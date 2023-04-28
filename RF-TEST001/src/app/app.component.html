@@ -1,0 +1,10 @@
+<form [formGroup]="loginForm">
+  <label for="first-name">First Name: </label>
+  <input id="first-name" type="text" formControlName="firstName">
+  <label for="last-name">Last Name: </label>
+  <input id="last-name" type="text" formControlName="lastName">
+
+  <hr>
+  <br>
+  <button class="button" (click)="onSubmit()">Submit</button>
+</form>

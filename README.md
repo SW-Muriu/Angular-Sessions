@@ -1,2 +1,1 @@
-# SE-WORKS
-# contains trial files on front end SW developement using angular
+contains trial files on front end SW developement using angular
