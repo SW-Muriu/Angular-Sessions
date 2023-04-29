@@ -1,5 +1,13 @@
 # TourOfHeroes
 
+The sample application helps the Hero Employment Agency find crises for heroes to solve.
+
+The application has three main feature areas:
+
+1. A Crisis Center for maintaining the list of crises for assignment to heroes.
+2. A Heroes area for maintaining the list of heroes employed by the agency.
+3. An Admin area to manage the list of crises and heroes.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.7.
 
 ## Development server
