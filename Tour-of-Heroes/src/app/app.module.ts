@@ -8,6 +8,9 @@ import { HeroListComponent } from './hero-list/hero-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+// this routing configuration can be placed in the routing module
+// especially when the application is complex for eased control
+// it however also works here, in the root/feature module
 const appRoutes: Routes = [
   {
     path: 'crisis-center', component: CrisisListComponent
@@ -17,18 +20,19 @@ const appRoutes: Routes = [
   },
   {
     path: '', redirectTo: '/heroes', pathMatch: 'full'
-  }
+  },
   {
     path: '**', component: PageNotFoundComponent
   },
 ];
+
 
 @NgModule({
   declarations: [
     AppComponent,
     CrisisListComponent,
     HeroListComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
