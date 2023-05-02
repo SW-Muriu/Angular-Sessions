@@ -37,6 +37,12 @@
           }
         }
       }
+    },
+    {
+      "type": "Live Preview",
+      "workspacePath": "/home/samsicker/Desktop/UB.NG Files/RF-TEST001/RF-Test0x00/Angular-Sessions/RF-TEST002",
+      "problemMatcher": [],
+      "label": "Live Preview: Run Server"
     }
   ]
 }

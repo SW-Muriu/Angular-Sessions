@@ -80,6 +80,18 @@ input[type="text"] {
   width: 100%;
   padding: .5rem;
 }
+div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
 
 /*
