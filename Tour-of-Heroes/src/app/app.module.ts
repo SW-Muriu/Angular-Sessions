@@ -4,9 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CrisisListComponent } from './crisis-list/crisis-list.component';
-import { HeroListComponent } from './hero-list/hero-list.component';
+import { HeroListComponent } from './heroes/hero-list/hero-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HeroesModule } from './heroes/heroes.module';
 
 // this routing configuration can be placed in the routing module
 // especially when the application is complex for eased control
@@ -19,10 +20,10 @@ const appRoutes: Routes = [
     path: 'heroes', component: HeroListComponent
   },
   {
-    path: '', redirectTo: '/heroes', pathMatch: 'full'
+    path: '**', component: PageNotFoundComponent
   },
   {
-    path: '**', component: PageNotFoundComponent
+    path: '', redirectTo: '/heroes', pathMatch: 'full'
   },
 ];
 
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+    HeroesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
