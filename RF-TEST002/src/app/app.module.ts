@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProfilesComponent } from './authentication/profiles/profiles.component';
 import { Route, RouterModule, Routes } from '@angular/router';
-import { Profiles2Component } from './authentication/profiles2/profiles2.component';
+import { Profiles2Component } from './profiles2/profiles2.component';
 import { LoginComponent } from './authentication/login/login.component';
 
 const routes: Routes = [

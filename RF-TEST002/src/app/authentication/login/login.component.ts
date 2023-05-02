@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy
   onSubmit(): void {
     console.log('/profile');
     /////after successful login
-    this.router.navigate(['/administration'], {skipLocationChange: false})
+    this.router.navigate(['/administration'], {skipLocationChange: true})
   
   }
     title = 'RF-TEST002';
