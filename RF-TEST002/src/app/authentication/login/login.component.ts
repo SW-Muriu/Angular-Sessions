@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy
   ngOnInit(): void {
     
   }
-  onSubmit() {
+  onSubmit(): void {
     console.log('/profile');
     /////after successful login
     this.router.navigate(['/administration'], {skipLocationChange: false})
