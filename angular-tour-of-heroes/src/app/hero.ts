@@ -1,5 +1,5 @@
 //creating a hero interface
-export interface Heroes
+export interface Hero
 {
     id: number;
     name: string;
