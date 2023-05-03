@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit
   }
 
   onSubmit (): void {
-    console.log('/administrationModule');
-  this.router.navigate(['/administrationModule'])
+    console.log('/administration');
+  this.router.navigate(['/Administration'])
   }
 
 }
