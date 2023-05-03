@@ -14,13 +14,13 @@ import { AdministrationComponent } from './administration.component';
     AdministrationRoutingModule
   ]
 })
-export class AdministrationModule implements OnInit{
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-  onSubmit (): void
-  {
-    console.log('/dashboard');
-  }
+export class AdministrationModule{
+ // ngOnInit(): void {
+   // throw new Error('Method not implemented.');
+  //}
+  //onSubmit (): void
+  //{
+   // console.log('/dashboard');
+//}
 
 }
