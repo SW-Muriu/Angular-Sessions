@@ -6,12 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
     throw new Error('Method not implemented.');
   }
 
   onSubmit (): void {
-    console.log('/')
+    console.log('/administration');
+  
   }
 
 }
