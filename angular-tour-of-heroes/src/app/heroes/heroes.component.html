@@ -1,6 +1,25 @@
-<h2> {{ hero }} </h2> <!-- binds data to the new hero property-->
+<h2> My Heroes </h2>
+<ul class="heroes">
+    <li *ngFor = "let hero of heroes">
+        <button type="button">
+            <span class="badge">
+                {{ hero.id }}
+            </span>
+            <span class="badge">
+                {{ hero.name }}                    
+            </span>
+        </button>
+    </li>
+</ul>
+
+
+<!-- binds data to the new hero property-->
 
 <!-- the div containers are used to update the binding to make an announcement -->
+
+<!-- the below chunk of code has been Commented out -->
+
+<!--
 <div> 
     <span>
         id:
@@ -12,14 +31,18 @@
     <span>
         name:
     </span>
-    {{ hero.name | uppercase }} <!-- Uses uppercase pipe to format-->
-</div>
+    {{ hero.name | uppercase }} -->
+    
+    <!-- Uses uppercase pipe to format-->
+<!-- </div> -->
 
 <!-- Two way binding to automate data flow -->
-<div>
+
+
+ <!--<div>
     <label for = "name">
         Hero name: 
     </label>
     <input id = "name" [(ngModel)] = "hero.name" placeholder="name">
     
-</div>
+</div> -->
