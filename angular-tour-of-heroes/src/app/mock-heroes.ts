@@ -2,32 +2,32 @@ import { Hero } from "./hero";
 export const HEROES: Hero[] = 
 [
     { 
-        id: 12, name: 'Dr. Nice' 
+        ID: 12, NAME: 'Dr. Nice' 
     
     },
     {
-        id: 13, name: 'Bombasto'
+        ID: 13, NAME: 'Bombasto'
     },
     {
-        id: 14, name: 'Celeritas'
+        ID: 14, NAME: 'Celeritas'
     },
     { 
-        id: 15, name: 'Magneta'
+        ID: 15, NAME: 'Magneta'
     },
     {
-        id: 16, name: 'RubberMan' 
+        ID: 16, NAME: 'RubberMan' 
     },
     { 
-        id: 17, name: 'Dynama' 
+        ID: 17, NAME: 'Dynama' 
     },
     { 
-        id: 18, name: 'Dr. IQ' 
+        ID: 18, NAME: 'Dr. IQ' 
     },
     { 
-        id: 19, name: 'Magma'
+        ID: 19, NAME: 'Magma'
     },
     { 
-        id: 20, name: 'Tornado'
+        ID: 20, NAME: 'Tornado'
     }
 
 ];

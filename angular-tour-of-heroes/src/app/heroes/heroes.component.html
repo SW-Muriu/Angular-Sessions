@@ -1,34 +1,17 @@
-<h2> My Heroes </h2>
+<h2>My Heroes</h2>
+
 <ul class="heroes">
-    
-    
-    <!-- change to include an an Onclick event on your button-->
-    <li *ngFor = "let hero of heroes">
-        <button [class.selected] ="hero ==  selectedHero" 
-        type="button" (click)="onSelect(hero)">
-            <span class="badge">
-                {{ hero.id }}
-            </span>
-            <span class="badge">
-                {{ hero.name }}                    
-            </span>
-        </button>
-    </li>
+  <li *ngFor="let hero of heroes">
+    <button [class.selected]="hero === selectedHero" type="button" (click)="onSelect(hero)">
+      <span class="badge">{{hero.ID}}</span>
+      <span class="name">{{hero.NAME}}</span>
+    </button>
+  </li>
 </ul>
-<div *ngIf = "selectedHero">
-    <h2> 
-        {{ selectedHero.name| uppercase }} Details
-    </h2>
-    <div>
-        id: {{ selectedHero.id }}
-    </div>
-    <div>
-        <label for="hero-name"> 
-            Hero name : 
-        </label>
-        <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name">
-    </div>
-</div>
+
+<app-hero-detail [hero]="selectedHero"></app-hero-detail>
+
+<app-hero-detail [hero] = "selectedHero"></app-hero-detail>
 
 
 <!-- binds data to the new hero property-->
