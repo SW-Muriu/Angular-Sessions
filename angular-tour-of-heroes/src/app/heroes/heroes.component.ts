@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero'
 import { HEROES } from '../mock-heroes';
 import { HeroService } from '../hero.service';
+import { Observable, of } from 'rxjs';
 
 
 
@@ -13,23 +14,26 @@ import { HeroService } from '../hero.service';
 export class HeroesComponent {
 
 heroes: Hero[] = [];
-constructor(private heroService: Hero) {}
+constructor(private heroService: HeroService) {}
 
 selectedHero?: Hero;
+
+ngOnInit(): void
+{
+  this.getHeroes();
+} 
 
 onSelect(hero:Hero): void
 {
   this.selectedHero = hero;
 }
 
-getHeroes(): void
+getHeroes(): Observable <Hero[]>
 {
-  this.heroes = this.heroService.getHeroes();
-}
-ngOnInit(): void
-{
-  this.getHeroes();
-} 
+  const heroes = of (HEROES);
+  return heroes;
+ }
+
 
 }
 
