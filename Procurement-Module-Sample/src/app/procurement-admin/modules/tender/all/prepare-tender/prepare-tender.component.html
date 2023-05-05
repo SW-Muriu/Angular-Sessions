@@ -1,0 +1,711 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb
+        [title]="'Tender Preperation'"
+        [items]="['Proc Admin', 'Prepare Tender']"
+        [active_item]="'All'"
+      >
+      </app-breadcrumb>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>Tender Preperation</h2>
+          </div>
+          <div class="body">
+            <form [formGroup]="tendeAdditionalDetailsForm" class="m-4">
+              <div class="row">
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Tender title</mat-label>
+                    <input matInput formControlName="title" required />
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('title')
+                          .hasError('title') &&
+                        tendeAdditionalDetailsForm.get('title').touched
+                      "
+                    >
+                      Please enter tender title
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Terms and conditions</mat-label>
+                    <input
+                      matInput
+                      formControlName="termsAndConditions"
+                      required
+                    />
+                    <button
+                      (click)="termsAndConditionsLookup()"
+                      mat-icon-button
+                      matSuffix
+                      [attr.aria-label]="'Hide password'"
+                    >
+                      <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('termsAndConditions')
+                          .hasError('termsAndConditions') &&
+                        tendeAdditionalDetailsForm.get('termsAndConditions')
+                          .touched
+                      "
+                    >
+                      Please specify terms and conditions
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Mandatory requirements</mat-label>
+                    <input
+                      matInput
+                      formControlName="mandatoryRequirements"
+                      required
+                    />
+                    <button
+                      (click)="tenderMandatoryRequirements()"
+                      mat-icon-button
+                      matSuffix
+                      [attr.aria-label]="'Hide password'"
+                    >
+                      <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('mandatoryRequirements')
+                          .hasError('mandatoryRequirements') &&
+                        tendeAdditionalDetailsForm.get('termsAndConditions')
+                          .touched
+                      "
+                    >
+                      Please specify mandatory requirements
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Financial requirements</mat-label>
+                    <input
+                      matInput
+                      formControlName="financialRequirements"
+                      required
+                    />
+                    <button
+                      (click)="financialRequirements()"
+                      mat-icon-button
+                      matSuffix
+                      [attr.aria-label]="'Hide password'"
+                    >
+                      <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('financialRequirements')
+                          .hasError('financialRequirements') &&
+                        tendeAdditionalDetailsForm.get('financialRequirements')
+                          .touched
+                      "
+                    >
+                      Please specify financial Requirements
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Technical requirements</mat-label>
+                    <input
+                      matInput
+                      formControlName="technicalRequirements"
+                      required
+                    />
+                    <button
+                      (click)="tenderTechnicalRequirements()"
+                      mat-icon-button
+                      matSuffix
+                      [attr.aria-label]="'Hide password'"
+                    >
+                      <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('technicalRequirements')
+                          .hasError('technicalRequirements') &&
+                        tendeAdditionalDetailsForm.get('technicalRequirements')
+                          .touched
+                      "
+                    >
+                      Please specify technical requirements
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Communication mode</mat-label>
+                    <input
+                      matInput
+                      formControlName="communicationMode"
+                      required
+                    />
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('communicationMode')
+                          .hasError('communicationMode') &&
+                        tendeAdditionalDetailsForm.get('communicationMode')
+                          .touched
+                      "
+                    >
+                      Please the mode of communication mode
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Tender category</mat-label>
+                    <mat-select
+                      formControlName="categorycode"
+                      (selectionChange)="getSelectedNeedCategories($event)"
+                    >
+                      <mat-option
+                        *ngFor="let category of categories"
+                        [value]="category.code"
+                        >{{ category.type }} - {{ category.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>done_all</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Type of tender</mat-label>
+                    <mat-select formControlName="tendertype">
+                      <mat-option
+                        *ngFor="let type of typesOfTender"
+                        [value]="type"
+                        >{{ type }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Bid type</mat-label>
+                    <mat-select formControlName="bidType">
+                      <mat-option *ngFor="let bid of bidTypes" [value]="bid"
+                        >{{ bid }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>done_all</mat-icon>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Evaluation criteria</mat-label>
+                    <mat-select formControlName="evaluationcriteria">
+                      <mat-option
+                        *ngFor="let creteria of evaluationCreteria"
+                        [value]="creteria"
+                        >{{ creteria }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>done_all</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Procurement type</mat-label>
+                    <mat-select formControlName="procurementtype">
+                      <mat-option
+                        *ngFor="let procurementType of procurementTypes"
+                        [value]="procurementType"
+                        >{{ procurementType }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>done_all</mat-icon>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Procuring entity</mat-label>
+                    <input
+                      matInput
+                      formControlName="procuringentity"
+                      required
+                    />
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('procuringentity')
+                          .hasError('procuringentity') &&
+                        tendeAdditionalDetailsForm.get('procuringentity')
+                          .touched
+                      "
+                    >
+                      Please enter the procuring entity
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Tender budget</mat-label>
+
+                    <input
+                      matInput
+                      type="number"
+                      formControlName="budget"
+                      required
+                    />
+                    <mat-icon
+                      matTooltip="The system will attempt to estimate a budget for you after you have specified the tender items"
+                      aria-label="Button that displays a tooltip in various positions"
+                      matSuffix
+                      >attach_money</mat-icon
+                    >
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <section>
+                    <label class="example-margin"
+                      >Include bid fee?&nbsp;&nbsp;&nbsp;</label
+                    >
+                    <mat-radio-group
+                      (change)="includeBidFee($event)"
+                      formControlName="withBidFee"
+                    >
+                      <mat-radio-button class="example-margin" value="Yes"
+                        >Yes</mat-radio-button
+                      >
+                      <mat-radio-button class="example-margin" value="No"
+                        >No
+                      </mat-radio-button>
+                    </mat-radio-group>
+                  </section>
+                </div>
+                <div
+                  *ngIf="hasBidFee"
+                  class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2"
+                >
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Tender bid fee</mat-label>
+
+                    <input
+                      matInput
+                      type="number"
+                      formControlName="bidFee"
+                      required
+                    />
+
+                    <mat-icon matSuffix>attach_money</mat-icon>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Tender description</mat-label>
+                    <textarea
+                      formControlName="tenderDescription"
+                      matInput
+                    ></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <div>
+                    <div [formGroup]="dyForm">
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-12">
+                            <div>
+                              <label for="formFileLg" class="form-label"
+                                >Choose files</label
+                              >
+                              <input
+                                formControlName="filename"
+                                class="form-control form-control-lg"
+                                id="formFileLg"
+                                type="file"
+                                #file
+                                type="file"
+                                [disabled]="isLoading | async"
+                                (change)="onSelectFile(file.files)"
+                                [multiple]="'multiple'"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>Choose items to include in tender</h2>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="body">
+                <div class="table-responsive header m-t-5">
+                  <div class="body">
+                    <div class="table-responsive">
+                      <div class="materialTableHeader">
+                        <div class="row">
+                          <div class="col-8">
+                            <ul class="header-buttons-left ms-0">
+                              <li class="dropdown">
+                                <h2>Select tender items</h2>
+                              </li>
+                              <li class="dropdown m-l-20">
+                                <label for="search-input"
+                                  ><i class="material-icons search-icon"
+                                    >search</i
+                                  ></label
+                                >
+                                <input
+                                  placeholder="Search"
+                                  type="text"
+                                  #filter
+                                  class="browser-default search-field"
+                                  aria-label="Search box"
+                                />
+                              </li>
+
+                              <li>
+                                <div
+                                  class="m-l-10"
+                                  [hidden]="!selection.hasValue()"
+                                  matTooltip="ADD"
+                                >
+                                  <button
+                                    mat-mini-fab
+                                    color="primary"
+                                    (click)="generateTenderItem()"
+                                  >
+                                    <mat-icon class="col-white"
+                                      >playlist_add_check
+                                    </mat-icon>
+                                  </button>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <mat-table
+                        #table
+                        matTableExporter
+                        [dataSource]="dataSource"
+                        matSort
+                        class="mat-cell"
+                        #exporter="matTableExporter"
+                      >
+                        <!-- Checkbox Column -->
+                        <ng-container matColumnDef="select">
+                          <mat-header-cell
+                            *matHeaderCellDef
+                            [ngClass]="'tbl-col-width-per-12'"
+                          >
+                            <mat-checkbox
+                              (change)="$event ? masterToggle() : null"
+                              [checked]="
+                                selection.hasValue() && isAllSelected()
+                              "
+                              [indeterminate]="
+                                selection.hasValue() && !isAllSelected()
+                              "
+                              [ngClass]="'tbl-checkbox'"
+                              (change)="checkboxActive()"
+                            ></mat-checkbox>
+                          </mat-header-cell>
+                          <mat-cell
+                            *matCellDef="let row"
+                            [ngClass]="'tbl-col-width-per-12'"
+                          >
+                            <mat-checkbox
+                              (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)"
+                              [ngClass]="'tbl-checkbox'"
+                              [aria-label]="checkboxLabel(row)"
+                              (change)="getSelectedNeed(row)"
+                              (change)="checkboxActive()"
+                            >
+                            </mat-checkbox>
+                          </mat-cell>
+                        </ng-container>
+                        <!-- ID Column -->
+                        <ng-container matColumnDef="item_name">
+                          <mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                            class="column-nowrap psl-3 tbl-col-width-per-35"
+                            >Item name
+                          </mat-header-cell>
+                          <mat-cell
+                            *matCellDef="let row"
+                            class="column-nowrap psl-3 tbl-col-width-per-35"
+                            >{{ row.item_name }}</mat-cell
+                          >
+                        </ng-container>
+                        <ng-container matColumnDef="department">
+                          <mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                            class="column-nowrap psl-3 tbl-col-width-per-15"
+                          >
+                            Department
+                          </mat-header-cell>
+                          <mat-cell
+                            *matCellDef="let row"
+                            class="column-nowrap psl-3 tbl-col-width-per-15"
+                          >
+                            {{ row.department }}
+                          </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="item_quantity">
+                          <mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                            class="column-nowrap psl-3 tbl-col-width-per-35"
+                          >
+                            Item quantity
+                          </mat-header-cell>
+                          <mat-cell
+                            *matCellDef="let row"
+                            class="column-nowrap psl-3 tbl-col-width-per-35"
+                          >
+                            {{ row.item_quantity }}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="unit_price">
+                          <mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                            class="column-nowrap psl-3 tbl-col-width-per-25"
+                          >
+                            Unit price
+                          </mat-header-cell>
+                          <mat-cell
+                            *matCellDef="let row"
+                            class="column-nowrap psl-3 tbl-col-width-per-25"
+                          >
+                            {{ row.unit_price }}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="total_price">
+                          <mat-header-cell
+                            *matHeaderCellDef
+                            mat-sort-header
+                            class="column-nowrap psl-3 tbl-col-width-per-25"
+                          >
+                            Total price
+                          </mat-header-cell>
+                          <mat-cell
+                            *matCellDef="let row"
+                            class="column-nowrap psl-3 tbl-col-width-per-25"
+                          >
+                            {{ row.total_price }}
+                          </mat-cell>
+                        </ng-container>
+                        <mat-header-row
+                          *matHeaderRowDef="displayedColumns"
+                        ></mat-header-row>
+                        <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+                        <mat-row
+                          *matRowDef="let row; columns: displayedColumns"
+                          [style.cursor]="'pointer'"
+                          matRipple
+                        ></mat-row>
+                        <mat-cell *matNoDataRow colspan="4">
+                          No data matching the filter "{{ input.value }}"
+                        </mat-cell>
+                      </mat-table>
+                      <!-- Loading spinner -->
+                      <div *ngIf="isLoading" class="tbl-spinner">
+                        <mat-progress-spinner
+                          color="primary"
+                          [diameter]="40"
+                          mode="indeterminate"
+                        >
+                        </mat-progress-spinner>
+                      </div>
+                      <mat-paginator
+                        #paginatorCostCenters="matPaginator"
+                        [pageSize]="3"
+                        [pageSizeOptions]="[3, 5, 10, 20, 30, 40, 50, 100]"
+                        aria-label="Select page"
+                      >
+                      </mat-paginator>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <h5>Tender Need Particulars preperation</h5>
+              <div
+                *ngFor="let dyForm of t.controls; let i = index"
+                class="list-group list-group-flush"
+              >
+                <div>
+                  <div [formGroup]="dyForm">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-2">
+                          <mat-form-field
+                            class="example-full-width"
+                            appearance="fill"
+                          >
+                            <mat-label>Item name </mat-label>
+                            <input
+                              matInput
+                              formControlName="itemName"
+                              required
+                            />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-2">
+                          <mat-form-field
+                            class="example-full-width"
+                            appearance="fill"
+                          >
+                            <mat-label>Item description </mat-label>
+                            <input
+                              matInput
+                              formControlName="itemDescription"
+                              required
+                            />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-2">
+                          <mat-form-field
+                            class="example-full-width"
+                            appearance="fill"
+                          >
+                            <mat-label>Item quantity</mat-label>
+                            <input
+                              (keyup)="specifyQuantity($event, i)"
+                              matInput
+                              formControlName="itemQuantity"
+                              type="number"
+                              required
+                            />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-2">
+                          <mat-form-field
+                            class="example-full-width"
+                            appearance="fill"
+                          >
+                            <mat-label>Item unit price </mat-label>
+                            <input
+                              (keyup)="specifyUnitPrice($event, i)"
+                              matInput
+                              formControlName="unitPrice"
+                              required
+                              type="number"
+                            />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-2">
+                          <mat-form-field
+                            class="example-full-width"
+                            appearance="fill"
+                          >
+                            <mat-label>Item total price </mat-label>
+                            <input
+                              matInput
+                              readonly
+                              formControlName="totalPrice"
+                              required
+                            />
+                          </mat-form-field>
+                        </div>
+                        <div
+                          class="col-1 d-flex align-items-center justify-content-center"
+                        >
+                          <mat-icon color="primary" (click)="onAddField()"
+                            >add_circle</mat-icon
+                          >
+                          <mat-icon color="warn" (click)="onRemoveField(i)"
+                            >remove_circle</mat-icon
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <div class="container">
+                    <div class="row align-items-end">
+                      <div class="col align-self-end">
+                        <div class="example-button-row" align="end">
+                          <button
+                            class="align-self-end"
+                            mat-raised-button
+                            color="primary"
+                            [type]="submit"
+                            [disabled]="
+                              !enableSubmit || !tendeAdditionalDetailsForm.valid
+                            "
+                            (click)="prepareTender()"
+                          >
+                            Prepare Tender
+                          </button>
+                          <button mat-raised-button color="warn" tabindex="-1">
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row align-items-end"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+<div class="addContainer">
+  <div *ngIf="member" class="contact-details">
+    <div class="modalHeader">
+      <div class="contact-details-name mb-1">Member Details</div>
+      <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div mat-dialog-content>
+      <mat-card-content>
+        <div class="row mt-1" style="width: 98%;">
+          <div class="col-5 m-b-10">Username:</div>
+          <div class="col-7 pro-left m-b-10">{{ member.username }}</div>
+          <div class="col-5 m-b-10">Firstname:</div>
+          <div class="col-7 pro-left m-b-10">{{ member.firstname }}</div>
+          <div class="col-5 m-b-10">Lastname:</div>
+          <div class="col-7 pro-left m-b-10">{{ member.lastname }}</div>
+          <div class="col-5 m-b-10">Phoneneumber:</div>
+          <div class="col-7 pro-left m-b-10">{{ member.phonenumber }}</div>
+          <div class="col-5 m-b-10">Email:</div>
+          <div class="col-7 pro-left m-b-10">{{ member.email }} </div>
+          <div class="col-5 m-b-10">Role:</div>
+          <div class="col-7 pro-left m-b-10">{{ member.roles[0].name }} </div>
+        </div>
+      </mat-card-content>
+    </div>
+  </div>
+</div>

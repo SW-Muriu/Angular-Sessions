@@ -1,0 +1,137 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!-- <img [src]='asset.img' alt="avatar"> -->
+        <img src="assets/images/emtec.png" alt="avatar" />
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 ms-2 me-2 font-17">
+            Select Tender
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div mat-dialog-content>
+    <mat-card-content>
+      <div class="body">
+
+        <div class="body">
+          <div class="table-responsiv">
+            <div class="table-header py-3" style="background-color: rgba(219, 218, 218, 0.836); margin: 5px;">
+              <div class="row">
+                <div class="col-6 px-4">
+                  <div class="mx-auto">
+                    <input class="pull-left search form-control" (keyup)="applyFilter($event)" placeholder="Filter..."
+                      #input />
+                  </div>
+                </div>
+                <div class="col-6 px-4">
+
+                  <div class="mx-auto">
+                    <div class="m-l-10" [hidden]=!selection.hasValue()>
+                      <button mat-mini-fab color="primary" (click)="proceed()" matTooltip="PROCEED">
+                        <mat-icon class="col-white">playlist_add_check</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <mat-table #table matTableExporter [dataSource]="dataSource" matSort class="mat-cell"
+              #exporter="matTableExporter">
+              <!-- Checkbox Column -->
+              <ng-container matColumnDef="select">
+                <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-10'">
+                  <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="
+                      selection.hasValue() && !isAllSelected()
+                    " [ngClass]="'tbl-checkbox'" (change)="checkboxActive()">
+                  </mat-checkbox>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-10'">
+                  <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'" [aria-label]="checkboxLabel(row)"
+                    (change)="checkboxActive()">
+                  </mat-checkbox>
+                </mat-cell>
+              </ng-container>
+              
+              <!-- ID Column -->
+              <ng-container matColumnDef="tenderNo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="column-nowrap psl-3 tbl-col-width-per-12">
+                  TenderNo
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-12">
+                  {{row.tenderNo}}
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="title">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="column-nowrap psl-3 tbl-col-width-per-25">
+                  Title
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-25">
+                  {{row.title}}
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="startDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="column-nowrap psl-3 tbl-col-width-per-20">
+                  StartDate
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-20">
+                  {{row.startDate|date :'short'}}
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="closingDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="column-nowrap psl-3 tbl-col-width-per-20">
+                  ClosingDate
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-20">
+                  {{row.closingDate|date :'short'}}
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="closureStatus">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="column-nowrap psl-3 tbl-col-width-per-20">
+                  Closure status
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-20">
+                  <div *ngIf="row.closureStatus == 'Open'">
+                    <span class="badge badge-pill badge-primary col-purple">
+                      {{ "Open" }}</span>
+                  </div>
+                  <div *ngIf="row.closureStatus == 'Closed'">
+                    <span class="badge badge-pill badge-primary col-green">
+                      {{ "Closed" }}</span>
+                  </div>
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+              <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'" matRipple>
+              </mat-row>
+              <mat-cell *matNoDataRow colspan="4">
+                No data matching the filter "{{ input.value }}"
+              </mat-cell>
+            </mat-table>
+            <!-- Loading spinner -->
+            <div *ngIf="isLoading" class="tbl-spinner">
+              <mat-progress-spinner color="primary" [diameter]="40" mode="indeterminate">
+              </mat-progress-spinner>
+            </div>
+            <mat-paginator [pageSize]="5" [pageSizeOptions]="[2, 5, 10, 20, 30, 40, 50, 100]"
+              aria-label="Select page of users"></mat-paginator>
+          </div>
+        </div>
+
+      </div>
+    </mat-card-content>
+  </div>
+
+</div>

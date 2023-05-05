@@ -1,0 +1,156 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!-- <img [src]='asset.img' alt="avatar"> -->
+        <img src="assets/images/emtec.png" alt="avatar" />
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 ms-2 me-2 font-17">
+            {{ dialogTitle }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+ 
+  <div mat-dialog-content>
+   
+    <div class="table-responsive m-4">
+      <p>
+        <strong>
+          Follow the following guidelines to complete this process
+          successfully.
+        </strong>
+      </p>
+      <ul>
+        <li>
+          <i class="fas fa-angle-double-right m-l-10"></i> All suppliers must pay a non refundable bid fee of
+          <strong> {{Data.bidFee| currency: 'KSH:'}}</strong>
+         
+        </li>
+        <li>
+          <i class="fas fa-angle-double-right m-l-10"></i> Make sure
+          the total bid fee is settled.
+        </li>
+
+        <li>
+          <i class="fas fa-angle-double-right m-l-10"></i>
+          Choose your preferred mode of payment below:
+        </li>
+       
+      </ul>
+    </div>
+
+
+    <div class="mt-4">
+      
+      <mat-tab-group>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <img src="assets/images/payment/mpesa.png" style="height: 45px;width: 45px;" alt="user">
+            Mpesa
+          </ng-template>
+          <div class="mt-3">
+            <div class="mt-5 ml-20 mr-20 mb-3" *ngIf="isMpesaLoading">
+              <mat-progress-bar color="primary" mode="indeterminate">
+              </mat-progress-bar>
+            </div>
+            <form class="register-form m-4" [formGroup]="mpesaForm">
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Bill Reference</mat-label>
+                    <span matPrefix>
+                      <mat-icon class="msr-2">account_balance</mat-icon>
+                    </span>
+                    <input matInput formControlName="billreference" required readonly>
+                    <mat-error *ngIf="mpesaForm.get('billreference').hasError('required')">
+                      Bill Reference is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Bid Amount</mat-label>
+                    <span matPrefix>
+                      <mat-icon class="msr-2">attach_money</mat-icon>
+                    </span>
+                    <input matInput formControlName="bidamount" placeholder="EX: 125 897 854 " mask="separator" required>
+                    <span matSuffix>.00</span>
+                    <mat-error *ngIf="mpesaForm.get('bidamount').hasError('required')">
+                      Bid Amount is required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Mpesa Number</mat-label>
+                    <span matPrefix>
+                      <mat-icon class="msr-2">phone</mat-icon>
+                    </span>
+                    <input matInput formControlName="phonenumber" placeholder="EX: (254)..." mask="(000) 000 00 00 00" />
+                    <mat-error *ngIf="mpesaForm.get('phonenumber').hasError('required')">
+                      Mpesa Number is required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row" *ngIf="!paymentMade">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <div class="example-button-row" align="end">
+                    <button mat-raised-button color="primary" [disabled]="!mpesaForm.valid" (click)="submit()">
+                      Process
+                    </button>
+                    <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="paymentMade">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <div class="example-button-row" align="end">
+                    <button mat-raised-button color="primary" [disabled]="!callBackRecieved" (click)="confirmPaymentStatus()">
+                      Continue
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <img src="assets/images/payment/paypal.png" style="height: 50px;width: 50px;" alt="paypal">
+            Paypal
+          </ng-template>
+          <div class="mt-3">
+            <app-paypal-payprequalification-bidfee></app-paypal-payprequalification-bidfee>
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <img src="assets/images/payment/creditCard.png" style="height: 40px;width: 50px;" alt="creditCard">
+            Credit Card
+          </ng-template>
+          <div class="mt-3">
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+
+
+  </div>
+</div>
+
+<!-- <br />
+Form value = {{ Form.value | json }}
+<br />
+Form Status = {{ Form }} -->

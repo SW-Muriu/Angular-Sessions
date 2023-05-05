@@ -1,0 +1,130 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <img src="../../../../../assets/images/emtec.png" alt="avatar" />
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 ms-2 me-2 font-17">
+            Update User
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      mat-icon-button
+      (click)="dialogRef.close()"
+      aria-label="Close dialog"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form
+      class="register-form m-4"
+      [formGroup]="accountForm"
+      (ngSubmit)="updateAccount()"
+    >
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName="firstname" required />
+            <!-- <mat-icon matSuffix>face</mat-icon> -->
+            <mat-error
+              *ngIf="accountForm.get('firstname').hasError('required')"
+            >
+              First name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input matInput formControlName="lastname" required />
+            <!-- <mat-icon matSuffix>business_center</mat-icon> -->
+            <mat-error *ngIf="accountForm.get('lastname').hasError('required')">
+              Last name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" required />
+            <!-- <mat-icon matSuffix>flag</mat-icon> -->
+            <mat-error *ngIf="accountForm.get('username').hasError('required')">
+              Username is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Mobile</mat-label>
+            <input matInput formControlName="phonenumber" required />
+            <!-- <mat-icon matSuffix>school</mat-icon> -->
+            <mat-error
+              *ngIf="accountForm.get('phonenumber').hasError('required')"
+            >
+              Mobile is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>User Department</mat-label>
+            <mat-select formControlName="department" required>
+              <mat-option *ngFor="let department of departments" [value]="department.name">
+                {{ department.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="accountForm.get('department').hasError('required')">
+              Department is required
+            </mat-error>
+          </mat-form-field>
+        </div>        
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required />
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error
+              *ngIf="
+                accountForm.get('email').hasError('required') ||
+                accountForm.get('email').touched
+              "
+            >
+              Please enter a valid email address
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row" align="end">
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="!accountForm.valid"
+            >
+              Save
+            </button>
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="onNoClick()"
+              tabindex="-1"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

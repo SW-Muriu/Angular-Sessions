@@ -1,0 +1,232 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb
+        [title]="'Request Need'"
+        [items]="['HOD']"
+        [active_item]="'Need equisition Form'"
+      >
+      </app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Need Requisition Form</h2>
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="needRequisitionForm">
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline"
+                  >
+                    <mat-label>Need</mat-label>
+                    <input matInput formControlName="need" required />
+                    <mat-error
+                      *ngIf="
+                        needRequisitionForm.get('need').hasError('required')
+                      "
+                    >
+                      Need is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline"
+                  >
+                    <mat-label>Select type</mat-label>
+                    <mat-select formControlName="type" required>
+                      <mat-option [value]="'Goods'"> Goods </mat-option>
+                      <mat-option [value]="'Services'"> Services </mat-option>
+                      <mat-option [value]="'Goods & Services'">
+                        Goods & Services
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        needRequisitionForm.get('type').hasError('required')
+                      "
+                    >
+                      Select the type of need
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline"
+                  >
+                    <mat-label>Category</mat-label>
+                    <mat-select formControlName="category" required>
+                      <mat-option
+                        *ngFor="let category of categories"
+                        [value]="category.code"
+                      >
+                        {{ category.code }} - {{ category.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        needRequisitionForm.get('category').hasError('required')
+                      "
+                    >
+                      Select the type of need
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Description</mat-label>
+                    <textarea matInput formControlName="despcription"></textarea>
+                    <mat-
+                      *ngIf="
+                        needRequisitionForm
+                          .get('despcription')
+                          .hasError('required')
+                      "
+                    >
+                      Description is required
+                    </mat->
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button
+                    style="margin-bottom: 10px"
+                    type="button"
+                    (click)="onAddField()"
+                    mat-raised-button
+                    color="primary"
+                  >
+                    + Add Item
+                  </button>
+                  <div
+                    *ngFor="let dyForm of t.controls; let i = index"
+                    class="list-group list-group-flush"
+                  >
+                    <div>
+                      <div [formGroup]="dyForm">
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-2">
+                              <mat-form-field
+                                class="example-full-width"
+                                appearance="outline"
+                              >
+                                <mat-label>Item name </mat-label>
+                                <input
+                                  matInput
+                                  formControlName="itemName"
+                                  required
+                                />
+                              </mat-form-field>
+                            </div>
+                            <div class="col-2">
+                              <mat-form-field
+                                class="example-full-width"
+                                appearance="outline"
+                              >
+                                <mat-label>Item description </mat-label>
+                                <input
+                                  matInput
+                                  formControlName="itemDescription"
+                                  required
+                                />
+                              </mat-form-field>
+                            </div>
+                            <div class="col-2">
+                              <mat-form-field
+                                class="example-full-width"
+                                appearance="outline"
+                              >
+                                <mat-label>Item quantity</mat-label>
+                                <input
+                                  (keyup)="specifyQuantity($event, i)"
+                                  matInput
+                                  formControlName="itemQuantity"
+                                  type="number"
+                                  required
+                                />
+                              </mat-form-field>
+                            </div>
+                            <div class="col-2">
+                              <mat-form-field
+                                class="example-full-width"
+                                appearance="outline"
+                              >
+                                <mat-label>Item unit price </mat-label>
+                                <input
+                                  (keyup)="specifyUnitPrice($event, i)"
+                                  matInput
+                                  formControlName="unitPrice"
+                                  required
+                                  type="number"
+                                />
+                              </mat-form-field>
+                            </div>
+                            <div class="col-2">
+                              <mat-form-field
+                                class="example-full-width"
+                                appearance="outline"
+                              >
+                                <mat-label>Item total price </mat-label>
+                                <input
+                                  matInput
+                                  readonly
+                                  formControlName="totalPrice"
+                                  required
+                                />
+                              </mat-form-field>
+                            </div>
+                            <div
+                              class="col-1 d-flex align-items-center justify-content-center"
+                            >
+                              <mat-icon color="primary" (click)="onAddField()"
+                                >add_circle</mat-icon
+                              >
+                              <mat-icon color="warn" (click)="onRemoveField(i)"
+                                >remove_circle</mat-icon
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <button
+                    class="btn-space"
+                    [disabled]="!needRequisitionForm.valid"
+                    (click)="requestNeed()"
+                    mat-raised-button
+                    color="primary"
+                  >
+                    Submit
+                  </button>
+                  <button type="button" mat-button>Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

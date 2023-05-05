@@ -1,0 +1,174 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Prequalification Announcement'" [items]="['Home']" [active_item]="'Add'">
+      </app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Add Prequalification Announcement</h2>
+          </div>
+          <div class="body">
+            <form [formGroup]="Form" class="m-4">
+
+             
+              <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Title</mat-label>
+                    <input formControlName="title" matInput required />
+                    <mat-error *ngIf="Form.get('title').hasError('required')">
+                      Title is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Categoryname</mat-label>
+                    
+                    <mat-select formControlName="categoryid" (selectionChange)="getAnnouncements($event)">
+                      <mat-option *ngFor="let item of tenderCategories" [value]="item.id">{{ item.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="Form.get('categoryid').hasError('required')">
+                      Categoryname is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Categorycode</mat-label>
+                    <input formControlName="categorycode" matInput required readonly />
+                    <mat-error *ngIf="Form.get('categorycode').hasError('required')">
+                      Categorycode is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>BidFee</mat-label>
+                    <input formControlName="bidfee" type="number" matInput required/>
+                    <mat-error *ngIf="Form.get('bidfee').hasError('required')">
+                      BidFee is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Start date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="startdate" required />
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="Form.get('startdate').hasError('required')">
+                      Please select Start Date
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Closing date</mat-label>
+                    <input matInput [matDatepicker]="picker2" formControlName="closingdate" required />
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                    <mat-error *ngIf="Form.get('closingdate').hasError('required')">
+                      Please select Closing Date
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+             
+                <div class="row">
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Website</mat-label>
+                      <textarea formControlName="website" matInput required></textarea>
+                      <mat-error *ngIf="Form.get('website').hasError('required')">
+                        Website is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Description</mat-label>
+                      <textarea formControlName="description" matInput required></textarea>
+                      <mat-error *ngIf="Form.get('description').hasError('required')">
+                        Description is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <button style="margin-bottom: 10px" type="button" (click)="onAddField()" mat-raised-button color="primary">
+            + Add Requirements
+          </button>
+          <div *ngFor="let dyForm of t.controls; let i = index" class="list-group list-group-flush">
+            <div>
+              <div [formGroup]="dyForm">
+         
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-6">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>{{ i + 1 }}.Requirement name </mat-label>
+                        <input matInput formControlName="requirementname" required (keyup)="getRequirementName($event)"/>
+                        <mat-error *ngIf="dyForm.get('requirementname').hasError('required')">
+                          Category name is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-5">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>{{ i + 1 }}.Input type </mat-label>
+                        <mat-select formControlName="inputtype" (selectionChange)="getInputType($event)">
+                          <mat-option *ngFor="let item of inputList" [value]="item.name">{{ item.name }}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="dyForm.get('inputtype').hasError('required')">
+                          Inputtype name is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    
+                    <div class="col-1 d-flex align-items-center justify-content-center">
+                      <mat-icon color="primary" (click)="onAddField()">add_circle</mat-icon>
+                      <mat-icon color="warn" (click)="onRemoveField(i)">remove_circle</mat-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+              <div class="col-lg-12">
+                <div class="m-l-25 m-b-20" [align]="'end'">
+                  <button mat-flat-button color="warn" class="msr-2 mt-4" (click)="back()">
+                    Discard
+                  </button>
+                  <button mat-flat-button color="primary" class="msr-4 mt-4" (click)="onSubmit()"
+                    [class.auth-spinner]="announcementloading" [disabled]="announcementloading"
+                    [disabled]="!selectedFiles" [disabled]="Form.invalid">
+                    Submit
+                  </button>
+                  <!-- [disabled]="!formIsValid" -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,202 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!-- <img [src]='asset.img' alt="avatar"> -->
+        <img src="assets/images/emtec.png" alt="avatar" />
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 ms-2 me-2 font-17">
+            Tenders Lookup
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      mat-icon-button
+      (click)="dialogRef.close()"
+      aria-label="Close dialog"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div mat-dialog-content>
+    <mat-card-content>
+      <div class="col-12 m-t-5">
+        <div class="body">
+          <div class="table-responsive m-t-5">
+            <div class="body">
+              <div class="table-responsive">
+                <div
+                  class="row"
+                  style="
+                    background-color: rgba(231, 229, 228, 0.836);
+                    margin: 5px;
+                  "
+                >
+                  <div class="col-6 d-flex align-items-center">
+                    <h6 style="margin: 5px">
+                      <strong>Select Tendor</strong>
+                    </h6>
+                  </div>
+                  <div class="col-6">
+                    <div id="plist" class="people-list">
+                      <div class="form-line m-b-10 m-t-10 m-l-2 m-r-2">
+                        <input
+                          placeholder="Filter..."
+                          type="text"
+                          (keyup)="applyFilter($event)"
+                          #filter
+                          class="form-control"
+                          placeholder="Search..."
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <mat-table
+                  #table
+                  matTableExporter
+                  [dataSource]="dataSource"
+                  matSort
+                  class="mat-cell"
+                  #exporter="matTableExporter"
+                >
+                  <!-- Checkbox Column -->
+                  <ng-container matColumnDef="select">
+                    <mat-header-cell
+                      *matHeaderCellDef
+                      [ngClass]="'tbl-col-width-per-12'"
+                    >
+                      <mat-checkbox
+                        (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="
+                          selection.hasValue() && !isAllSelected()
+                        "
+                        [ngClass]="'tbl-checkbox'"
+                        (change)="checkboxActive()"
+                      >
+                      </mat-checkbox>
+                    </mat-header-cell>
+                    <mat-cell
+                      *matCellDef="let row"
+                      [ngClass]="'tbl-col-width-per-12'"
+                    >
+                      <mat-checkbox
+                        (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [ngClass]="'tbl-checkbox'"
+                        [aria-label]="checkboxLabel(row)"
+                        (change)="checkboxActive()"
+                      >
+                      </mat-checkbox>
+                    </mat-cell>
+                  </ng-container>
+
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="tenderNo">
+                    <mat-header-cell
+                      *matHeaderCellDef
+                      mat-sort-header
+                      class="column-nowrap psl-3 tbl-col-width-per-25"
+                      >Tender number
+                    </mat-header-cell>
+                    <mat-cell
+                      *matCellDef="let row"
+                      class="column-nowrap psl-3 tbl-col-width-per-25"
+                      >{{ row.tenderNo }}</mat-cell
+                    >
+                  </ng-container>
+                  <ng-container matColumnDef="title">
+                    <mat-header-cell
+                      *matHeaderCellDef
+                      mat-sort-header
+                      class="column-nowrap psl-3 tbl-col-width-per-25"
+                    >
+                      Title
+                    </mat-header-cell>
+                    <mat-cell
+                      *matCellDef="let row"
+                      class="column-nowrap psl-3 tbl-col-width-per-25"
+                    >
+                      {{ row.title }}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="tendertype">
+                    <mat-header-cell
+                      *matHeaderCellDef
+                      mat-sort-header
+                      class="column-nowrap psl-3 tbl-col-width-per-25"
+                    >
+                      Tender type
+                    </mat-header-cell>
+                    <mat-cell
+                      *matCellDef="let row"
+                      class="column-nowrap psl-3 tbl-col-width-per-25"
+                    >
+                    <div *ngIf="row.tendertype == 'Open'" class="badge badge-solid-green">{{"Open"}}</div>
+                    <div *ngIf="row.tendertype == 'Closed'" class="badge badge-solid-blue">{{"Closed"}}</div>
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="postedTime">
+                    <mat-header-cell
+                      *matHeaderCellDef
+                      mat-sort-header
+                      class="column-nowrap psl-3 tbl-col-width-per-25"
+                    >
+                      Date created
+                    </mat-header-cell>
+                    <mat-cell
+                      *matCellDef="let row"
+                      class="column-nowrap psl-3 tbl-col-width-per-25"
+                    >
+                      {{ row.postedTime }}
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row
+                    *matHeaderRowDef="displayedColumns"
+                  ></mat-header-row>
+                  <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+                  <mat-row
+                    *matRowDef="let row; columns: displayedColumns"
+                    [style.cursor]="'pointer'"
+                    matRipple
+                  >
+                  </mat-row>
+                  <mat-cell *matNoDataRow colspan="4">
+                    No data matching the filter "{{ input.value }}"
+                  </mat-cell>
+                </mat-table>
+                <!-- Loading spinner -->
+                <div *ngIf="isLoading" class="tbl-spinner">
+                  <mat-progress-spinner
+                    color="primary"
+                    [diameter]="40"
+                    mode="indeterminate"
+                  >
+                  </mat-progress-spinner>
+                </div>
+                <mat-paginator
+                  [pageSize]="2"
+                  [pageSizeOptions]="[2, 5, 10, 20, 30, 40, 50, 100]"
+                  aria-label="Select page of users"
+                ></mat-paginator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </div>
+  <mat-dialog-actions align="end" class="m-3">
+    <button mat-flat-button color="primary" (click)="addTermsAndConditions()">
+      Add
+    </button>
+    <button mat-flat-button color="accent" (click)="onNoClick()" >Cancel</button>
+  </mat-dialog-actions>
+</div>

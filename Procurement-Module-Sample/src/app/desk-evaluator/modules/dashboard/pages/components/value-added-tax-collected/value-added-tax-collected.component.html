@@ -1,0 +1,59 @@
+<div class="card">
+  <div class="row p-3">
+    <div class="col-md-4">
+      <form [formGroup]="valueAddedTaxParametersForm">
+        <mat-form-field appearance="legacy">
+          <mat-label>Select Chart Period</mat-label>
+          <mat-select (selectionChange)="onSelectPurchaseOrderPeriod($event)" formControlName="period">
+            <mat-option *ngFor="let item of chartDispType" value="{{ item }}">{{ item }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="col-md-8">
+      <form [formGroup]="valueAddedTaxParametersForm" *ngIf="this.poneedYear">
+        <mat-form-field appearance="legacy">
+          <mat-label>Select Year</mat-label>
+          <mat-select (selectionChange)="getTotalMonthlyIncomeWithHoldingSummary($event)" formControlName="year">
+            <mat-option *ngFor="let item of this.vatWithHoldingMetrics" value="{{ item }}">{{ item }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <form [formGroup]="valueAddedTaxParametersForm" *ngIf="this.poneedMonth">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="legacy">
+              <mat-label>Select Year</mat-label>
+              <mat-select (selectionChange)="getTotalDateWiseValueAddedTaxSummarry($event)" formControlName="year">
+                <mat-option *ngFor="let item of this.vatWithHoldingMetrics" value="{{ item }}">{{ item }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="legacy">
+              <mat-label>Select Month</mat-label>
+              <mat-select (selectionChange)="getTotalDateWiseValueAddedTaxSummarry($event)" formControlName="month">
+                <mat-option *ngFor="let item of monthsArray" value="{{ item }}">{{ item }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="header">
+    <h6>Value Added Tax</h6>
+  </div>
+  <div style="min-height: 420px;">
+    <div class="body" *ngIf="!isLoading">
+      <apx-chart [series]="barChartOptions.series" [chart]="barChartOptions.chart"
+        [dataLabels]="barChartOptions.dataLabels" [plotOptions]="barChartOptions.plotOptions"
+        [responsive]="barChartOptions.responsive" [xaxis]="barChartOptions.xaxis" [tooltip]="barChartOptions.tooltip"
+        [legend]="barChartOptions.legend" [fill]="barChartOptions.fill">
+      </apx-chart>
+    </div>
+    <div *ngIf="isLoading">
+      <app-spinner></app-spinner>
+    </div>
+  </div>
+</div>

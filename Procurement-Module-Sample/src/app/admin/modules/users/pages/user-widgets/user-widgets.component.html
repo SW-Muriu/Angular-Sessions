@@ -1,0 +1,71 @@
+<div class="row ">
+  
+  <div class="col-xl-3 col-lg-6" (click)="viewActivateUserAccounts()">
+    <div class="card l-bg-purple-dark">
+      <div class="card-statistic-3" >
+        <div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
+        <div class="card-content">
+          <h4 class="card-title">Total Active Users</h4>
+          <span class="data-1">{{ activeAccounts.length }}</span>
+          <mat-progress-bar mode="determinate"
+            class="progress-m progress-round progress-shadow l-orange-progress mt-2 mb-2" value="40">
+          </mat-progress-bar>
+          <p class="mb-0 text-sm">
+            <span class="text-nowrap">View Active Users</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-6" (click)="viewLockedAccounts()">
+    <div class="card l-bg-purple-dark">
+      <div class="card-statistic-3" >
+        <div class="card-icon card-icon-large"><i class="fas fa-unlock-alt"></i></div>
+        <div class="card-content">
+          <h4 class="card-title">Total Locked Users</h4>
+          <span class="data-1">{{ lockedAccounts.length }}</span>
+          <mat-progress-bar mode="determinate"
+            class="progress-m progress-round progress-shadow l-purple-progress mt-2 mb-2" value="40">
+          </mat-progress-bar>
+          <p class="mb-0 text-sm">
+            <span class="text-nowrap">View Locked User Accounts</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-6" (click)="viewInactiveUserAccounts()">
+    <div class="card l-bg-purple-dark">
+      <div class="card-statistic-3" >
+        <div class="card-icon card-icon-large"><i class="far fa-times-circle"></i></div>
+        <div class="card-content">
+          <h4 class="card-title">Total Inactive Accounts</h4>
+          <span class="data-1">{{ inactiveAccounts.length }}</span>
+          <mat-progress-bar mode="determinate"
+            class="progress-m progress-round progress-shadow l-green-progress mt-2 mb-2" value="40">
+          </mat-progress-bar>
+          <p class="mb-0 text-sm">
+            <span class="text-nowrap">View Inactive Accounts</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-6" (click)="viewdeletedAccounts()">
+    <div class="card l-bg-purple-dark">
+      <div class="card-statistic-3" >
+        <div class="card-icon card-icon-large"><i class="fas fa-trash-alt"></i></div>
+        <div class="card-content">
+          <h4 class="card-title">Deleted Accounts</h4>
+          <span class="data-1">{{ deletedAccounts.length }}</span>
+          <mat-progress-bar mode="determinate"
+            class="progress-m progress-round progress-shadow l-sky-progress mt-2 mb-2" value="40">
+          </mat-progress-bar>
+          <p class="mb-0 text-sm">
+            <span class="text-nowrap">View Deleted Accounts</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

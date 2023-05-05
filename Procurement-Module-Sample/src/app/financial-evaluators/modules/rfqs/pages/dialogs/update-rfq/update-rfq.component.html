@@ -1,0 +1,158 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modalHeader clearfix">
+          <img src="../../../../../assets/images/emtec.png" alt="avatar" />
+          <div class="modal-about">
+            <div class="font-weight-bold p-t-5 ms-2 me-2 font-17">
+              Update RFQ
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="rfqForm" (ngSubmit)="addCostCenter()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>RFQ title</mat-label>
+            <input matInput formControlName="title" required />
+            <mat-error *ngIf="rfqForm.get('title').hasError('required')">
+              RFQ title is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Bid fee</mat-label>
+            <input matInput formControlName="bidFee" type="text" required />
+            <mat-error *ngIf="rfqForm.get('bidFee').hasError('required')">
+             Bid fee is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Response deadline</mat-label>
+            <input
+              formControlName="responseDeadline"
+              matInput
+              [matDatepicker]="picker"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error
+              *ngIf="
+              rfqForm
+                  .get('responseDeadline')
+                  .hasError('responseDeadline') &&
+                  rfqForm.get('responseDeadline').touched
+              "
+            >
+              Please enter the response deadline
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Project deadline</mat-label>
+            <input
+              formControlName="projectDeadline"
+              matInput
+              [matDatepicker]="picker1"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker1"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+            <mat-error
+              *ngIf="
+              rfqForm
+                  .get('projectDeadline')
+                  .hasError('projectDeadline') &&
+                  rfqForm.get('projectDeadline').touched
+              "
+            >
+              Please enter the project deadline
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <!-- <button style="margin-bottom: 10px" type="button" (click)="onAddField()" mat-raised-button color="primary">
+            + Add Particulars
+          </button> -->
+          <div *ngFor="let dyForm of t.controls; let i = index" class="list-group list-group-flush">
+            <div>
+              <div [formGroup]="dyForm">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-3">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Item name </mat-label>
+                        <input matInput formControlName="item" required/>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Item description </mat-label>
+                        <input matInput formControlName="description" required/>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Item quantity </mat-label>
+                        <input matInput formControlName="quantity" required/>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Unit price </mat-label>
+                        <input matInput formControlName="unitPrice" required/>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Total price </mat-label>
+                        <input matInput formControlName="totalPrice" required/>
+                      </mat-form-field>
+                    </div>
+                    <!-- <div class="col-1 d-flex align-items-center justify-content-center">
+                      <mat-icon color="primary" (click)="onAddField()">add_circle</mat-icon>
+                      <mat-icon color="warn" (click)="onRemoveField(i)">remove_circle</mat-icon>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row" align="end">
+            <button mat-raised-button color="primary" [disabled]="!rfqForm.valid">
+              Save
+            </button>
+            <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

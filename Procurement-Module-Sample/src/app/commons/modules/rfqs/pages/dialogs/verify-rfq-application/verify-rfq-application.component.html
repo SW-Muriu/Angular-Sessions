@@ -1,0 +1,85 @@
+<div class="addContainer">
+  <div *ngIf="Data" class="contact-details">
+    <div class="modalHeader">
+      <div class="contact-details-name mb-1">Verify RFQ Application</div>
+      <button
+        mat-icon-button
+        (click)="dialogRef.close()"
+        aria-label="Close dialog"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div mat-dialog-content>
+      <div style="margin-left: 25px">
+        <mat-card-content>
+          <div class="row mt-1" style="width: 98%">
+            <div class="col-5 m-b-10">Supplier Email :</div>
+            <div class="col-7 pro-left m-b-10">{{ Data.suppliername }}</div>
+            <div class="col-5 m-b-10">Quatation Net Amount:</div>
+            <div class="col-7 pro-left m-b-10">
+              {{ Data.netQuote | currency: "UGX" }}
+            </div> 
+            <div class="col-5 m-b-10">Quatation Gross Amount:</div>
+            <div class="col-7 pro-left m-b-10">
+              {{ Data.grossQuote | currency: "UGX"  }}
+            </div>
+          </div>
+        </mat-card-content>
+      </div>
+      <form
+        class="register-form m-4"
+        [formGroup]="statusForm"
+        (ngSubmit)="changeStatus()"
+      >
+        <div class="row">
+          <div  class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Status</mat-label>
+              <mat-select
+                formControlName="action"
+                required
+                (selectionChange)="statusSelected($event)"
+              >
+                <mat-option
+                  *ngFor="let statusType of statusTypes"
+                  [value]="statusType.value"
+                >
+                  {{ statusType.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>          
+        </div>
+        <div class="row" *ngIf="rejected">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Reason for rejection</mat-label>
+              <textarea formControlName="reason" matInput></textarea>
+              <mat-error *ngIf="statusForm.get('reason').hasError('required')">
+                Reason is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <div class="example-button-row" align="end">
+              <button
+                mat-raised-button
+                color="primary"
+                [disabled]="!statusForm.valid"
+              >
+                Submit
+              </button>
+              <button mat-raised-button color="warn" tabindex="-1">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

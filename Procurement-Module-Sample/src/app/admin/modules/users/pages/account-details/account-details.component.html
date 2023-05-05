@@ -1,0 +1,54 @@
+<div class="addContainer">
+  <div *ngIf="account" class="contact-details">
+    <div class="modalHeader">
+      <div class="contact-details-name mb-1">Account Details</div>
+      <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div mat-dialog-content>
+      <mat-card-content>
+        <div class="row mt-1" style="width: 98%;">
+          <div class="col-5 m-b-10">Username:</div>
+          <div class="col-7 pro-left m-b-10">{{ account.username }}</div>
+          <div class="col-5 m-b-10">Firstname:</div>
+          <div class="col-7 pro-left m-b-10">{{ account.firstname }}</div>
+          <div class="col-5 m-b-10">Lastname:</div>
+          <div class="col-7 pro-left m-b-10">{{ account.lastname }}</div>
+          <div class="col-5 m-b-10">Phoneneumber:</div>
+          <div class="col-7 pro-left m-b-10">{{ account.phonenumber }}</div>
+          <div class="col-5 m-b-10">Email:</div>
+          <div class="col-7 pro-left m-b-10">{{ account.email }} </div>
+          <div class="col-5 m-b-10">Role:</div>
+          <div class="col-7 pro-left m-b-10">{{ account.roles[0].name }} </div>
+          <div class="col-5 m-b-10">Createdon:</div>
+          <div class="col-7 pro-left m-b-10"> <span class="material-icons-outlined project-icon2">
+              date_range
+            </span>{{ account.createdOn | date }}</div>
+            <div class="col-5 m-b-10">Modifiedon:</div>
+          <div class="col-7 pro-left m-b-10"> <span class="material-icons-outlined project-icon2">
+              date_range
+            </span>{{ account.modifiedOn | date }}</div>
+          <div class="col-5 m-b-10">Account Active:</div>
+          <div class="col-7 pro-lef mb-2">
+            <div >
+              <span class="badge badge-pill badge-primary col-green">
+                {{account.acctActive}}</span>
+            </div>
+          </div>
+                    <div class="col-5 m-b-10">User logged in:</div>
+          <div class="col-7 pro-lef mb-2">
+            <div *ngIf="account.loggedIn">
+              <span class="badge badge-solid-blue">{{ account.loggedIn }}</span>
+              <button type="button" class="btn btn-outline-danger mx-3" (click)="logoutUser()">Logout</button>
+            </div>
+            <div *ngIf="!account.loggedIn">
+              <span class="badge badge-pill badge-primary col-orange">
+                False </span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </div>
+  </div>
+</div>

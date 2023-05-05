@@ -1,0 +1,92 @@
+<div class="card">
+    
+    <br>
+    <div class="header">
+        <h2>Invoices'/Customers' reports</h2>
+    </div>
+    
+    <div class="body">
+        <div class="doc-file-type">
+            <ul class="list-unstyled" style="position: relative; min-height: 500px;">
+                <li class="d-flex mb-3" (click)="paymentParameters('general')">
+                    <span class="msr-3 align-self-center img-icon info-rgba text-info"><i
+                            class="far fa-file-archive"></i></span>
+
+                    <div class="set-flex">
+                        <h5 class="font-16 mb-1">General report</h5>
+                        <p>Report with all payment details</p>
+                    </div>
+                    <div class="ms-auto">
+                        <td>
+
+                            <i class="far fa-arrow-alt-circle-down"></i>
+                        </td>
+                    </div>
+                </li>
+                <li class="d-flex mb-3" (click)="paymentParameters('payments recieved')">
+                    <span class="msr-3 align-self-center img-icon danger-rgba text-danger"><i
+                        class="far fa-file-pdf"></i></span>
+                    <div class="set-flex">
+                        <h5 class="font-16 mb-1">Payments per customer</h5>
+                        <p>Report for all payments recieved from specific customer</p>
+                    </div>
+                    <div class="ms-auto">
+                        <td>
+
+                            <i class="far fa-arrow-alt-circle-down"></i>
+                        </td>
+                    </div>
+                </li>
+                <!-- <li class="d-flex mb-3" (click)="paymentParameters('supplier payment')">
+                    <span class="msr-3 align-self-center img-icon danger-rgba text-danger"><i
+                            class="far fa-file-pdf"></i></span>
+                    <div class="set-flex">
+                        <h5 class="font-16 mb-1">Payments from customers</h5>
+                        <p>Report for all payments recieved from customers</p>
+                    </div>
+                    <div class="ms-auto">
+                        <td>
+
+                            <i class="far fa-arrow-alt-circle-down"></i>
+                        </td>
+                    </div>
+                </li> -->
+                
+                <li class="d-flex mb-3" (click)="paymentParameters('customer statement')">
+                    <span class="msr-3 align-self-center img-icon success-rgba text-success"><i
+                        class="far fa-file-excel"></i></span>
+                    <div class="set-flex">
+                        <h5 class="font-16 mb-1">Customer statement</h5>
+                        <p>Report for all customer statements</p>
+                    </div>
+                    <div class="ms-auto">
+                        <td>
+
+                            <i class="far fa-arrow-alt-circle-down"></i>
+                        </td>
+                    </div>
+                </li>
+
+               
+                <li class="d-flex mb-3" (click)="paymentParameters('invoices per customer')">
+                    <span class="msr-3 align-self-center img-icon primary-rgba text-primary"><i
+                        class="far fa-file-word"></i></span>
+
+                    <div class="set-flex">
+                        <h5 class="font-16 mb-1">Invoices per customer</h5>
+                        <p>Invoice report per customer</p>
+                    </div>
+                    <div class="ms-auto">
+                        <td>
+
+                            <i class="far fa-arrow-alt-circle-down"></i>
+                        </td>
+                    </div>
+                </li>
+
+
+            </ul>
+
+        </div>
+    </div>
+</div>

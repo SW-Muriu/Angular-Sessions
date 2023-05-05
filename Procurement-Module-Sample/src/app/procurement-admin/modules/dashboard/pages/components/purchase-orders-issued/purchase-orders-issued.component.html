@@ -1,0 +1,62 @@
+<div class="card">
+  <div class="row p-3">
+    <div class="col-md-4">
+      <form [formGroup]="purchaseOrdersParametersForm">
+        <mat-form-field appearance="legacy">
+          <mat-label>Select Chart Period</mat-label>
+          <mat-select (selectionChange)="onSelectPurchaseOrderPeriod($event)" formControlName="period">
+            <mat-option *ngFor="let item of chartDispType" value="{{ item }}">{{ item }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="col-md-8">
+      <form [formGroup]="purchaseOrdersParametersForm" *ngIf="this.poneedYear">
+        <mat-form-field appearance="legacy">
+          <mat-label>Select Year</mat-label>
+          <mat-select (selectionChange)="getPurchaseOrdersIssuedMonthWise($event)" formControlName="year">
+            <mat-option *ngFor="let item of this.purchaseOrdersMetrics" value="{{ item }}">{{ item }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <form [formGroup]="purchaseOrdersParametersForm" *ngIf="this.poneedMonth">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="legacy">
+              <mat-label>Select Year</mat-label>
+              <mat-select (selectionChange)="getPurchaseOrdersIssuedDateWise($event)" formControlName="year">
+                <mat-option *ngFor="let item of this.purchaseOrdersMetrics" value="{{ item }}">{{ item }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="legacy">
+              <mat-label>Select Month</mat-label>
+              <mat-select (selectionChange)="getPurchaseOrdersIssuedDateWise($event)" formControlName="month">
+                <mat-option *ngFor="let item of monthsArray" value="{{ item }}">{{ item }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="float-start">
+      <h6 class="text-muted">Purchase Orders Issued</h6>
+    </div>
+    <div style="min-height: 420px;">
+      <div  *ngIf="!isLoading">
+        <apx-chart [series]="performanceRateChartOptions.series" [chart]="performanceRateChartOptions.chart"
+          [xaxis]="performanceRateChartOptions.xaxis" [stroke]="performanceRateChartOptions.stroke"
+          [colors]="performanceRateChartOptions.colors" [dataLabels]="performanceRateChartOptions.dataLabels"
+          [legend]="performanceRateChartOptions.legend" [markers]="performanceRateChartOptions.markers"
+          [grid]="performanceRateChartOptions.grid" [yaxis]="performanceRateChartOptions.yaxis"
+          [tooltip]="performanceRateChartOptions.tooltip" [title]="performanceRateChartOptions.title"></apx-chart>
+      </div>
+      <div *ngIf="isLoading">
+        <app-spinner></app-spinner>
+      </div>
+    </div>
+  </div>
+</div>

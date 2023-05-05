@@ -1,0 +1,97 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Dashboard'" [items]="['Home']" [active_item]="'Dashboard'">
+      </app-breadcrumb>
+    </div>
+    <!-- Widgets -->
+    <div class="row">
+      <div class="col-lg-3 col-sm-6">
+        <div class="info-box7 bg-c-purple order-info-box7">
+          <div class="info-box7-block">
+            <h4 class="m-b-20">Requests</h4>
+            <h2 class="text-end"><span class="float-start">23</span><i class="fas fa-ticket-alt"></i></h2>
+            <p class="m-b-0">18% Higher Then Last Month</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="info-box7 bg-c-purple order-info-box7">
+          <div class="info-box7-block">
+            <h4 class="m-b-20">Proposals</h4>
+            <h2 class="text-end"><span class="float-start">20</span><i class="far fa-check-circle"></i></h2>
+            <p class="m-b-0">21% Higher Then Last Month</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="info-box7 bg-c-purple order-info-box7">
+          <div class="info-box7-block">
+            <h4 class="m-b-20">Evaluation</h4>
+            <h2 class="text-end"><span class="float-start">13</span><i class="fas fa-briefcase"></i></h2>
+            <p class="m-b-0">37% Higher Then Last Month</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="info-box7 bg-c-purple order-info-box7">
+          <div class="info-box7-block">
+            <h4 class="m-b-20">Contracts</h4>
+            <h2 class="text-end"><span class="float-start">34</span><i class="fas fa-umbrella-beach"></i></h2>
+            <p class="m-b-0">10% Higher Then Last Month</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #END# Widgets -->
+    <div class="row">
+      <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Weekly Working Hours</h2>
+          </div>
+          <div class="body">
+            <apx-chart [series]="barChartOptions.series" [chart]="barChartOptions.chart"
+              [dataLabels]="barChartOptions.dataLabels" [plotOptions]="barChartOptions.plotOptions"
+              [responsive]="barChartOptions.responsive" [xaxis]="barChartOptions.xaxis"
+              [legend]="barChartOptions.legend" [colors]="barChartOptions.colors" [tooltip]="barChartOptions.tooltip"
+              [fill]="barChartOptions.fill">
+            </apx-chart>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Running Project Review</h2>
+          </div>
+          <div class="body">
+            <apx-chart [series]="radialChartOptions.radialseries" [chart]="radialChartOptions.chart"
+              [plotOptions]="radialChartOptions.plotOptions" [labels]="radialChartOptions.labels"></apx-chart>
+            <div class="text-center p-t-20">
+              <div class="chart-note">
+                <span class="dot bg-orange"></span>
+                <span>Project 1</span>
+              </div>
+              <div class="chart-note">
+                <span class="dot bg-indigo"></span>
+                <span>Project 2</span>
+              </div>
+              <div class="chart-note msr-0">
+                <span class="dot bg-green"></span>
+                <span>Project 3</span>
+              </div>
+            </div>
+            <div class="text-center p-t-20">
+              <button mat-stroked-button color="primary">More Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+   
+  </div>
+</section>

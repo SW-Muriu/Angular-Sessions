@@ -1,0 +1,106 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modalHeader clearfix">
+          <img src="../../../../../assets/images/emtec.png" alt="avatar" />
+          <div class="modal-about">
+            <div class="font-weight-bold p-t-5 ms-2 me-2 font-17">
+              Add prequalification
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    
+    <form class="register-form m-4" [formGroup]="Form" (ngSubmit)="addPreqParams()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Category name</mat-label>
+            <input matInput formControlName="categoryname" required />
+            <mat-error *ngIf="Form.get('categoryname').hasError('required')">
+              Category name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Tender name </mat-label>
+            <mat-select formControlName="tenderid" (selectionChange)="getTenderById($event)">
+              <mat-option *ngFor="let item of tenders" [value]="item.id">{{
+                item.title }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="Form.get('tenderid').hasError('required')">
+              Tender name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+     
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <button style="margin-bottom: 10px" type="button" (click)="onAddField()" mat-raised-button color="primary">
+            + Add Requirements
+          </button>
+          <div *ngFor="let dyForm of t.controls; let i = index" class="list-group list-group-flush">
+            <div>
+              <div [formGroup]="dyForm">
+         
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-6">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>{{ i + 1 }}.Requirement name </mat-label>
+                        <input matInput formControlName="requirementname" required (keyup)="getRequirementName($event)"/>
+                        <mat-error *ngIf="dyForm.get('requirementname').hasError('required')">
+                          Category name is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-5">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>{{ i + 1 }}.Input type </mat-label>
+                        <mat-select formControlName="inputtype" (selectionChange)="getInputType($event)">
+                          <mat-option *ngFor="let item of inputList" [value]="item.name">{{ item.name }}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="dyForm.get('inputtype').hasError('required')">
+                          Inputtype name is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    
+                    <div class="col-1 d-flex align-items-center justify-content-center">
+                      <mat-icon color="primary" (click)="onAddField()">add_circle</mat-icon>
+                      <mat-icon color="warn" (click)="onRemoveField(i)">remove_circle</mat-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row" align="end">
+            <button mat-raised-button color="primary" [disabled]="!Form.valid">
+              Save
+            </button>
+            <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,201 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modalHeader clearfix">
+          <img src="../../../../../assets/images/emtec.png" alt="avatar" />
+          <div class="modal-about">
+            <div class="font-weight-bold p-t-5 ms-2 me-2 font-17">
+              Update Need
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="m-4" [formGroup]="updateNeedform">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Need</mat-label>
+            <input matInput formControlName="need" required>
+            <mat-error *ngIf="updateNeedform.get('need').hasError('required')">
+              Need is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Select type</mat-label>
+              <mat-select formControlName="type" required>
+                <mat-option [value]="'Goods'">
+                  Goods
+                </mat-option>
+                <mat-option [value]="'Services'">
+                  Services
+                </mat-option>
+                <mat-option [value]="'Goods & Services'">
+                  Goods & Services
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="updateNeedform.get('type').hasError('required')">
+                Select the type of need
+              </mat-error>
+            </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+          <mat-form-field
+            class="example-full-width mb-3"
+            appearance="outline"
+          >
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category" required>
+              <mat-option
+                *ngFor="let category of categories"
+                [value]="category.code"
+              >
+                {{ category.code }} - {{ category.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="
+              updateNeedform.get('category').hasError('required')
+              "
+            >
+              Select the type of need
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Description</mat-label>
+              <textarea matInput formControlName="despcription"></textarea>
+              <mat-error *ngIf="updateNeedform.get('despcription').hasError('required')">
+                Description is required
+              </mat-error>
+            </mat-form-field>
+        </div>
+      </div>
+
+      
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <button
+            style="margin-bottom: 10px"
+            type="button"
+            (click)="onAddField()"
+            mat-raised-button
+            color="primary"
+          >
+            + Add Item
+          </button>
+          <div
+            *ngFor="let dyForm of t.controls; let i = index"
+            class="list-group list-group-flush"
+          >
+            <div>
+              <div [formGroup]="dyForm">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Item name </mat-label>
+                        <input
+                          matInput
+                          formControlName="itemName"
+                          required
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Item description </mat-label>
+                        <input
+                          matInput
+                          formControlName="itemDescription"
+                          required
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Item quantity</mat-label>
+                        <input
+                        (keyup)="specifyQuantity($event, i)"
+                          matInput
+                          formControlName="itemQuantity"
+                          required
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Item unit price </mat-label>
+                        <input
+                        (keyup)="specifyUnitPrice($event, i)"
+                          matInput
+                          formControlName="unitPrice"
+                          required
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Item total price </mat-label>
+                        <input
+                          matInput
+                          formControlName="totalPrice"
+                          required
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div
+                      class="col-1 d-flex align-items-center justify-content-center"
+                    >
+                      <mat-icon color="primary" (click)="onAddField()"
+                        >add_circle</mat-icon
+                      >
+                      <mat-icon color="warn" (click)="onRemoveField(i)"
+                        >remove_circle</mat-icon
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>              
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+          <button class="btn-space" [disabled]="!updateNeedform.valid" (click)="updateNeed()" mat-raised-button
+            color="primary">Submit</button>
+          <button type="button" mat-button>Cancel</button>
+        </div>
+      </div>
+    </form>   
+  </div>
+</div>

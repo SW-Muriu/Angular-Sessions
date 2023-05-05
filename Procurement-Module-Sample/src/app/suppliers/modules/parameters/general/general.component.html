@@ -1,0 +1,192 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Parameters'" [items]="['Home','Parameters']" [active_item]="'General Parameters'">
+      </app-breadcrumb>
+    </div>
+    <!-- Widgets -->
+    <app-widgets></app-widgets>
+    <!-- #END# Widgets -->
+    <div class="row clearfix">
+      <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Profile</h2>
+          </div>
+          <div class="body" *ngIf="paramsExist">
+            <div class="border-apply" style="margin: 1px;">
+              <div class="m-b-20">
+                <div class="contact-grid">
+                  <div class="profile-header l-bg-red">
+                    <div class="user-name">{{data.companyname}}</div>
+                    <div class="name-center">{{data.emailaddress}}</div>
+                  </div>
+                  <img src="assets/images/postB.png" class="user-img" alt="" style="width: 100px; height: 100px;">
+                  <p>
+                    {{data.physicaladdress}},
+                  </p>
+                  <div>
+                    <span class="phone">
+                      <i class="material-icons">phone</i>{{data.phoneno}}</span>
+                  </div>
+                  <div class="profile-userbuttons" style="margin-bottom: 10px;">
+                    <button mat-flat-button color="primary">{{'Kenya'}}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="body" *ngIf="!paramsExist">
+            <div class="border-apply" style="margin: 1px;">
+              <div class="m-b-20">
+                <div class="contact-grid">
+                  <div class="profile-header l-bg-purple-dark">
+                    <div class="user-name">{{'Loading..'}}</div>
+                    <div class="name-center">{{'Loading..'}}</div>
+                  </div>
+                  <img src="assets/images/em.jpg" class="user-img" alt="">
+                  <p>
+                    {{'Loading..'}},
+                    <br />{{'Loading..'}}
+                  </p>
+                  <div>
+                    <span class="phone">
+                      <i class="material-icons">phone</i>{{'Loading..'}}</span>
+                  </div>
+                  <div class="profile-userbuttons" style="margin-bottom: 10px;">
+                    <button mat-flat-button color="primary">{{'Loading..'}}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>General parameters</h2>
+
+          </div>
+          <div class="body">
+
+            <form class="m-4" [formGroup]="Form" (ngSubmit)="onFormSubmit()">
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Company name</mat-label>
+                    <input matInput formControlName="companyname">
+                    <mat-icon matSuffix>house</mat-icon>
+                    <mat-error *ngIf="Form.get('companyname').hasError('required')">
+                      Please enter company name
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="emailaddress" required>
+                    <mat-icon matSuffix>email</mat-icon>
+                    <mat-error
+                      *ngIf="Form.get('emailaddress').hasError('required') && Form.get('emailaddress').touched">
+                      Please enter a valid email address
+                    </mat-error>
+                  </mat-form-field>
+
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Phone</mat-label>
+                    <!-- <span matPrefix>
+                        <mat-icon class="msr-2">phone</mat-icon>
+                      </span> -->
+                    <input matInput formControlName="phoneno" required />
+                    <mat-icon matSuffix>phone</mat-icon>
+                    <mat-error *ngIf="Form.get('phoneno').hasError('required') && Form.get('phoneno').touched">
+                      Please enter a valid phone number
+                    </mat-error>
+                  </mat-form-field>
+
+                </div>
+
+              </div>
+              <!-- <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Address</mat-label>
+                      <textarea matInput formControlName="address"></textarea>
+                    </mat-form-field>
+                  </div>
+                </div> -->
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="physicaladdress" required>
+                    <mat-icon matSuffix>location_city</mat-icon>
+                    <mat-error *ngIf="Form.get('physicaladdress').hasError('required')">
+                      City name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Country</mat-label>
+                    <input matInput formControlName="country" required>
+                    <mat-icon matSuffix>flag</mat-icon>
+                    <mat-error *ngIf="Form.get('country').hasError('required')">
+                      Country is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Website</mat-label>
+                    <textarea matInput formControlName="website"></textarea>
+                    <mat-error *ngIf="Form.get('website').hasError('required')">
+                      Website is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <app-file-upload (change)="selectFile($event)"  formControlName="logo"></app-file-upload>
+                </div>
+              </div>
+              <div *ngIf="currentFile" class="progress my-3">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                  attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"
+                  [ngStyle]="{ width: progress + '%' }">
+                  {{ progress }}%
+                </div>
+              </div>
+              <div style="margin-top: 15px;" *ngIf="message" class="alert alert-danger" role="alert">{{ message }}</div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 float-left">
+                  <div class="float-right">
+                    <button class="btn-space" [disabled]="!Form.valid" mat-raised-button color="primary">Submit</button>
+                    <button type="button" mat-button>Cancel</button>
+                  </div>
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+</section>

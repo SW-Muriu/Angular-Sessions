@@ -1,0 +1,237 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb
+        [title]="'Request Need'"
+        [items]="['HOD']"
+        [active_item]="'Need equisition Form'"
+      >
+      </app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Need Requisition Form</h2>
+          </div>
+          <div class="body">
+            <form class="register-form m-4" [formGroup]="bidRfqForm">
+              <div class="row">
+                <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>RFQ title</mat-label>
+                    <input matInput formControlName="rfqtitle" required />
+                    <mat-error
+                      *ngIf="bidRfqForm.get('rfqtitle').hasError('required')"
+                    >
+                      RFQ title is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Supplier name</mat-label>
+                    <input
+                      matInput
+                      formControlName="suppliername"
+                      type="text"
+                      required
+                    />
+                    <mat-error
+                      *ngIf="
+                        bidRfqForm.get('suppliername').hasError('required')
+                      "
+                    >
+                      Supplier name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Supplier email</mat-label>
+                    <input
+                      matInput
+                      formControlName="supplieremail"
+                      type="text"
+                      required
+                    />
+                    <mat-error
+                      *ngIf="
+                        bidRfqForm.get('supplieremail').hasError('required')
+                      "
+                    >
+                      Supplier email is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div
+                  *ngFor="let dyForm of t.controls; let i = index"
+                  class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2"
+                >
+                  <div>
+                    <div [formGroup]="dyForm">
+                      <div class="form-group">
+                        <div class="row">
+                          <div
+                            class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2"
+                          >
+                            <mat-form-field
+                              class="example-full-width"
+                              appearance="outline"
+                            >
+                              <mat-label>Item</mat-label>
+                              <input
+                                matInput
+                                formControlName="item"
+                                type="text"
+                                readonly
+                                required
+                              />
+                            </mat-form-field>
+                          </div>
+                          <div
+                            class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2"
+                          >
+                            <mat-form-field
+                              class="example-full-width"
+                              appearance="outline"
+                            >
+                              <mat-label>Quantity</mat-label>
+                              <input
+                                matInput
+                                formControlName="quantity"
+                                type="text"
+                                readonly
+                                required
+                              />
+                            </mat-form-field>
+                          </div>
+
+                          <div
+                            class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2"
+                          >
+                            <mat-form-field
+                              class="example-full-width"
+                              appearance="outline"
+                            >
+                              <mat-label>Tax rate</mat-label>
+                              <mat-select
+                                (selectionChange)="selectTax($event, i)"
+                                formControlName="taxRate"
+                              >
+                                <mat-option
+                                  *ngFor="let taxCategory of taxCategories"
+                                  value="{{ taxCategory.code }}"
+                                  >{{ taxCategory.name }}</mat-option
+                                >
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+
+                          <div
+                            class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2"
+                          >
+                            <mat-form-field
+                              class="example-full-width"
+                              appearance="outline"
+                            >
+                              <mat-label>Discount rate</mat-label>
+                              <input
+                                matInput
+                                (keyup)="specifyDiscountRate($event, i)"
+                                formControlName="discountrate"
+                                type="number"
+                                required
+                              />
+                            </mat-form-field>
+                          </div>
+
+                          <div
+                            class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2"
+                          >
+                            <mat-form-field
+                              class="example-full-width"
+                              appearance="outline"
+                            >
+                              <mat-label>Unit price</mat-label>
+                              <input
+                                matInput
+                                (keyup)="specifyUnitPrice($event, i)"
+                                formControlName="unitPrice"
+                                type="number"
+                                required
+                              />
+                            </mat-form-field>
+                          </div>
+                          <div
+                            class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2"
+                          >
+                            <mat-form-field
+                              class="example-full-width"
+                              appearance="outline"
+                            >
+                              <mat-label>Gross amount</mat-label>
+                              <input
+                                matInput
+                                formControlName="totalPrice"
+                                type="number"
+                                readonly
+                                required
+                              />
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <div class="float-end m-t-5 text-end">
+                    <p>Sub - Total amount: {{ netAmount | currency: "UGX" }}</p>
+                    <p>Discount : {{ discount | currency : "UGX" }}</p>
+                    <p>Tax (10%) : {{ taxAmount | currency: "UGX" }}</p>
+                    <hr />
+                    <h3><b>Total :</b> {{ grossAmount | currency: "UGX" }}</h3>
+                  </div>
+                  <div class="clearfix"></div>
+                  <hr />
+                  <div class="float-end m-t-30 text-end" align="end">
+                    <button
+                      mat-raised-button
+                      class="btn-space"
+                      color="primary"
+                      [disabled]="!bidRfqForm.valid"
+                      (click)="sendQuatation()"
+                    >
+                      Send
+                    </button>
+                    <button mat-raised-button color="warn" (click)="onCancel()">
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

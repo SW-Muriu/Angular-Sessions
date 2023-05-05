@@ -1,0 +1,236 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Pending Application'" [items]="['Home']" [active_item]="'Application'">
+      </app-breadcrumb>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+
+          <div *ngIf="applicationLoading">
+            <div style="margin: 100px">
+              <div class="d-flex justify-content-center">
+                <img src="assets/images/gif.gif" style="display: block; margin: auto; width: 50px" />
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!applicationLoading">
+            <div class="header">
+              <h2>Application details</h2>
+            </div>
+            <div class="body">
+              <div class="wrapper wrapper-content animated fadeInUp">
+                <div class="ibox">
+                  <div class="ibox-content">
+                    <div class="row">
+                      <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="m-b-md">
+                              <h3 class="project-name" style="color: rgb(104, 77, 140);">
+                                {{applicationData.prequalificationtitle}}</h3>
+                            </div><br>
+                            <dl>
+                              <dt class="pull-left me-2">Status:</dt>
+                              <dd>
+                                <span _ngcontent-isv-c222="" class="project-bedge2 project-type-Testing">
+                                  <div _ngcontent-isv-c222="" class="pro-left">
+                                    {{applicationData.status}}
+                                  </div>
+                                </span>
+                              </dd>
+                            </dl>
+                          </div>
+                        </div>
+    
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <dl class="dl-horizontal">
+                              <dt class="pull-left me-2">ReferenceId:</dt>
+                              <dd>{{applicationData.referenceid}}</dd>
+                            </dl>
+                          </div>
+                          <div class="col-lg-4" id="cluster_info">
+                            <dl class="dl-horizontal">
+                              <dt class="pull-left me-2">Submitted On:</dt>
+                              <dd> {{applicationData.submittedon | date: 'medium'}}</dd>
+                            </dl>
+                          </div>
+                        </div>
+                      </div>                   
+                      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        
+                          <div class="body">
+                            <div class="row">
+                              <div class="col-lg-4 col-md-4 col-12">
+                                <div class="profile-image float-md-right"> <img src="assets/images/postB.png" alt="">
+                                </div>
+                              </div>
+                              <div class="col-lg-8 col-md-8 col-12">
+                                <h4 class="m-t-0 m-b-0"><strong>Application</strong> From:</h4>
+                                <span class="job_post">Supplier Name</span>
+                                <p>102, Svayam Appartment, new P.L. road, Nairobi-369852</p>
+                                <div>
+                                  <button type="button" class="btn btn-outline-success btn-border-radius msr-2" (click)="verify()">Verify</button>
+                                  <!-- <button type="button" class="btn btn-outline-warning btn-border-radius">Message</button> -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="project-activity">
+                          <mat-tab-group>
+
+                            <mat-tab>
+                              <ng-template mat-tab-label>
+                                <mat-icon class="example-tab-icon msr-2">
+                                  remove_red_eye
+                                </mat-icon>
+                                Review Requirements
+                              </ng-template>
+                              <div class="header">
+                                <h2>
+                                  <strong>Requirements:</strong>
+                                </h2>
+                              </div>
+
+                              <div *ngIf="reqLoading">
+                                <div style="margin: 100px">
+                                  <div class="d-flex justify-content-center">
+                                    <img src="assets/images/gif.gif"
+                                      style="display: block; margin: auto; width: 50px" />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div *ngIf="!reqLoading">
+                                <div class="boxs mail_listing" style="margin-left: 60px;margin-right: 60px;">
+                                  <div class="inbox-center table-responsive">
+                                    <table class="table table-hover">
+                                      <thead>
+
+                                        <tr>
+                                          <th></th>
+                                          <th>ID</th>
+                                          <th>Requirement Name</th>
+                                          <th>Response</th>
+
+                                        </tr>
+
+                                      </thead>
+                                      <tbody>
+                                        <tr class="unread"
+                                          *ngFor="let item of noFileInputs| paginate: { itemsPerPage: 4, currentPage: p }">
+
+                                          <td class="hidden-xs m-r-5">
+                                            <i class="material-icons text-warning">star</i>
+                                          </td>
+
+                                          <td class="hidden-xs m-r-5">{{item.id}}
+
+                                          </td>
+                                          <td class="hidden-xs m-r-5"><span
+                                              class="badge col-purple shadow-style m-r-10">Question</span>{{item.requirementname}}
+                                          </td>
+                                          <td class="max-texts m-r-5">
+                                            <a>
+                                              <span class="badge col-blue shadow-style m-r-10">Answer</span>
+                                              {{item.response}}</a>
+                                          </td>
+
+                                        </tr>
+
+
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-sm-4 ">
+                                    </div>
+                                    <div class="col-sm-8 text-end">
+                                      <div class="float-end">
+                                        <div class="email-btn-group m-l-15">
+                                          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div *ngIf="!reqLoading" style="margin-left: 60px;margin-right: 60px;">
+                                  <div class="row">
+
+                                    <div class="header">
+                                      <h2>Uploaded documents</h2>
+                                    </div>
+                                    <!-- class="list-group list-group-horizontal" class="d-flex flex-nowrap" -->
+                                    <div class="body">
+                                      <div class="doc-file-type">
+                                        <!-- {
+                                          "id": 2,
+                                          "supplierid": "7",
+                                          "requirementid": "4",
+                                          "requirementname": "nationalid",
+                                          "filename": "Fiv1.jpg",
+                                          "filetype": "image/jpeg",
+                                          "file": "rtwergfregre"
+                                        } -->
+                                        <ul class="list-group-horizontal d-flex flex-wrap"
+                                          style="position: relative; max-height: 285px;" [perfectScrollbar]>
+
+                                          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2"
+                                            *ngFor="let item of withFileInputs">
+                                            <li class="d-flex mb-3 m-4" (click)="onClickDownloadPdf(item)">
+                                              <span class="msr-3 align-self-center img-icon danger-rgba text-danger"><i
+                                                  class="far fa-file-pdf"></i></span>
+                                              <div class="set-flex">
+                                                <h5 class="font-16 mb-1" style="margin-right: 20px;">
+                                                  {{item.requirementname}}
+                                                </h5>
+                                                <p>{{item.filename}} - {{item.filetype}}</p>
+                                              </div>
+                                              <div class="ms-auto">
+                                                <td>
+
+                                                  <i class="far fa-arrow-alt-circle-down"></i>
+                                                </td>
+                                              </div>
+                                            </li>
+                                          </div>
+
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </div>
+
+
+                              </div>
+
+
+                            </mat-tab>
+                          </mat-tab-group>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
