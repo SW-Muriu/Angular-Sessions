@@ -1,0 +1,483 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Prequalification Requirements'" [items]="['Home']" [active_item]="'Prequalification'">
+      </app-breadcrumb>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+
+          <div *ngIf="loading">
+            <div style="margin: 100px">
+              <div class="d-flex justify-content-center">
+                <img src="assets/images/gif.gif" style="display: block; margin: auto; width: 50px" />
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!loading">
+            <div class="header">
+              <h2>Prequalification Requirements</h2>
+            </div>
+            <div class="body">
+              <div class="wrapper wrapper-content animated fadeInUp">
+                <div class="ibox">
+                  <div class="ibox-content">
+                    <div class="row">
+                      <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="m-b-md">
+                              <h3 class="project-name" style="color: rgb(210, 116, 29);">{{requirementsData.title}}</h3>
+                            </div>
+                            <dl>
+                              <dt class="pull-left me-2">Status:</dt>
+                              <dd>
+                                <span _ngcontent-isv-c222="" class="project-bedge2 project-type-Testing">
+                                  <div _ngcontent-isv-c222="" class="pro-left">
+                                    Active
+                                  </div>
+                                </span>
+                              </dd>
+                            </dl>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                            <dl class="dl-horizontal">
+
+                              <dt class="pull-left me-2">Category Name:</dt>
+                              <dd>{{requirementsData.category}}</dd>
+                              <dt class="pull-left me-2">Category Code:</dt>
+                              <dd> {{requirementsData.categorycode}} </dd>
+                              <dt class="pull-left me-2">BidFee:</dt>
+                              <dd> {{requirementsData.bidfee | currency: 'KSH: '}} </dd>
+
+
+                            </dl>
+                          </div>
+                          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12" id="cluster_info">
+                            <dl class="dl-horizontal">
+                              <dt class="pull-left me-2">Start date:</dt>
+                              <dd> {{requirementsData.startdate | date: 'medium'}}</dd>
+                              <dt class="pull-left me-2">Close date:</dt>
+                              <dd> {{requirementsData.closingdate | date: 'medium'}}</dd>
+                              <dt class="pull-left me-2">Website:</dt>
+                              <dd> {{requirementsData.website}} </dd>
+                              <!-- <dt class="pull-left me-2">Deadline:</dt>
+                          <dd> 22-09-2021 </dd>
+                          <dt class="pull-left me-2">Team:</dt>
+                          <dd class="project-people">
+                            <ul class="list-unstyled order-list">
+                              <li class="avatar avatar-sm"><img src="assets/images/user/user1.jpg" alt="user"
+                                  class="rounded-circle"></li>
+                              <li class="avatar avatar-sm"><img src="assets/images/user/user2.jpg" alt="user"
+                                  class="rounded-circle"></li>
+                              <li class="avatar avatar-sm"><img src="assets/images/user/user3.jpg" alt="user"
+                                  class="rounded-circle"></li>
+                              <li class="avatar avatar-sm">
+                                <span class="badge">+4</span>
+                              </li>
+                            </ul>
+                          </dd> -->
+                            </dl>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <app-countdown *ngIf="requirementsData" [closingdate]="requirementsData.closingdate ">
+                        </app-countdown>
+
+                      </div>
+
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="project-activity">
+                          <mat-tab-group>
+                            <mat-tab>
+                              <ng-template mat-tab-label>
+                                <mat-icon class="example-tab-icon msr-2">
+                                  list
+                                </mat-icon>
+                                Instructions
+                              </ng-template>
+                              <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="tab-pane active">
+
+                                  <div style="margin: 20px;">
+                                    <p>
+                                      <strong>
+                                        Follow the following guidelines to complete this process
+                                        successfully.
+                                      </strong>
+                                    </p>
+                                    <ul>
+                                      <li>
+                                        <i class="fas fa-angle-double-right m-l-10"></i> Make sure
+                                        every field is filled. This data is critical in identifying contractors who are
+                                        upto the task.
+                                      </li>
+                                      <li>
+                                        <i class="fas fa-angle-double-right m-l-10"></i> Ensure all inputs with a
+                                        drop-down are filled
+                                      </li>
+                                      <li>
+                                        <i class="fas fa-angle-double-right m-l-10"></i>
+                                        All inputs which need uploading of documents are key. Ensure all documents
+                                        provided are as per the defined requirement.
+                                      </li>
+
+                                    </ul>
+                                  </div>
+
+
+                                </div>
+                              </div>
+                            </mat-tab>
+                            <mat-tab>
+                              <ng-template mat-tab-label>
+                                <mat-icon class="example-tab-icon msr-2">
+                                  cloud_upload
+                                </mat-icon>
+                                Upload Requirements
+                              </ng-template>
+                              <div class="header">
+                                <h2>
+                                  <strong>Requirements:</strong>
+                                </h2>
+                              </div>
+
+                              <div *ngIf="reqLoading">
+                                <div style="margin: 100px">
+                                  <div class="d-flex justify-content-center">
+                                    <img src="assets/images/gif.gif"
+                                      style="display: block; margin: auto; width: 50px" />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div *ngIf="!reqLoading">
+                                <form class="m-4" [formGroup]="dynamicForm" novalidate>
+                                  <div class="row">
+                                    <ng-container *ngFor="let controls of textInputs">
+                                      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                        <div *ngIf="controls.type == 'text'">
+                                          <mat-form-field class="example-full-width" appearance="fill">
+                                            <mat-label>{{controls.label}}</mat-label>
+                                            <input matInput [type]="controls.type" [formControlName]="controls.name">
+                                            <mat-icon matSuffix>house</mat-icon>
+                                          </mat-form-field>
+                                          <ng-container *ngFor="let validation of controls.validations">
+                                            <span
+                                              *ngIf="dynamicForm.controls[controls.name].touched && dynamicForm.controls[controls.name].errors">
+                                              <mat-error
+                                                *ngIf="dynamicForm.controls[controls.name].errors[validation.name]">
+                                                {{validation.message}}
+                                              </mat-error>
+                                            </span>
+                                          </ng-container>
+                                        </div>
+                                      </div>
+                                    </ng-container>
+                                  </div>
+                                  <div class="row">
+                                    <ng-container *ngFor="let controls of selectInputs">
+                                      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                        <div *ngIf="controls.type == 'select'">
+                                          <mat-form-field class="example-full-width" appearance="fill">
+                                            <mat-label>{{controls.label}}</mat-label>
+                                            <mat-select [type]="controls.type" [formControlName]="controls.name">
+                                              <mat-option *ngFor="let item of selectItems" [value]="item.name">{{
+                                                item.name }}
+                                              </mat-option>
+                                            </mat-select>
+                                            <mat-icon matSuffix>house</mat-icon>
+                                          </mat-form-field>
+                                          <ng-container *ngFor="let validation of controls.validations">
+                                            <span
+                                              *ngIf="dynamicForm.controls[controls.name].touched && dynamicForm.controls[controls.name].errors">
+                                              <mat-error
+                                                *ngIf="dynamicForm.controls[controls.name].errors[validation.name]">
+                                                {{validation.message}}
+                                              </mat-error>
+                                            </span>
+                                          </ng-container>
+                                        </div>
+                                      </div>
+                                    </ng-container>
+                                  </div>
+
+                                </form>
+                                <!-- <form class="m-4" [formGroup]="dynamicFileForm" novalidate>
+
+                                  <div class="row">
+                                    <ol>
+                                      <li *ngFor="let row of selectedFiles">
+                                        <a  target="_blank" [href]="row?.url | safe: 'resourceUrl'">{{row?.name}}</a>
+                                        
+                                        <br>
+                                        <img [src]="row?.base64" alt="img" width="100px">
+                                      </li>
+                                    </ol>
+                                  </div>
+
+                                </form> -->
+
+                                <!-- Test form -->
+                                <div *ngIf="fInputs">
+                                  <form [formGroup]="form">
+
+
+
+                                    <div style="margin: 20px;">
+                                      <div class="table-responsive">
+                                        <div class="materialTableHeader">
+                                          <div class="row">
+                                            <div class="col-8">
+                                              <ul class="header-buttons-left ms-0">
+                                                <li class="dropdown">
+                                                  <h2>Upload Documents</h2>
+                                                </li>
+                                                <li class="dropdown m-l-20">
+                                                  <label for="search-input"><i
+                                                      class="material-icons search-icon">search</i></label>
+                                                  <input placeholder="Filter..." type="text"
+                                                    (keyup)="applyFilter($event)" #filter
+                                                    class="browser-default search-field" aria-label="Search box">
+                                                </li>
+
+                                              </ul>
+                                            </div>
+                                            <div class="col-4">
+
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <!-- <table mat-table [dataSource]="dataSource" formArrayName="filedetails"> -->
+                                        <mat-table #table matTableExporter [dataSource]="dataSource"
+                                          formArrayName="filedetails" matSort class="mat-cell"
+                                          #exporter="matTableExporter">
+
+                                          <!-- ID Column -->
+                                          <ng-container matColumnDef="requirementid">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header
+                                              class="psl-3 tbl-col-width-per-28">Requirement Id
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let row; let index = index" [formGroupName]="index"
+                                              class="column-nowrap psl-3 tbl-col-width-per-28">
+                                              <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                <mat-label>Requirementid</mat-label>
+                                                <input matInput type="text" formControlName="requirementid"
+                                                  placeholder="requirementid" readonly>
+                                              </mat-form-field>
+                                            </mat-cell>
+                                          </ng-container>
+
+
+
+                                          <ng-container matColumnDef="requirementname">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header
+                                              class="column-nowrap psl-3 tbl-col-width-per-28">Requirement Name
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let row; let index = index" [formGroupName]="index"
+                                              class="column-nowrap psl-3 tbl-col-width-per-28">
+                                              <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                <mat-label>requirementname</mat-label>
+                                                <input matInput type="text" formControlName="requirementname"
+                                                  placeholder="requirementname" readonly>
+                                              </mat-form-field>
+                                            </mat-cell>
+                                          </ng-container>
+                                          <ng-container matColumnDef="filename">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header
+                                              class="column-nowrap psl-3 tbl-col-width-per-28">Filename
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let row; let index = index" [formGroupName]="index"
+                                              class="column-nowrap psl-3 tbl-col-width-per-28">
+
+                                              <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                <mat-label>Filename</mat-label>
+                                                <input matInput type="text" formControlName="filename"
+                                                  placeholder="filename" readonly>
+                                              </mat-form-field>
+
+                                            </mat-cell>
+                                          </ng-container>
+
+
+                                          <ng-container matColumnDef="filetype">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header
+                                              class="column-nowrap psl-3 tbl-col-width-per-28">Filetype
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let row; let index = index" [formGroupName]="index"
+                                              class="column-nowrap psl-3 tbl-col-width-per-28">
+
+                                              <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                <mat-label>filetype</mat-label>
+                                                <input matInput type="text" formControlName="filetype"
+                                                  placeholder="filetype" readonly>
+                                              </mat-form-field>
+
+                                            </mat-cell>
+                                          </ng-container>
+
+                                          <ng-container matColumnDef="selectFile">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header
+                                              class="column-nowrap psl-3 tbl-col-width-per-28">Select File
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let row; let index = index" [formGroupName]="index"
+                                              class="column-nowrap psl-3 tbl-col-width-per-28">
+
+                                              <input #file type="file" [disabled]="isLoading | async"
+                                                (change)="onSelectFile(file.files,row,index)" [multiple]="'multiple'" />
+
+                                            </mat-cell>
+                                          </ng-container>
+
+                                          <!-- Row definitions -->
+                                          <!-- <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                                                    <tr mat-row *matRowDef="let row; let i = index; columns: displayColumns;"></tr> -->
+
+                                          <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+                                          <mat-row *matRowDef="let row; let i = index; columns: displayColumns;"
+                                            [style.cursor]="'pointer'" matRipple>
+                                          </mat-row>
+                                          <mat-cell *matNoDataRow colspan="4">
+                                            No data matching the filter "{{ input.value }}"</mat-cell>
+                                        </mat-table>
+                                        <!-- Loading spinner -->
+                                        <div *ngIf="isFileDataLoading" class="tbl-spinner">
+                                          <mat-progress-spinner color="primary" [diameter]="40" mode="indeterminate">
+                                          </mat-progress-spinner>
+                                        </div>
+                                        <mat-paginator [pageSize]="10"
+                                          [pageSizeOptions]="[2, 5, 10, 20, 30, 40, 50, 100]"
+                                          aria-label="Select page of users"></mat-paginator>
+                                      </div>
+                                    </div>
+
+
+
+
+                                  </form>
+
+                                </div>
+
+                                <!-- Test Form -->
+
+
+
+                                <div class="row m-4" style="margin-bottom: 4px;">
+                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 float-left">
+                                    <br>
+                                    <div class="position-absolute bottom-0 end-0 m-4">
+                                      <button class="btn-space" mat-raised-button color="primary"
+                                        (click)="onSubmit()">Submit</button>
+                                      <!-- [disabled]="!dynamicForm.valid" -->
+                                      <button type="button" mat-button>Cancel</button>
+                                    </div>
+                                    <!-- [disabled]="!dynamicFileForm.valid" [disabled]="!dynamicForm.valid" -->
+                                  </div>
+                                </div>
+                              </div>
+
+
+                            </mat-tab>
+                          </mat-tab-group>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        <div class="card">
+          <div class="body">
+            <div class="wrapper">
+              <div class="project-card-header">Project description
+              </div>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                has been the industry's standard dummy text ever since the 1500s, when an unknown
+                printer took a galley of type and scrambled it to make a type specimen book.</p>
+              <br>
+              <p> It has
+                survived not only five centuries, but also the leap into electronic typesetting,
+                remaining essentially unchanged. It was popularised in the 1960s with the release of
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="body">
+            <div class="wrapper">
+              <div class="project-card-header">Client Details
+              </div>
+              <div class="project-info-box">
+                <p><b>Client:</b> xyz pvt.ltd</p>
+                <p><b>Date:</b> 25.07.2021</p>
+                <p><b>Contact Person:</b> John Doe</p>
+                <p><b>Country:</b> USA</p>
+                <p class="mb-0"><b>Budget:</b> $500</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="body">
+            <div class="wrapper">
+              <div class="project-card-header">Project tags
+              </div>
+              <div class="panel-body mb-4"> <span class="label label-success m-1">Angular</span>
+                <span class="label label-warning m-1">Typescript</span> <span class="label label-info m-1">SCSS</span>
+                <span class="label label-success m-1">Git</span> <span class="label label-danger m-1">Admin</span> <span
+                  class="label label-warning m-1">Project</span> <span class="label label-success m-1">Photoshop</span>
+                <span class="label label-primary m-1">Material</span>
+              </div>
+              <div class="project-card-header">Project files
+              </div>
+              <div class="d-flex mb-2">
+                <div class="project-doc-icon text-center"><i class="far fa-file-pdf col-red"></i>
+                </div>
+                <div class="content ms-3">
+                  <p class="mb-1">Project_document.pdf</p>
+                  <span>Size: 4.3Mb</span>
+                </div>
+              </div>
+              <div class="d-flex mb-2">
+                <div class="project-doc-icon text-center"><i class="far fa-file-word col-blue"></i>
+                </div>
+                <div class="content ms-3">
+                  <p class="mb-1">error_log_47859657458.docx</p>
+                  <span>Size: 2.7Mb</span>
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="project-doc-icon text-center"><i class="far fa-file-image col-green"></i>
+                </div>
+                <div class="content ms-3">
+                  <p class="mb-1">screenshots.jpeg</p>
+                  <span>Size: 2.0Mb</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+</section>

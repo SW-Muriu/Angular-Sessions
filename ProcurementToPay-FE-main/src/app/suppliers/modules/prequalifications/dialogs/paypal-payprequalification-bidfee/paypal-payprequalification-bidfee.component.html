@@ -1,0 +1,210 @@
+<div class="mt-5 ml-20 mr-20 mb-3" *ngIf="isPaypalLoading">
+  <mat-progress-bar color="primary" mode="indeterminate">
+  </mat-progress-bar>
+</div>
+<form class="register-form m-4" [formGroup]="paypalForm" *ngIf="!showReciept">
+  <div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Firstname</mat-label>
+        <span matPrefix>
+          <mat-icon class="msr-2">account_balance</mat-icon>
+        </span>
+        <input matInput formControlName="firstname" required>
+        <mat-error *ngIf="paypalForm.get('firstname').hasError('required')">
+          Firstname is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Lastname</mat-label>
+        <span matPrefix>
+          <mat-icon class="msr-2">account_balance</mat-icon>
+        </span>
+        <input matInput formControlName="lastname" required>
+        <mat-error *ngIf="paypalForm.get('lastname').hasError('required')">
+          lastname is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <span matPrefix>
+          <mat-icon class="msr-2">account_balance</mat-icon>
+        </span>
+        <input matInput formControlName="email" required>
+        <mat-error *ngIf="paypalForm.get('email').hasError('required')">
+          Email is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>currency</mat-label>
+        <span matPrefix>
+          <mat-icon class="msr-2">account_balance</mat-icon>
+        </span>
+        <input matInput formControlName="currency" required>
+        <mat-error *ngIf="paypalForm.get('currency').hasError('required')">
+          Currency is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Bid Amount</mat-label>
+        <span matPrefix>
+          <mat-icon class="msr-2">attach_money</mat-icon>
+        </span>
+        <input matInput formControlName="total" placeholder="EX: 125 897 854 " mask="separator" required>
+        <span matSuffix>.00</span>
+        <mat-error *ngIf="paypalForm.get('total').hasError('required')">
+          Bid Amount is required!
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!paymentMade">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+      <div class="example-button-row" align="end">
+        <button mat-raised-button color="primary" (click)="submit()">
+          Process
+        </button>
+        <!-- [disabled]="!paypalForm.valid" -->
+        <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="showPaypalLink">
+    <div class="col-12">
+      <h6><strong>Paypal Link</strong></h6>
+      <p>Click on the paypal link below to complete this transaction.</p>
+      <a href="{{paypalLink}}" target="_blank">{{paypalLink}} <i class="fas fa-arrow-right"></i> </a>
+    </div>
+  </div>
+  
+  <!-- <div class="row" *ngIf="paymentMade">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+      <div class="example-button-row" align="end">
+        <button mat-raised-button color="primary" [disabled]="!callBackRecieved" (click)="confirmPaymentStatus()">
+          Continue
+        </button>
+      </div>
+    </div>
+  </div> -->
+</form>
+
+
+
+
+<div class="container" *ngIf="showReciept">
+  <div class="row clearfix">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="card">
+        <div class="body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="white-box">
+                <h3>
+                  <b>RECEIPT</b>
+                  <span class="float-end">#345766</span>
+                </h3>
+                <hr>
+                <div class="row" id="watermark">
+                  <div class="col-md-12">
+                    <div class="float-start">
+                      <address>
+                        <img class="img-responsive" alt="postbankLogo" src="assets/images/postbank/postBank.png"
+                          style="width: 71px; border-radius: 43px;">
+                        <!-- <Span class="fs-2 fw-bold m-2 align-middle">Kuber</Span> -->
+                        <p class="fs-5 fw-bold m-2">PostBank Uganda</p>
+                        <p class="m-l-5">
+                          D 103, Kampala, <br> Opp. Town Hall, <br>
+                          Mugabe Road, <br> PO Box - 380015
+                        </p>
+                      </address>
+                    </div>
+                    <div class="float-end text-end">
+                      <address>
+                        <img class="img-responsive" alt="postbankLogo" src="assets/images/emtech/em.png"
+                          style="width: 71px; border-radius: 43px;">
+                        <p class="fs-5 fw-bold m-2">E&M Technology</p>
+                        <p class="m-l-30">
+                          G 10, Nairobi, <br> Opp. Muthaiga, <br>
+                          Kiambu Road, <br> PO Box - 2801
+                        </p>                        
+                      </address>
+                    </div>
+                  </div>
+                  <div class="col-md-12 align-middle">
+                    <p class="m-t-8">
+                      <b>Invoice Date :</b>
+                      <i class="fa fa-calendar"></i> 14th September 2022
+                    </p>
+                    <p>
+                      <b>Status :</b>
+                      <span class="label label-success">Success</span>
+                    </p>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="table-responsive m-t-8">
+                      <table class="table table-hover text-center">
+                        <thead>
+                          <tr>
+                            <th class="text-center">#</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="text-center">1</td>
+                            <td>Preq 1</td>
+                            <td class="">Prequalification bid payment</td>
+                            <td>$460</td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="float-end m-t-6 text-end">
+                      <p>Sub - Total amount: $460</p>
+                      <p>Discount : $0 </p>
+                      <p>vat (0%) : $0 </p>
+                      <hr>
+                      <h3><b>Total :</b> $460</h3>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <div class="text-end">
+                      <!-- <button class="msr-2" mat-flat-button color="accent"><i class="fas fa-print"></i>
+                        Print</button> -->
+                        
+                        <button *ngIf="paymentMade" mat-raised-button color="primary" [disabled]="!callBackRecieved" (click)="confirmPaymentStatus()">
+                          Continue
+                        </button>
+                        
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

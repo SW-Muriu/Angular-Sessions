@@ -1,0 +1,54 @@
+<div class="container">
+  <h3 mat-dialog-title>Add USer To Committee</h3>
+  <form [formGroup]="addMemberToCommitteeForm">
+    <div mat-dialog-content>
+      <div class="row">
+        <div class="col text-center"> <i class="far fas fa-user-plus fa-6x col-green"></i> </div>
+        
+        <div class="col-12">
+          <dl class="dl-horizontal">
+            <dt class="pull-left me-2">Username:</dt>
+            <dd>{{ member.username }}</dd>
+            <dt class="pull-left me-2">Firstname:</dt>
+            <dd> {{ member.firstname }}</dd>
+            <dt class="pull-left me-2">Lastname:</dt>
+            <dd> {{ member.lastname }}</dd>
+            <!-- <dt class="pull-left me-2">Email:</dt>
+            <dd> {{ member.email }}</dd> 
+            <dt class="pull-left me-2">Phonenumber:</dt>
+            <dd> {{ member.phonenumber }}</dd> 
+            <dt class="pull-left me-2">Role:</dt>
+            <dd> {{ member.roles[0].name }}</dd>
+            <dt class="pull-left me-2">member Active:</dt>
+            <dd> {{ member.acctActive }}</dd>  -->
+          </dl>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Committee role</mat-label>
+            <!-- <input matInput formControlName="status" required /> -->
+            <mat-select formControlName="roleid" required>
+              <mat-option *ngFor="let role of roles" [value]="role.id">
+                {{ role.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="addMemberToCommitteeForm.get('roleid').hasError('required')"
+            >
+            Role is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <mat-dialog-actions align="end" class="mb-1">
+      <button mat-flat-button color="primary" (click)="addMemberToCommittee()">
+        Add Member
+      </button>
+      <button mat-flat-button (click)="onClick()" tabindex="-1">Cancel</button>
+    </mat-dialog-actions>
+  </form>
+ 
+</div>

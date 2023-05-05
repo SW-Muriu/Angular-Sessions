@@ -1,0 +1,87 @@
+
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!-- <img [src]='asset.img' alt="avatar"> -->
+        <img src="assets/images/emtec.png" alt="avatar" />
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 ms-2 me-2 font-17">
+            {{ dialogTitle }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="Form">
+      <!-- description: ["", Validators.required],
+      subTitle: ["", Validators.required],
+      title: ["", Validators.required], -->
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title" required>
+            <!-- <mat-select formControlName="taxName" required>
+              <mat-option *ngFor="let tax of taxes" [value]="tax.value">
+                {{ tax.name }}
+              </mat-option>
+            </mat-select> -->
+            <mat-error *ngIf="Form.get('title').hasError('required')">
+              Title is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>SubTitle</mat-label>
+            <input matInput formControlName="subTitle" required>
+            <mat-error *ngIf="Form.get('subTitle').hasError('required')">
+              SubTitle is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" required></textarea>
+            <mat-error *ngIf="Form.get('description').hasError('required')">
+              Title is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        
+      </div>
+      
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row" align="end">
+            <button mat-raised-button color="primary" [disabled]="!Form.valid" (click)="submit()">
+              Save
+            </button>
+            <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- <br />
+Form value = {{ Form.value | json }}
+<br />
+Form Status = {{ Form }} -->
+
+

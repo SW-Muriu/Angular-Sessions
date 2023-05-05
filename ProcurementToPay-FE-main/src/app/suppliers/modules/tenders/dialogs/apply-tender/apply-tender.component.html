@@ -1,0 +1,810 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Tenders'" [items]="['Home']" [active_item]="'Apply Tender'">
+      </app-breadcrumb>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <!-- <div *ngIf="loading">
+            <div style="margin: 100px">
+              <div class="d-flex justify-content-center">
+                <img src="assets/images/gif.gif" style="display: block; margin: auto; width: 50px" />
+              </div>
+            </div>
+          </div> -->
+
+          <div>
+            <!-- *ngIf="!loading" -->
+            <div class="header">
+              <h2>Tender Details</h2>
+            </div>
+            <!-- {
+
+              "budget": 5000000,
+
+
+              "bidType": "Auction Bids",
+              "tenderNo": "BWMANMR3",
+              "communicationMode": "https://www.mytenders.co.ke",
+              "postedStatus": "Posted",
+              "status": "Approved",
+              "roleTechnicalApprovalStatus": "Y",
+              "roleFinancialApprovalStatus": "Y",
+              "roleDeskApprovalStatus": "Y",
+              "biddingstatus": "Open",
+              "reason": "-",
+              "procuringentity": "Postbank Uganda",
+              "trackingstatus": null,
+              "procurementtype": "Strategic Procurement",
+              "evaluationcriteria": "Determination of Responsiveness",
+              "postedBy": "procadmin",
+              "postedTime": "2022-09-15T10:08:38.000+00:00",
+              "modifiedBy": null,
+              "modifiedTime": null,
+              "verifiedBy": "technical",
+              "verifiedTime": "2022-09-15T10:17:51.000+00:00",
+              "deletedBy": null,
+              "deletedFlag": "N",
+              "deletedTime": null,
+             
+          } -->
+            <div class="body">
+              <div class="wrapper wrapper-content animated fadeInUp">
+                <div class="ibox">
+                  <div class="ibox-content">
+                    <div class="row">
+                      <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="m-b-md">
+                              <h3 class="project-name" style="color: rgb(210, 116, 29)">
+                                {{ tenderData.title }}
+                              </h3>
+                            </div>
+                            <dl>
+                              <dt class="pull-left me-2">Status:</dt>
+                              <dd>
+                                <span _ngcontent-isv-c222="" class="project-bedge2 project-type-Testing">
+                                  <div _ngcontent-isv-c222="" class="pro-left">
+                                    Active
+                                  </div>
+                                </span>
+                              </dd>
+                            </dl>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                            <dl class="dl-horizontal">
+                              <!-- <dt class="pull-left me-2">Category Name:</dt>
+                              <dd>{{ "requirementsData.category" }}</dd> -->
+                              <dt class="pull-left me-2">Category Code:</dt>
+                              <dd>{{ tenderData.categorycode }}</dd>
+                              <dt class="pull-left me-2">Tender Number:</dt>
+                              <dd>{{ tenderData.tenderNo }}</dd>
+                              <dt class="pull-left me-2">BidFee:</dt>
+                              <dd>{{ tenderData.bidFee }}</dd>
+                            </dl>
+                          </div>
+                          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12" id="cluster_info">
+                            <dl class="dl-horizontal">
+                              <dt class="pull-left me-2">Start date:</dt>
+                              <dd>
+                                {{ tenderData.startDate | date: 'medium' }}
+                              </dd>
+                              <dt class="pull-left me-2">Close date:</dt>
+                              <dd>
+                                {{ tenderData.closingDate | date: 'medium' }}
+                              </dd>
+                              <dt class="pull-left me-2">Website:</dt>
+                              <dd>{{ tenderData.communicationMode }}</dd>
+                            </dl>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <app-countdown *ngIf="tenderData" [closingdate]="tenderData.closingDate">
+                        </app-countdown>
+
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="project-activity">
+                          <mat-tab-group>
+                            <mat-tab>
+                              <ng-template mat-tab-label>
+                                <mat-icon class="example-tab-icon msr-2">
+                                  list
+                                </mat-icon>
+                                Instructions
+                              </ng-template>
+                              <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="tab-pane active">
+                                  <div style="margin: 20px">
+                                    <p>
+                                      <strong>
+                                        Follow the following guidelines to
+                                        complete this process successfully.
+                                      </strong>
+                                    </p>
+                                    <ul>
+                                      <li>
+                                        <i class="fas fa-angle-double-right m-l-10"></i>
+                                        Make sure every field is filled. This
+                                        data is critical in identifying
+                                        contractors who are upto the task.
+                                      </li>
+                                      <li>
+                                        <i class="fas fa-angle-double-right m-l-10"></i>
+                                        Ensure all inputs with a drop-down are
+                                        filled
+                                      </li>
+                                      <li>
+                                        <i class="fas fa-angle-double-right m-l-10"></i>
+                                        All inputs which need uploading of
+                                        documents are key. Ensure all documents
+                                        provided are as per the defined
+                                        requirement.
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </mat-tab>
+                            <mat-tab>
+                              <ng-template mat-tab-label>
+                                <mat-icon class="example-tab-icon msr-2">
+                                  list
+                                </mat-icon>
+                                Upload requirements
+                              </ng-template>
+                              <div class="col-lg-12 col-md-12 col-sm-12">
+
+                                <div class="header">
+                                  <h2>
+                                    <strong>Please upload all the requirements</strong>
+                                  </h2>
+                                </div>
+                                <div class="body" *ngIf="showWizard">
+                                  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                                    <mat-step [stepControl]="HFormGroup1">
+                                      <ng-template matStepLabel>Mandatory Requirements</ng-template>
+                                      
+                                      <div>
+                                        <div *ngIf="inputsM.length==0" class="alert alert-info mt-5 m-l-20 m-r-20">
+                                          <strong>No Text</strong> requirements defined for this category!
+                                        </div>
+                                        <form class="m-4" [formGroup]="HFormGroup1" novalidate>
+                                          <div class="row">
+                                            <ng-container *ngFor="let controls of textInputsM">
+                                              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                                <div *ngIf="controls.type == 'text'">
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>{{controls.label}}</mat-label>
+                                                    <input matInput [type]="controls.type"
+                                                      [formControlName]="controls.name">
+                                                    <mat-icon matSuffix>house</mat-icon>
+                                                  </mat-form-field>
+                                                  <ng-container *ngFor="let validation of controls.validations">
+                                                    <span
+                                                      *ngIf="HFormGroup1.controls[controls.name].touched && HFormGroup1.controls[controls.name].errors">
+                                                      <mat-error
+                                                        *ngIf="HFormGroup1.controls[controls.name].errors[validation.name]">
+                                                        {{validation.message}}
+                                                      </mat-error>
+                                                    </span>
+                                                  </ng-container>
+                                                </div>
+                                              </div>
+                                            </ng-container>
+                                          </div>
+                                          <div class="row">
+                                            <ng-container *ngFor="let controls of selectInputsM">
+                                              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                                <div *ngIf="controls.type == 'select'">
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>{{controls.label}}</mat-label>
+                                                    <mat-select [type]="controls.type"
+                                                      [formControlName]="controls.name">
+                                                      <mat-option *ngFor="let item of selectItems" [value]="item.name">
+                                                        {{
+                                                        item.name }}
+                                                      </mat-option>
+                                                    </mat-select>
+                                                    <mat-icon matSuffix>house</mat-icon>
+                                                  </mat-form-field>
+                                                  <ng-container *ngFor="let validation of controls.validations">
+                                                    <span
+                                                      *ngIf="HFormGroup1.controls[controls.name].touched && HFormGroup1.controls[controls.name].errors">
+                                                      <mat-error
+                                                        *ngIf="HFormGroup1.controls[controls.name].errors[validation.name]">
+                                                        {{validation.message}}
+                                                      </mat-error>
+                                                    </span>
+                                                  </ng-container>
+                                                </div>
+                                              </div>
+                                            </ng-container>
+                                          </div>
+                                        </form>
+                                        <div *ngIf="fInputsM.length==0" class="alert alert-info mt-5 m-l-20 m-r-20">
+                                          <strong>No File</strong> requirements defined for this category!
+                                        </div>
+                                        <div *ngIf="fInputsM.length>0">
+                                          <form [formGroup]="formM">
+                                            <div style="margin: 20px;">
+                                              <div class="table-responsive">
+                                                <div class="materialTableHeader">
+                                                  <div class="row">
+                                                    <div class="col-8">
+                                                      <ul class="header-buttons-left ms-0">
+                                                        <li class="dropdown">
+                                                          <h2>Upload Documents</h2>
+                                                        </li>
+                                                        <li class="dropdown m-l-20">
+                                                          <label for="search-input"><i
+                                                              class="material-icons search-icon">search</i></label>
+                                                          <input placeholder="Filter..." type="text"
+                                                            (keyup)="applyFilterM($event)" #filter
+                                                            class="browser-default search-field"
+                                                            aria-label="Search box">
+                                                        </li>
+                                                      </ul>
+                                                    </div>
+                                                    <div class="col-4">
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <mat-table #table matTableExporter [dataSource]="dataSourceM"
+                                                  formArrayName="filedetails" matSort class="mat-cell"
+                                                  #exporter="matTableExporter">
+                                                  <ng-container matColumnDef="requirementid">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="psl-3 tbl-col-width-per-28">Requirement Id
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+                                                      <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                        <mat-label>Requirementid</mat-label>
+                                                        <input matInput type="text" formControlName="requirementid"
+                                                          placeholder="requirementid" readonly>
+                                                      </mat-form-field>
+                                                    </mat-cell>
+                                                  </ng-container>
+                                                  <ng-container matColumnDef="requirementname">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">Requirement Name
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+                                                      <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                        <mat-label>requirementname</mat-label>
+                                                        <input matInput type="text" formControlName="requirementname"
+                                                          placeholder="requirementname" readonly>
+                                                      </mat-form-field>
+                                                    </mat-cell>
+                                                  </ng-container>
+                                                  <ng-container matColumnDef="filename">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">Filename
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+
+                                                      <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                        <mat-label>Filename</mat-label>
+                                                        <input matInput type="text" formControlName="filename"
+                                                          placeholder="filename" readonly>
+                                                      </mat-form-field>
+
+                                                    </mat-cell>
+                                                  </ng-container>
+
+
+                                                  <ng-container matColumnDef="filetype">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">Filetype
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+
+                                                      <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                        <mat-label>filetype</mat-label>
+                                                        <input matInput type="text" formControlName="filetype"
+                                                          placeholder="filetype" readonly>
+                                                      </mat-form-field>
+
+                                                    </mat-cell>
+                                                  </ng-container>
+
+                                                  <ng-container matColumnDef="selectFile">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">Select File
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+
+                                                      <input #file type="file" [disabled]="isLoading | async"
+                                                        (change)="onSelectFile(file.files,row,formM)"
+                                                        [multiple]="'multiple'" />
+
+                                                    </mat-cell>
+                                                  </ng-container>
+
+                                                  <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+                                                  <mat-row *matRowDef="let row; let i = index; columns: displayColumns;"
+                                                    [style.cursor]="'pointer'" matRipple>
+                                                  </mat-row>
+                                                  <mat-cell *matNoDataRow colspan="4">
+                                                    No data matching the filter "{{ input.value }}"</mat-cell>
+                                                </mat-table>
+                                                <div *ngIf="isFileDataLoading" class="tbl-spinner">
+                                                  <mat-progress-spinner color="primary" [diameter]="40"
+                                                    mode="indeterminate">
+                                                  </mat-progress-spinner>
+                                                </div>
+                                                <mat-paginator [pageSize]="10"
+                                                  [pageSizeOptions]="[2, 5, 10, 20, 30, 40, 50, 100]"
+                                                  aria-label="Select page of users"></mat-paginator>
+                                              </div>
+                                            </div>
+                                          </form>
+                                        </div>
+                                        <div class="row m-4" style="margin-bottom: 4px;">
+                                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 float-left">
+                                            <br>
+                                            <div class="position-absolute bottom-0 end-0 m-4">
+                                              <button mat-raised-button matStepperNext color="primary"
+                                                [disabled]="!HFormGroup1.valid || !formM.valid">Next</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </mat-step>
+                                    <mat-step [stepControl]="HFormGroup2">
+                                      <ng-template matStepLabel>Financial Requirements</ng-template>
+                                      
+                                      <div>
+                                        <div *ngIf="inputsF.length==0" class="alert alert-info mt-5 m-l-20 m-r-20">
+                                          <strong>No Text</strong> requirements defined for this category!
+                                        </div>
+                                        <form class="m-4" [formGroup]="HFormGroup2" novalidate>
+                                          <div class="row">
+                                            <ng-container *ngFor="let controls of textInputsF">
+                                              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                                <div *ngIf="controls.type == 'text'">
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>{{controls.label}}</mat-label>
+                                                    <input matInput [type]="controls.type"
+                                                      [formControlName]="controls.name">
+                                                    <mat-icon matSuffix>house</mat-icon>
+                                                  </mat-form-field>
+                                                  <ng-container *ngFor="let validation of controls.validations">
+                                                    <span
+                                                      *ngIf="HFormGroup2.controls[controls.name].touched && HFormGroup2.controls[controls.name].errors">
+                                                      <mat-error
+                                                        *ngIf="HFormGroup2.controls[controls.name].errors[validation.name]">
+                                                        {{validation.message}}
+                                                      </mat-error>
+                                                    </span>
+                                                  </ng-container>
+                                                </div>
+                                              </div>
+                                            </ng-container>
+                                          </div>
+                                          <div class="row">
+                                            <ng-container *ngFor="let controls of selectInputsF">
+                                              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                                <div *ngIf="controls.type == 'select'">
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>{{controls.label}}</mat-label>
+                                                    <mat-select [type]="controls.type"
+                                                      [formControlName]="controls.name">
+                                                      <mat-option *ngFor="let item of selectItems" [value]="item.name">
+                                                        {{
+                                                        item.name }}
+                                                      </mat-option>
+                                                    </mat-select>
+                                                    <mat-icon matSuffix>house</mat-icon>
+                                                  </mat-form-field>
+                                                  <ng-container *ngFor="let validation of controls.validations">
+                                                    <span
+                                                      *ngIf="HFormGroup1.controls[controls.name].touched && HFormGroup1.controls[controls.name].errors">
+                                                      <mat-error
+                                                        *ngIf="HFormGroup1.controls[controls.name].errors[validation.name]">
+                                                        {{validation.message}}
+                                                      </mat-error>
+                                                    </span>
+                                                  </ng-container>
+                                                </div>
+                                              </div>
+                                            </ng-container>
+                                          </div>
+                                        </form>
+                                        <div *ngIf="fInputsF.length==0" class="alert alert-info mt-5 m-l-20 m-r-20">
+                                          <strong>No File</strong> requirements defined for this category!
+                                        </div>
+                                        <div *ngIf="fInputsF.length>0">
+                                          <form [formGroup]="formF">
+                                            <div style="margin: 20px;">
+                                              <div class="table-responsive">
+                                                <div class="materialTableHeader">
+                                                  <div class="row">
+                                                    <div class="col-8">
+                                                      <ul class="header-buttons-left ms-0">
+                                                        <li class="dropdown">
+                                                          <h2>Upload Documents</h2>
+                                                        </li>
+                                                        <li class="dropdown m-l-20">
+                                                          <label for="search-input"><i
+                                                              class="material-icons search-icon">search</i></label>
+                                                          <input placeholder="Filter..." type="text"
+                                                            (keyup)="applyFilterF($event)" #filter
+                                                            class="browser-default search-field"
+                                                            aria-label="Search box">
+                                                        </li>
+                                                      </ul>
+                                                    </div>
+                                                    <div class="col-4">
+
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <mat-table #table matTableExporter [dataSource]="dataSourceF"
+                                                  formArrayName="filedetails" matSort class="mat-cell"
+                                                  #exporter="matTableExporter">
+                                                  <ng-container matColumnDef="requirementid">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="psl-3 tbl-col-width-per-28">Requirement Id
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+                                                      <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                        <mat-label>Requirementid</mat-label>
+                                                        <input matInput type="text" formControlName="requirementid"
+                                                          placeholder="requirementid" readonly>
+                                                      </mat-form-field>
+                                                    </mat-cell>
+                                                  </ng-container>
+                                                  <ng-container matColumnDef="requirementname">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">Requirement Name
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+                                                      <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                        <mat-label>requirementname</mat-label>
+                                                        <input matInput type="text" formControlName="requirementname"
+                                                          placeholder="requirementname" readonly>
+                                                      </mat-form-field>
+                                                    </mat-cell>
+                                                  </ng-container>
+                                                  <ng-container matColumnDef="filename">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">Filename
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+
+                                                      <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                        <mat-label>Filename</mat-label>
+                                                        <input matInput type="text" formControlName="filename"
+                                                          placeholder="filename" readonly>
+                                                      </mat-form-field>
+
+                                                    </mat-cell>
+                                                  </ng-container>
+
+
+                                                  <ng-container matColumnDef="filetype">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">Filetype
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+
+                                                      <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                        <mat-label>filetype</mat-label>
+                                                        <input matInput type="text" formControlName="filetype"
+                                                          placeholder="filetype" readonly>
+                                                      </mat-form-field>
+
+                                                    </mat-cell>
+                                                  </ng-container>
+
+                                                  <ng-container matColumnDef="selectFile">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">Select File
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+                                                      <input #file type="file" [disabled]="isLoading | async"
+                                                        (change)="onSelectFile(file.files,row,formF)"
+                                                        [multiple]="'multiple'" />
+                                                    </mat-cell>
+                                                  </ng-container>
+                                                  <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+                                                  <mat-row *matRowDef="let row; let i = index; columns: displayColumns;"
+                                                    [style.cursor]="'pointer'" matRipple>
+                                                  </mat-row>
+                                                  <mat-cell *matNoDataRow colspan="4">
+                                                    No data matching the filter "{{ input.value }}"</mat-cell>
+                                                </mat-table>
+                                                <div *ngIf="isFileDataLoading" class="tbl-spinner">
+                                                  <mat-progress-spinner color="primary" [diameter]="40"
+                                                    mode="indeterminate">
+                                                  </mat-progress-spinner>
+                                                </div>
+                                                <mat-paginator [pageSize]="10"
+                                                  [pageSizeOptions]="[2, 5, 10, 20, 30, 40, 50, 100]"
+                                                  aria-label="Select page of users"></mat-paginator>
+                                              </div>
+                                            </div>
+                                          </form>
+                                        </div>
+                                        <div class="row m-4" style="margin-bottom: 4px;">
+                                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 float-left">
+                                            <br>
+                                            <div class="position-absolute bottom-0 end-0 m-4">
+                                              <button mat-raised-button matStepperPrevious color="warn"
+                                                class="msr-2">Back</button>
+                                              <button mat-raised-button matStepperNext color="primary"
+                                                [disabled]="!HFormGroup2.valid || !formF.valid">Next</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </mat-step>
+                                    <mat-step [stepControl]="HFormGroup3">
+                                      <ng-template matStepLabel>Technical Requirements</ng-template>
+                                      
+                                      <div>
+                                        <div *ngIf="inputsT.length==0" class="alert alert-info mt-5 m-l-20 m-r-20">
+                                          <strong>No Text</strong> requirements defined for this category!
+                                        </div>
+                                        <form class="m-4" [formGroup]="HFormGroup3" novalidate>
+                                          <div class="row">
+                                            <ng-container *ngFor="let controls of textInputsT">
+                                              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                                <div *ngIf="controls.type == 'text'">
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>{{controls.label}}</mat-label>
+                                                    <input matInput [type]="controls.type"
+                                                      [formControlName]="controls.name">
+                                                    <mat-icon matSuffix>house</mat-icon>
+                                                  </mat-form-field>
+                                                  <ng-container *ngFor="let validation of controls.validations">
+                                                    <span
+                                                      *ngIf="HFormGroup3.controls[controls.name].touched && HFormGroup3.controls[controls.name].errors">
+                                                      <mat-error
+                                                        *ngIf="HFormGroup3.controls[controls.name].errors[validation.name]">
+                                                        {{validation.message}}
+                                                      </mat-error>
+                                                    </span>
+                                                  </ng-container>
+                                                </div>
+                                              </div>
+                                            </ng-container>
+                                          </div>
+                                          <div class="row">
+                                            <ng-container *ngFor="let controls of selectInputsT">
+                                              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                                <div *ngIf="controls.type == 'select'">
+                                                  <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>{{controls.label}}</mat-label>
+                                                    <mat-select [type]="controls.type"
+                                                      [formControlName]="controls.name">
+                                                      <mat-option *ngFor="let item of selectItems" [value]="item.name">
+                                                        {{
+                                                        item.name }}
+                                                      </mat-option>
+                                                    </mat-select>
+                                                    <mat-icon matSuffix>house</mat-icon>
+                                                  </mat-form-field>
+                                                  <ng-container *ngFor="let validation of controls.validations">
+                                                    <span
+                                                      *ngIf="HFormGroup1.controls[controls.name].touched && HFormGroup1.controls[controls.name].errors">
+                                                      <mat-error
+                                                        *ngIf="HFormGroup1.controls[controls.name].errors[validation.name]">
+                                                        {{validation.message}}
+                                                      </mat-error>
+                                                    </span>
+                                                  </ng-container>
+                                                </div>
+                                              </div>
+                                            </ng-container>
+                                          </div>
+                                        </form>
+                                        <div *ngIf="fInputsT.length==0" class="alert alert-info mt-5 m-l-20 m-r-20">
+                                          <strong>No File</strong> requirements defined for this category!
+                                        </div>
+                                        <div *ngIf="fInputsT.length>0">
+                                          <form [formGroup]="formT">
+                                            <div style="margin: 20px;">
+                                              <div class="table-responsive">
+                                                <div class="materialTableHeader">
+                                                  <div class="row">
+                                                    <div class="col-8">
+                                                      <ul class="header-buttons-left ms-0">
+                                                        <li class="dropdown">
+                                                          <h2>Upload Documents</h2>
+                                                        </li>
+                                                        <li class="dropdown m-l-20">
+                                                          <label for="search-input"><i
+                                                              class="material-icons search-icon">search</i></label>
+                                                          <input placeholder="Filter..." type="text"
+                                                            (keyup)="applyFilterT($event)" #filter
+                                                            class="browser-default search-field"
+                                                            aria-label="Search box">
+                                                        </li>
+
+                                                      </ul>
+                                                    </div>
+                                                    <div class="col-4">
+
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <mat-table #table matTableExporter [dataSource]="dataSourceT"
+                                                  formArrayName="filedetails" matSort class="mat-cell"
+                                                  #exporter="matTableExporter">
+                                                  <ng-container matColumnDef="requirementid">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="psl-3 tbl-col-width-per-28">Requirement Id
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+                                                      <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                        <mat-label>Requirementid</mat-label>
+                                                        <input matInput type="text" formControlName="requirementid"
+                                                          placeholder="requirementid" readonly>
+                                                      </mat-form-field>
+                                                    </mat-cell>
+                                                  </ng-container>
+                                                  <ng-container matColumnDef="requirementname">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">Requirement Name
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+                                                      <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                        <mat-label>requirementname</mat-label>
+                                                        <input matInput type="text" formControlName="requirementname"
+                                                          placeholder="requirementname" readonly>
+                                                      </mat-form-field>
+                                                    </mat-cell>
+                                                  </ng-container>
+                                                  <ng-container matColumnDef="filename">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">Filename
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+
+                                                      <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                        <mat-label>Filename</mat-label>
+                                                        <input matInput type="text" formControlName="filename"
+                                                          placeholder="filename" readonly>
+                                                      </mat-form-field>
+
+                                                    </mat-cell>
+                                                  </ng-container>
+
+
+                                                  <ng-container matColumnDef="filetype">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">Filetype
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+
+                                                      <mat-form-field class="example-full-width mt-2" appearance="fill">
+                                                        <mat-label>filetype</mat-label>
+                                                        <input matInput type="text" formControlName="filetype"
+                                                          placeholder="filetype" readonly>
+                                                      </mat-form-field>
+
+                                                    </mat-cell>
+                                                  </ng-container>
+
+                                                  <ng-container matColumnDef="selectFile">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">Select File
+                                                    </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row; let index = index"
+                                                      [formGroupName]="index"
+                                                      class="column-nowrap psl-3 tbl-col-width-per-28">
+
+                                                      <input #file type="file" [disabled]="isLoading | async"
+                                                        (change)="onSelectFile(file.files,row,formT)"
+                                                        [multiple]="'multiple'" />
+
+                                                    </mat-cell>
+                                                  </ng-container>
+
+
+                                                  <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+                                                  <mat-row *matRowDef="let row; let i = index; columns: displayColumns;"
+                                                    [style.cursor]="'pointer'" matRipple>
+                                                  </mat-row>
+                                                  <mat-cell *matNoDataRow colspan="4">
+                                                    No data matching the filter "{{ input.value }}"</mat-cell>
+                                                </mat-table>
+                                                <div *ngIf="isFileDataLoading" class="tbl-spinner">
+                                                  <mat-progress-spinner color="primary" [diameter]="40"
+                                                    mode="indeterminate">
+                                                  </mat-progress-spinner>
+                                                </div>
+                                                <mat-paginator [pageSize]="10"
+                                                  [pageSizeOptions]="[2, 5, 10, 20, 30, 40, 50, 100]"
+                                                  aria-label="Select page of users"></mat-paginator>
+                                              </div>
+                                            </div>
+                                          </form>
+                                        </div>
+                                        <div class="row m-4" style="margin-bottom: 4px;">
+                                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 float-left">
+                                            <br>
+                                            <div class="position-absolute bottom-0 end-0 m-4">
+                                              <button mat-raised-button matStepperPrevious color="warn"
+                                                class="msr-2">Back</button>
+                                              <button mat-raised-button matStepperNext color="primary"
+                                                [disabled]="!HFormGroup3.valid || !formT.valid">Next</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </mat-step>
+                                    <mat-step>
+                                      <ng-template matStepLabel>Done</ng-template>
+                                      <p>You are now done.</p>
+                                      <div>
+                                        <button mat-raised-button matStepperPrevious color="warn"
+                                          class="msr-2">Back</button>
+
+                                        <button mat-raised-button color="accent" class="msr-2"
+                                          (click)="stepper.reset()">Reset</button>
+
+                                        <button mat-raised-button color="primary" (click)="submitApplicaation()"
+                                          (click)="stepper.reset()"
+                                          [disabled]="!HFormGroup1.valid || !formM.valid || !HFormGroup2.valid || !formF.valid || !HFormGroup3.valid || !formT.valid">Submit</button>
+                                      </div>
+                                    </mat-step>
+                                  </mat-horizontal-stepper>
+                                </div>
+                              </div>
+
+                            </mat-tab>
+                          </mat-tab-group>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

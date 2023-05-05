@@ -1,0 +1,185 @@
+
+<div class="addContainer">
+  <div *ngIf="needDetails" class="contact-details">
+    <div class="modalHeader">
+      <div class="contact-details-name mb-1">Need Details</div>
+      <button
+        mat-icon-button
+        (click)="dialogRef.close()"
+        aria-label="Close dialog"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div mat-dialog-content>
+      <mat-card-content>
+        <div class="row mt-1" style="width: 98%">
+          <div class="col-5 m-b-10">Name of need:</div>
+          <div class="col-7 pro-left m-b-10">
+            {{ needDetails.need }}
+          </div>
+          <div class="col-5 m-b-10">Type of need:</div>
+          <div class="col-7 pro-left m-b-10">
+            {{ needDetails.type }}
+          </div>
+        </div>
+        <div class="row mt-1" style="width: 98%">
+          <div class="col-5 m-b-10">Code of need:</div>
+          <div class="col-7 pro-left m-b-10">
+            {{ needDetails.reqCode }}
+          </div>
+          <div class="col-5 m-b-10">Description:</div>
+          <div class="col-7 pro-left m-b-10">
+            {{ needDetails.despcription }}
+          </div>
+        </div>
+
+        <div class="table-responsive m-t-5">
+          <div class="body">
+            <div class="table-responsive">
+              <div
+                class="row"
+                style="
+                  background-color: rgba(163, 159, 159, 0.297);
+                  margin: 5px;
+                "
+              >
+                <div class="col-6 d-flex align-items-center">
+                  <h6 style="margin: 5px">
+                    <strong>Need Particulars</strong>
+                  </h6>
+                </div>
+                <div class="col-6">
+                  <div id="plist" class="people-list">
+                    <div class="form-line m-b-10 m-t-10 m-l-2 m-r-2">
+                      <input
+                        placeholder="Filter..."
+                        type="text"
+                        (keyup)="applyFilter($event)"
+                        #filter
+                        class="form-control"
+                        placeholder="Search..."
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <mat-table
+                #table
+                matTableExporter
+                [dataSource]="dataSource"
+                matSort
+                class="mat-cell"
+                #exporter="matTableExporter"
+              >
+                
+                <ng-container matColumnDef="itemName">
+                  <mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-40"
+                  >
+                    Item name
+                  </mat-header-cell>
+                  <mat-cell
+                    *matCellDef="let row"
+                    class="column-nowrap psl-3 tbl-col-width-per-40"
+                  >
+                    {{ row.itemName }}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="itemDescription">
+                  <mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-40"
+                  >
+                    Item description
+                  </mat-header-cell>
+                  <mat-cell
+                    *matCellDef="let row"
+                    class="column-nowrap psl-3 tbl-col-width-per-40"
+                  >
+                    {{ row.itemDescription }}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="itemQuantity">
+                  <mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-40"
+                  >
+                    Item quantity
+                  </mat-header-cell>
+                  <mat-cell
+                    *matCellDef="let row"
+                    class="column-nowrap psl-3 tbl-col-width-per-40"
+                  >
+                    {{ row.itemQuantity }}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="unitPrice">
+                  <mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-40"
+                  >
+                    Unit price
+                  </mat-header-cell>
+                  <mat-cell
+                    *matCellDef="let row"
+                    class="column-nowrap psl-3 tbl-col-width-per-40"
+                  >
+                    {{ row.unitPrice }}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="totalPrice">
+                  <mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-40"
+                  >
+                    Total price
+                  </mat-header-cell>
+                  <mat-cell
+                    *matCellDef="let row"
+                    class="column-nowrap psl-3 tbl-col-width-per-40"
+                  >
+                    {{ row.totalPrice }}
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row
+                  *matHeaderRowDef="displayedColumns"
+                ></mat-header-row>
+                <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+                <mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                  [style.cursor]="'pointer'"
+                  matRipple
+                >
+                </mat-row>
+                <mat-cell *matNoDataRow colspan="4">
+                  No data matching the filter "{{ input.value }}"
+                </mat-cell>
+              </mat-table>
+              <!-- Loading spinner -->
+              <div *ngIf="isLoading" class="tbl-spinner">
+                <mat-progress-spinner
+                  color="primary"
+                  [diameter]="40"
+                  mode="indeterminate"
+                >
+                </mat-progress-spinner>
+              </div>
+              <mat-paginator
+                [pageSize]="10"
+                [pageSizeOptions]="[2, 5, 10, 20, 30, 40, 50, 100]"
+                aria-label="Select page of users"
+              ></mat-paginator>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </div>
+  </div>
+</div>

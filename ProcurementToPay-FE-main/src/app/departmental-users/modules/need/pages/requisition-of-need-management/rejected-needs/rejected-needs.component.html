@@ -1,0 +1,339 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <app-breadcrumb
+        [title]="'Needs Management'"
+        [items]="['HOD', 'Needs Management']"
+        [active_item]="'Rejected Needs'"
+      >
+      </app-breadcrumb>
+    </div>
+    
+    <app-need-wigets></app-need-wigets>
+
+    <div class="card">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="boxs mail_listing">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="body">
+                <div class="table-responsive">
+                  <div class="materialTableHeader">
+                    <div class="row">
+                      <div class="col-8">
+                        <ul class="header-buttons-left ms-0">
+                          <li class="dropdown">
+                            <h2>Rejected Needs</h2>
+                          </li>
+                          <li class="dropdown m-l-20">
+                            <label for="search-input"
+                              ><i class="material-icons search-icon"
+                                >search</i
+                              ></label
+                            >
+                            <input
+                              (keyup)="applyFilter($event)"
+                              placeholder="Filter..."
+                              type="text"
+                              class="browser-default search-field"
+                              aria-label="Search box"
+                            />
+                          </li>
+                          <li>
+                            <div class="m-l-10" matTooltip="ADD">
+                              <button
+                                mat-mini-fab
+                                color="primary"
+                                (click)="navigateToRequestNeed()"
+                              >
+                                <mat-icon class="col-white">add</mat-icon>
+                              </button>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="m-l-10" matTooltip="REFRESH">
+                              <button
+                                mat-mini-fab
+                                color="primary"
+                                (click)="refresh()"
+                              >
+                                <mat-icon class="col-white">refresh</mat-icon>
+                              </button>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col-4">
+                        <ul class="header-buttons">
+                          <li>
+                            <div class="export-button m-l-10" matTooltip="XLSX">
+                              <img
+                                src="assets/images/icons/xlsx.png"
+                                alt=""
+                                (click)="
+                                  exporter.exportTable('xlsx', {
+                                    fileName: 'assets-list',
+                                    sheet: 'sheet1'
+                                  })
+                                "
+                              />
+                            </div>
+                          </li>
+                          <li>
+                            <div class="export-button m-l-10" matTooltip="CSV">
+                              <img
+                                src="assets/images/icons/csv.png"
+                                alt=""
+                                (click)="exporter.exportTable('csv')"
+                              />
+                            </div>
+                          </li>
+                          <li>
+                            <div class="export-button m-l-10" matTooltip="JSON">
+                              <img
+                                src="assets/images/icons/json.png"
+                                alt=""
+                                (click)="exporter.exportTable('json')"
+                              />
+                            </div>
+                          </li>
+                          <li>
+                            <div class="export-button m-l-10" matTooltip="TXT">
+                              <img
+                                src="assets/images/icons/txt.png"
+                                alt=""
+                                (click)="exporter.exportTable('txt')"
+                              />
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <mat-table
+                    #table
+                    matTableExporter
+                    [dataSource]="dataSource"
+                    matSort
+                    class="mat-cell"
+                    #exporter="matTableExporter"
+                  >
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        class="psl-3 tbl-col-width-per-8"
+                        >Id
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        class="column-nowrap psl-3 tbl-col-width-per-8"
+                        >{{ row.id }}</mat-cell
+                      >
+                    </ng-container>
+                    <ng-container matColumnDef="reqCode">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-20"
+                        >Code
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        class="column-nowrap psl-3 tbl-col-width-per-20"
+                      >
+                        {{ row.reqCode }}</mat-cell
+                      >
+                    </ng-container>
+                    <ng-container matColumnDef="need">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-25"
+                        >Need</mat-header-cell
+                      >
+                      <mat-cell
+                        *matCellDef="let row"
+                        class="column-nowrap psl-3 tbl-col-width-per-25"
+                      >
+                        {{ row.need }}
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="address">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-15"
+                        >Address
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        class="column-nowrap psl-3 tbl-col-width-per-15"
+                      >
+                        {{ row.address }}
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="type">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-15"
+                        >Type
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        class="column-nowrap psl-3 tbl-col-width-per-15"
+                      >
+                        {{ row.type }}
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-20"
+                        >Status
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        class="column-nowrap psl-3 tbl-col-width-per-20"
+                      >
+                      <div *ngIf="row.status == 'pending'">
+                        <span
+                          class="badge badge-pill badge-primary col-purple"
+                        >
+                          {{ "Pending" }}</span
+                        >
+                      </div>
+                      <div *ngIf="row.status == 'Pending'">
+                        <span
+                          class="badge badge-pill badge-primary col-purple"
+                        >
+                          {{ "Pending" }}</span
+                        >
+                      </div>
+                      <div *ngIf="row.status == 'Approved'">
+                        <span
+                          class="badge badge-pill badge-primary col-green"
+                        >
+                          {{ "Approved" }}</span
+                        >
+                      </div>
+                      <div *ngIf="row.status == 'Rejected'">
+                        <span class="badge badge-pill badge-primary col-red">
+                          {{ "Rejected" }}</span
+                        >
+                      </div>
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="despcription">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-20"
+                        >Description
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        class="column-nowrap psl-3 tbl-col-width-per-20"
+                      >
+                        {{ row.despcription }}
+                      </mat-cell>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="requestDate">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        class="column-nowrap psl-3 tbl-col-width-per-20"
+                        >Request date
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row; let i = index"
+                        class="column-nowrap psl-3 tbl-col-width-per-20"
+                      >
+                        {{ row.requestDate | date: "medium" }}
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="verify">
+                      <mat-header-cell
+                        class="column-nowrap psl-3 tbl-col-width-per-20"
+                        *matHeaderCellDef
+                        >Verify need
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row; let i = index"
+                        class="column-nowrap psl-3 tbl-col-width-per-20"
+                      >
+                        <button
+                          class="badge badge-solid-green btn btn btn-sm m-1"
+                          [disabled]="loading"
+                          (click)="$event.stopPropagation()"
+                          (click)="
+                            postInvoiceToUra(row.localInvoiceNo, row.buyerTin)
+                          "
+                        >
+                          Verify Need
+                        </button>
+                      </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="viewDetails">
+                      <mat-header-cell
+                        class="column-nowrap psl-3 tbl-col-width-per-20"
+                        *matHeaderCellDef
+                        >View Details
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row; let i = index"
+                        class="column-nowrap psl-3 tbl-col-width-per-20"
+                      >
+                        <button
+                          class="badge badge-solid-blue btn btn btn-sm m-1"
+                          [disabled]="loading"
+                          (click)="$event.stopPropagation()"
+                          (click)="
+                          needDetails(row)
+                          "
+                        >
+                          View Details
+                        </button>
+                      </mat-cell>
+                    </ng-container>
+                   
+                    <mat-header-row
+                      *matHeaderRowDef="displayedColumns"
+                    ></mat-header-row>
+                    <mat-row
+                      *matRowDef="let row; columns: displayedColumns"
+                      [style.cursor]="'pointer'"
+                      matRipple
+                    >
+                    </mat-row>
+                    <mat-cell *matNoDataRow colspan="4">
+                      No data matching the filter "{{ input.value }}"</mat-cell
+                    >
+                  </mat-table>
+                  <!-- Loading spinner -->
+                  <div *ngIf="isLoading" class="tbl-spinner">
+                    <mat-progress-spinner
+                      color="primary"
+                      [diameter]="40"
+                      mode="indeterminate"
+                    >
+                    </mat-progress-spinner>
+                  </div>
+                  <mat-paginator
+                    [pageSize]="10"
+                    [pageSizeOptions]="[2, 5, 10, 20, 30, 40, 50, 100]"
+                    aria-label="Select page of users"
+                  ></mat-paginator>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

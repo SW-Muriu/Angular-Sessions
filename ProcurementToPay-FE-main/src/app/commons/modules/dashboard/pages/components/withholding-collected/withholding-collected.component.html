@@ -1,0 +1,62 @@
+<div class="card">
+  <div class="row p-3">
+    <div class="col-md-4">
+      <form [formGroup]="incomeWithHoldingTaxParametersForm">
+        <mat-form-field appearance="legacy">
+          <mat-label>Select Chart Period</mat-label>
+          <mat-select (selectionChange)="onSelectPeriod($event)" formControlName="period">
+            <mat-option *ngFor="let item of chartDispType" value="{{ item }}">{{ item }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="col-md-8">
+      <form [formGroup]="incomeWithHoldingTaxParametersForm" *ngIf="this.needYear">
+        <mat-form-field appearance="legacy">
+          <mat-label>Select Year</mat-label>
+          <mat-select (selectionChange)="getTotalMonthlyIncomeWithHoldingSummary($event)" formControlName="year">
+            <mat-option *ngFor="let item of this.incomeWithHoldingMetrics" value="{{ item }}">{{ item }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <form [formGroup]="incomeWithHoldingTaxParametersForm" *ngIf="this.needMonth">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="legacy">
+              <mat-label>Select Year</mat-label>
+              <mat-select (selectionChange)="getTotalDateWiseIncomeWithHoldingSummary($event)" formControlName="year">
+                <mat-option *ngFor="let item of this.incomeWithHoldingMetrics" value="{{ item }}">{{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="legacy">
+              <mat-label>Select Month</mat-label>
+              <mat-select (selectionChange)="getTotalDateWiseIncomeWithHoldingSummary($event)" formControlName="month">
+                <mat-option *ngFor="let item of monthsArray" value="{{ item }}">{{ item }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="header">
+    <h6>Income WithHolding Tax</h6>
+  </div>
+
+  <div class="body" style="min-height: 420px;">
+    <div class="recent-report__chart" *ngIf="!isLoading">
+      <apx-chart [series]="lineChartOptions.series" [chart]="lineChartOptions.chart" [xaxis]="lineChartOptions.xaxis"
+        [stroke]="lineChartOptions.stroke" [colors]="lineChartOptions.colors" [dataLabels]="lineChartOptions.dataLabels"
+        [legend]="lineChartOptions.legend" [tooltip]="lineChartOptions.tooltip" [markers]="lineChartOptions.markers"
+        [grid]="lineChartOptions.grid" [yaxis]="lineChartOptions.yaxis" [title]="lineChartOptions.title"
+        [fill]="lineChartOptions.fill">
+      </apx-chart>
+    </div>
+    <div *ngIf="isLoading">
+      <app-spinner></app-spinner>
+    </div>
+  </div>
+</div>

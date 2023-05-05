@@ -1,0 +1,42 @@
+<div class="addContainer">
+  <div *ngIf="bidder" class="contact-details">
+    <div class="modalHeader">
+      <div class="contact-details-name mb-1">Bidder Details</div>
+      <button
+        mat-icon-button
+        (click)="dialogRef.close()"
+        aria-label="Close dialog"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div mat-dialog-content>
+      <mat-card-content>
+        <div class="row mt-1" style="width: 98%">
+        <div class="col-5 m-b-10">Username:</div>
+        <div class="col-7 pro-left m-b-10">{{ bidder.firstname }}</div>
+        <div class="col-5 m-b-10">Company Name:</div>
+        <div class="col-7 pro-left m-b-10">{{ bidder.companyname }}</div>
+        <div class="col-5 m-b-10">Country:</div>
+        <div class="col-7 pro-left m-b-10">{{ bidder.country }}</div>
+        <div class="col-5 m-b-10">Phoneneumber:</div>
+        <div class="col-7 pro-left m-b-10">{{ bidder.phonenumber }}</div>
+        <div class="col-5 m-b-10">Email Address:</div>
+        <div class="col-7 pro-left m-b-10">{{ bidder.emailaddress }}</div>
+        <div class="col-5 m-b-10">Supply Location:</div>
+        <div class="col-7 pro-left m-b-10">{{ bidder.supplylocations }}</div>
+        <div class="col-5 m-b-10">Createdon:</div>
+        <div class="col-7 pro-left m-b-10">
+         {{ bidder.createdOn | date }}
+        </div>
+        <div class="col-5 m-b-10">Physical Address:</div>
+        <div class="col-7 pro-left m-b-10">{{ bidder.physicaladdress }}</div>
+        <div class="col-5 m-b-10">Taxpin:</div>
+        <div class="col-7 pro-left m-b-10">{{ bidder.taxpin }}</div>
+        <!-- <div class="col-5 m-b-10">Loggedin:</div>
+        <div class="col-7 pro-left m-b-10"><span> {{ bidder.taxpin }}</span> <span></span></div> -->
+        </div>
+      </mat-card-content>
+    </div>
+  </div>
+</div>

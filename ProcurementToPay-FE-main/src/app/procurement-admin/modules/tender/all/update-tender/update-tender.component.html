@@ -1,0 +1,418 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb
+        [title]="'Tender Management'"
+        [items]="['Procurement Admin', 'Tender Preperation']"
+        [active_item]="'Update Tender'"
+      >
+      </app-breadcrumb>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>Update Tender</h2>
+          </div>
+          <div class="body">
+            <form [formGroup]="tendeAdditionalDetailsForm" class="m-4">
+              <div class="row">
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Tender title</mat-label>
+                    <input matInput formControlName="title" required />
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('title')
+                          .hasError('title') &&
+                        tendeAdditionalDetailsForm.get('title').touched
+                      "
+                    >
+                      Please enter tender title
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Terms and conditions</mat-label>
+                    <input matInput formControlName="termsAndConditions" readonly required />
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('termsAndConditions')
+                          .hasError('termsAndConditions') &&
+                        tendeAdditionalDetailsForm.get('termsAndConditions').touched
+                      "
+                    >
+                      Please specify terms and conditions
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Mandatory requirements</mat-label>
+                    <input matInput formControlName="mandatoryRequirements" readonly required />
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('mandatoryRequirements')
+                          .hasError('mandatoryRequirements') &&
+                        tendeAdditionalDetailsForm.get('termsAndConditions').touched
+                      "
+                    >
+                      Please specify mandatory requirements
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Financial requirements</mat-label>
+                    <input matInput formControlName="financialRequirements" readonly required />
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('financialRequirements')
+                          .hasError('financialRequirements') &&
+                        tendeAdditionalDetailsForm.get('financialRequirements').touched
+                      "
+                    >
+                      Please specify financial Requirements
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Technical requirements</mat-label>
+                    <input matInput formControlName="technicalRequirements" readonly required />
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('technicalRequirements')
+                          .hasError('technicalRequirements') &&
+                        tendeAdditionalDetailsForm.get('technicalRequirements').touched
+                      "
+                    >
+                      Please specify technical requirements
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Communication mode</mat-label>
+                    <input
+                      matInput
+                      formControlName="communicationMode"
+                      required
+                    />
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('communicationMode')
+                          .hasError('communicationMode') &&
+                        tendeAdditionalDetailsForm.get('communicationMode')
+                          .touched
+                      "
+                    >
+                      Please the mode of communication mode
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Communication mode</mat-label>
+                    <input
+                      matInput
+                      formControlName="categorycode"
+                      readonly
+                      required
+                    />
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('categorycode')
+                          .hasError('categorycode') &&
+                        tendeAdditionalDetailsForm.get('categorycode')
+                          .touched
+                      "
+                    >
+                      Please the mode of communication mode
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Type of tender</mat-label>
+                    <mat-select
+                      formControlName="tendertype"
+                    >
+                      <mat-option
+                        *ngFor="let type of typesOfTender"
+                        [value]="type"
+                        >{{ type }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+            
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Bid type</mat-label>
+                    <mat-select
+                      formControlName="bidType"
+                    >
+                      <mat-option
+                        *ngFor="let bid of bidTypes"
+                        [value]="bid"
+                        >{{ bid }} </mat-option
+                      >
+                    </mat-select>
+                    <mat-icon matSuffix>done_all</mat-icon>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Evaluation criteria</mat-label>
+                    <mat-select
+                      formControlName="evaluationcriteria"
+                    >
+                      <mat-option
+                        *ngFor="let creteria of evaluationCreteria"
+                        [value]="creteria"
+                        >{{ creteria }} </mat-option
+                      >
+                    </mat-select>
+                    <mat-icon matSuffix>done_all</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Procurement type</mat-label>
+                    <mat-select
+                      formControlName="procurementtype"
+                    >
+                      <mat-option
+                        *ngFor="let procurementType of procurementTypes"
+                        [value]="procurementType"
+                        >{{ procurementType }} </mat-option
+                      >
+                    </mat-select>
+                    <mat-icon matSuffix>done_all</mat-icon>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Procuring entity</mat-label>
+                    <input matInput formControlName="procuringentity" readonly required />
+                    <mat-error
+                      *ngIf="
+                        tendeAdditionalDetailsForm
+                          .get('procuringentity')
+                          .hasError('procuringentity') &&
+                        tendeAdditionalDetailsForm.get('procuringentity').touched
+                      "
+                    >
+                      Please enter the procuring entity
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Tender budget</mat-label>
+
+                    <input
+                      matInput
+                      type="number"
+                      formControlName="budget"
+                      required
+                    />
+                    <mat-icon matTooltip="The system will attempt to estimate a budget for you after you have specified the tender items"
+                    aria-label="Button that displays a tooltip in various positions" matSuffix>attach_money</mat-icon>
+                  </mat-form-field>
+                </div>
+
+             
+                
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <section>
+                  <label class="example-margin">Include bid fee?&nbsp;&nbsp;&nbsp;</label>
+                  <mat-radio-group (change)="includeBidFee($event)" formControlName="withBidFee">
+                    <mat-radio-button class="example-margin" value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button class="example-margin" value="No">No </mat-radio-button>
+                  </mat-radio-group>
+                </section>
+                </div>
+                <div *ngIf="hasBidFee" class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Tender bid fee</mat-label>
+
+                    <input
+                      matInput
+                      type="number"
+                      formControlName="bidFee"
+                      required
+                    />
+
+                    <mat-icon matSuffix>attach_money</mat-icon>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Tender description</mat-label>
+                    <textarea
+                      formControlName="tenderDescription"
+                      matInput
+                    ></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+          
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>Tender items</h2>
+          </div>
+          <div class="body">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div
+                  *ngFor="let dyForm of t.controls; let i = index"
+                  class="list-group list-group-flush"
+                >
+                  <div>
+                    <div [formGroup]="dyForm">
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-3">
+                            <mat-form-field
+                              class="example-full-width"
+                              appearance="fill"
+                            >
+                              <mat-label>Item name </mat-label>
+                              <input
+                                matInput
+                                formControlName="itemName"
+                                required
+                              />
+                            </mat-form-field>
+                          </div>
+                          <div class="col-3">
+                            <mat-form-field
+                              class="example-full-width"
+                              appearance="fill"
+                            >
+                              <mat-label>Item description </mat-label>
+                              <input
+                                matInput
+                                formControlName="itemDescription"
+                                required
+                              />
+                            </mat-form-field>
+                          </div>
+                          <div class="col-3">
+                            <mat-form-field
+                              class="example-full-width"
+                              appearance="fill"
+                            >
+                              <mat-label>Item quantity</mat-label>
+                              <input
+                                (keyup)="specifyQuantity($event, i)"
+                                matInput
+                                formControlName="itemQuantity"
+                                type="number"
+                                required
+                              />
+                            </mat-form-field>
+                          </div>
+                          <div class="col-3">
+                            <mat-form-field
+                              class="example-full-width"
+                              appearance="fill"
+                            >
+                              <mat-label>Item unit price </mat-label>
+                              <input
+                                (keyup)="specifyUnitPrice($event, i)"
+                                matInput
+                                formControlName="unitPrice"
+                                required
+                                type="number"
+                              />
+                            </mat-form-field>
+                          </div>
+                          <div class="col-3">
+                            <mat-form-field
+                              class="example-full-width"
+                              appearance="fill"
+                            >
+                              <mat-label>Item total price </mat-label>
+                              <input
+                                matInput
+                                readonly
+                                formControlName="totalPrice"
+                                required
+                              />
+                            </mat-form-field>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                  <div class="col-12 mb-3">
+                    <div class="container">
+                      <div class="row align-items-end">
+                        <div class="col align-self-end">
+                          <div class="example-button-row" align="end">
+                            <button
+                              class="align-self-end"
+                              mat-raised-button
+                              color="primary"
+                              [type]="submit"
+                              (click)="prepareTender()"
+                            >
+                              Update Tender
+                            </button>
+                            <button mat-raised-button color="warn" (click)="onClick()">
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row align-items-end"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

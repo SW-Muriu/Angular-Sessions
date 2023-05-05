@@ -1,0 +1,254 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Contract Details'" [items]="['View']" [active_item]="'View Contract'">
+      </app-breadcrumb>
+    </div>
+
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        <div class="card">
+          <div class="header">
+            <h2>Supplier Details</h2>
+          </div>
+          <div class="m-2" *ngIf="!paramsExist">
+            <div class="border-apply">
+              <div class="m-b-10">
+                <div class="contact-grid">
+                  <div class="profile-header l-bg-purple-dark">
+                    <div class="user-name">{{'Loading..'}}</div>
+                    <div class="name-center">{{'Loading..'}}</div>
+                  </div>
+                  <img src="assets/images/em.jpg" class="user-img" alt="">
+                  <p>
+                    {{'Loading..'}},
+                    <br />{{'Loading..'}}
+                  </p>
+                  <div>
+                    <span class="phone">
+                      <i class="material-icons">phone</i>{{'Loading..'}}</span>
+                  </div>
+                  <div class="profile-userbuttons" style="margin-bottom: 5px;">
+                    <button mat-flat-button color="primary">{{'Loading..'}}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="m-2" *ngIf="paramsExist">
+            <div class="border-apply">
+              <div class="m-b-10">
+                <div class="contact-grid">
+                  <div class="profile-header l-bg-red">
+                    <div class="user-name">{{data.companyname}}</div>
+                    <div class="name-center">{{data.emailaddress}}</div>
+                  </div>
+                  <img src="assets/images/postB.png" class="user-img" alt="" style="width: 100px; height: 100px;">
+                  <p>
+                    {{data.physicaladdress}},
+                  </p>
+                  <div>
+                    <span class="phone">
+                      <i class="material-icons">phone</i>{{data.phoneno}}</span>
+                  </div>
+                  <div class="profile-userbuttons" style="margin-bottom: 5px;">
+                    <button mat-flat-button color="primary">{{'Kenya'}}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="header">
+            <h2>Contract Documents</h2>
+          </div>
+          <div class="body">
+            <div class="doc-file-type">
+              <ul class="list-unstyled" style="position: relative; height: 260px;" [perfectScrollbar]>
+
+                <li class="d-flex mb-3 m-3" *ngFor="let contractFile of contractData.contractDocuments"
+                  (click)="onClickDownloadPdf(contractFile)">
+                  <span class="msr-3 align-self-center img-icon danger-rgba text-danger"><i
+                      class="far fa-file-pdf"></i></span>
+                  <div class="set-flex">
+                    <h5 class="font-16 mb-1">{{contractFile.filename.toLowerCase()}}</h5>
+                    <p>{{contractFile.fileType.substring(0, 35)}}</p>
+                  </div>
+                  <div class="ms-auto">
+                    <td>
+                      <i class="far fa-arrow-alt-circle-down"></i>
+                    </td>
+                  </div>
+                </li>
+
+              </ul>
+              <!-- <div class="text-center p-t-20">
+                <button mat-stroked-button color="primary">More Records</button>
+              </div> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+        <div class="card">
+          <div class="header">
+            <h2>Contract Details</h2>
+          </div>
+
+          <div class="body">
+            <div class="wrapper wrapper-content animated fadeInUp">
+              <div class="ibox">
+                <div class="ibox-content">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="m-b-md">
+                        <p class="col-blue cursor-pointer pull-right" (click)="editContract(contractData)">Edit
+                          contract</p>
+                        <h3 class="project-name">{{contractData.title}}</h3>
+                      </div><br>
+                      
+                      <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                          <dl class="dl-horizontal">
+                            <dt class="pull-left me-2">Contract progress:</dt>
+                            <dd>
+                              <button *ngIf="contractData.progress == 'Not Started'" class="badge badge-solid-brown"><i
+                                  class="fas fa-check-square"></i>&nbsp;
+                                {{contractData.progress}}</button>
+                              <button *ngIf="contractData.progress == 'In Progress'" class="badge badge-solid-purple"><i
+                                  class="fas fa-check-square"></i>&nbsp;
+                                {{contractData.progress}}</button>
+                              <button *ngIf="contractData.progress == 'Terminated'" class="badge badge-solid-red"><i
+                                  class="fas fa-check-square"></i>&nbsp;
+                                {{contractData.progress}}</button>
+                              <button *ngIf="contractData.progress == 'Expired'" class="badge badge-solid-red"><i
+                                  class="fas fa-check-square"></i>&nbsp;
+                                {{contractData.progress}}</button>
+                            </dd>
+                          </dl>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                          <dl class="dl-horizontal">
+                            <dt class="pull-left me-2">Contract status:</dt>
+                            <dd>
+                              <button *ngIf="contractData.status == 'Pending'" class="badge badge-solid-purple"><i
+                                class="far fa-pause-circle"></i>&nbsp;
+                                {{contractData.status}}</button>
+                              <button *ngIf="contractData.status == 'Approved'" class="badge badge-solid-green"><i
+                                  class="fas fa-check-square"></i>&nbsp;
+                                {{contractData.status}}</button>
+                              <button *ngIf="contractData.status == 'Rejected'" class="badge badge-solid-red"><i
+                                  class="fas fa-check-square"></i>&nbsp;
+                                {{contractData.status}}</button>
+                              <button *ngIf="contractData.status == 'Deleted'" class="badge badge-solid-red"><i
+                                  class="fas fa-check-square"></i>&nbsp;
+                                {{contractData.status}}</button>
+                            </dd>
+                          </dl>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                          <div class="">
+                            <button type="button" class="btn btn-outline-success btn-border-radius" (click)="verify()">Verify Contract</button>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      
+                      
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                      <dl class="dl-horizontal">
+
+                        <dt class="pull-left me-2">Created by:</dt>
+                        <dd>{{contractData.createdBy}}</dd>
+                        <dt class="pull-left me-2">Created Time:</dt>
+                        <dd> {{contractData.createdTime| date: 'medium'}} </dd>
+                        <br>
+                        <dt class="pull-left me-2">Timeline Status:</dt>
+                        <dd>
+                          <div class="progress progress-xs mt-3">
+                            <mat-progress-bar mode="determinate" value="60">
+                            </mat-progress-bar>
+                          </div>
+                        </dd>
+                        <small><strong>60%</strong> Contract completed.</small>
+                      </dl>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                      <dl class="dl-horizontal">
+                        <dt class="pull-left me-2">Contract Type:</dt>
+                        <dd> {{contractData.contractType}}</dd>
+                        <dt class="pull-left me-2">Contract Worth:</dt>
+                        <dd> {{contractData.totalAmount | currency: 'KSH:'}}</dd>
+                      </dl>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                      <dl class="dl-horizontal">
+
+                        <dt class="pull-left me-2">Start Date:</dt>
+                        <dd> {{contractData.startDate | date: 'medium'}} </dd>
+                        <dt class="pull-left me-2">Close Date:</dt>
+                        <dd> {{contractData.closingDate | date: 'medium'}} </dd>
+
+
+                      </dl>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                      <dt class="pull-left me-2">Last Update:</dt>
+                      <dd>22-08-2021 12:15:57</dd>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="project-activity">
+                        <mat-tab-group>
+                          <mat-tab>
+                            <ng-template mat-tab-label>
+                              <mat-icon class="example-tab-icon msr-2">
+                                history
+                              </mat-icon>
+                              Contract History
+                            </ng-template>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                              <div class="tab-pane active" style="position: relative; height: 320px;"
+                                [perfectScrollbar]>
+
+                              </div>
+                            </div>
+                          </mat-tab>
+                          <!-- <mat-tab>
+                            <ng-template mat-tab-label>
+                              <mat-icon class="example-tab-icon msr-2">
+                                local_activity
+                              </mat-icon>
+                              Last Activity
+                            </ng-template>
+                            <div style="position: relative; height: 330px;" [perfectScrollbar]>
+                              
+
+                            </div>
+
+                          </mat-tab> -->
+                        </mat-tab-group>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>

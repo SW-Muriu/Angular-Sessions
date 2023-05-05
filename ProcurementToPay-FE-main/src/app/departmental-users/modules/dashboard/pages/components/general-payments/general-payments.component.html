@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="header">
+        <h2>
+          Total Weekly Payment
+        </h2>
+
+      </div>
+      <div class="body">
+        <div class="recent-report__chart">
+          <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels"
+            [options]="lineChartOptions" [legend]="true">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+    <div class="card">
+      <div class="header">
+        <h2>Weekly Payment Per Cost Center</h2>
+
+      </div>
+      <div class="body">
+        <div style="text-align:center">
+          <apx-chart [series]="lineChart2Options.series" [chart]="lineChart2Options.chart"
+            [xaxis]="lineChart2Options.xaxis" [title]="lineChart2Options.title"></apx-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,282 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <app-breadcrumb [title]="'Contract Management'" [items]="['Procurement Admin', 'Contract Management']"
+        [active_item]="'Approved Contracts'">
+      </app-breadcrumb>
+    </div>
+
+    <app-gen-widgets></app-gen-widgets>
+
+
+    <div class="card">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="boxs mail_listing">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="body">
+                <div class="table-responsive">
+                  <div class="materialTableHeader">
+                    <div class="row">
+                      <div class="col-8">
+                        <ul class="header-buttons-left ms-0">
+                          <li class="dropdown">
+                            <h2>Approved Contracts</h2>
+                          </li>
+                          <li class="dropdown m-l-20">
+                            <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                            <input (keyup)="applyFilter($event)" placeholder="Filter..." type="text"
+                              class="browser-default search-field" aria-label="Search box" />
+                          </li>
+                          <li>
+                            <div class="m-l-10" matTooltip="ADD">
+                              <button mat-mini-fab color="primary" (click)="navigateToRequestNeed()">
+                                <mat-icon class="col-white">add</mat-icon>
+                              </button>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="m-l-10" matTooltip="REFRESH">
+                              <button mat-mini-fab color="primary" (click)="refresh()">
+                                <mat-icon class="col-white">refresh</mat-icon>
+                              </button>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col-4">
+                        <ul class="header-buttons">
+                          <li>
+                            <div class="export-button m-l-10" matTooltip="XLSX">
+                              <img src="assets/images/icons/xlsx.png" alt="" (click)="
+                                  exporter.exportTable('xlsx', {
+                                    fileName: 'assets-list',
+                                    sheet: 'sheet1'
+                                  })
+                                " />
+                            </div>
+                          </li>
+                          <li>
+                            <div class="export-button m-l-10" matTooltip="CSV">
+                              <img src="assets/images/icons/csv.png" alt="" (click)="exporter.exportTable('csv')" />
+                            </div>
+                          </li>
+                          <li>
+                            <div class="export-button m-l-10" matTooltip="JSON">
+                              <img src="assets/images/icons/json.png" alt="" (click)="exporter.exportTable('json')" />
+                            </div>
+                          </li>
+                          <li>
+                            <div class="export-button m-l-10" matTooltip="TXT">
+                              <img src="assets/images/icons/txt.png" alt="" (click)="exporter.exportTable('txt')" />
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <mat-table #table matTableExporter [dataSource]="dataSource" matSort class="mat-cell"
+                    #exporter="matTableExporter">
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="psl-3 tbl-col-width-per-4">Id
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-4">{{ row.id }}
+                      </mat-cell>
+                    </ng-container>
+                                        
+                    <ng-container matColumnDef="title">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-40">Tender title</mat-header-cell>
+                      <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-40">
+                        {{ row.title }}
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="totalAmount">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-20">Contract worth
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-20">
+                        {{ row.totalAmount | currency: "KSH"}}
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="startDate">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-15">Start date
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-15">
+                        {{ row.startDate | date: 'short' }}
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="closingDate">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-15">Closing date
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-15">
+                        {{ row.closingDate | date: 'short' }}
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-10">Status
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-10">
+                        <div *ngIf="row.status == 'pending'">
+                          <span class="badge badge-pill badge-primary col-purple">
+                            {{ "Pending" }}</span>
+                        </div>
+                        <div *ngIf="row.status == 'Pending'">
+                          <span class="badge badge-pill badge-primary col-purple">
+                            {{ "Pending" }}</span>
+                        </div>
+                        <div *ngIf="row.status == 'Partial'">
+                          <span class="badge badge-pill badge-primary col-blue">
+                            {{ "Partial" }}&nbsp;&nbsp;&nbsp;</span>
+                        </div>
+                        <div *ngIf="row.status == 'Approved'">
+                          <span class="badge badge-pill badge-primary col-green">
+                            {{ "Approved" }}</span>
+                        </div>
+                        <div *ngIf="row.status == 'Rejected'">
+                          <span class="badge badge-pill badge-primary col-red">
+                            {{ "Rejected" }}</span>
+                        </div>
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="createdBy">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-15">Prepared By
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-15">
+                        <div *ngIf="row.createdBy">
+                          {{ row.createdBy }}
+                        </div>
+                        <div *ngIf="!row.createdBy">
+                          -
+                        </div>
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="financeApproved">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-15">
+                        Finance approved
+                      </mat-header-cell>
+                      <mat-cell mat-cell *matCellDef="let row"
+                      class="column-nowrap psl-3 tbl-col-width-per-15">
+                      <div *ngIf="row.roleFinancialApprovalStatus == 'P'">
+                        <button class="badge badge-solid-red"><i class="fas fa-times-circle"></i>&nbsp;
+                          {{'No'}}</button>
+                      </div>
+                      <div *ngIf="row.roleFinancialApprovalStatus == 'Y'">
+                        <button class="badge badge-solid-green"><i class="fas fa-check-square"></i>&nbsp;
+                          {{'Yes'}}</button>
+                      </div>
+                      <div *ngIf="!row.roleFinancialApprovalStatus">
+                        <button class="badge badge-solid-red"><i class="fas fa-times-circle"></i>&nbsp;
+                          {{'No'}}</button>
+                      </div>
+                    </mat-cell>
+                     
+                    </ng-container>
+                    <ng-container matColumnDef="deskApproved">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-15">
+                        Desk approved
+                      </mat-header-cell>
+                      <mat-cell mat-cell *matCellDef="let row"
+                      class="column-nowrap psl-3 tbl-col-width-per-15">
+                      <div *ngIf="row.roleDeskApprovalStatus == 'P'">
+                        <button class="badge badge-solid-red"><i class="fas fa-times-circle"></i>&nbsp;
+                          {{'No'}}</button>
+                      </div>
+                      <div *ngIf="row.roleDeskApprovalStatus == 'Y'">
+                        <button class="badge badge-solid-green"><i class="fas fa-check-square"></i>&nbsp;
+                          {{'Yes'}}</button>
+                      </div>
+                      <div *ngIf="!row.roleDeskApprovalStatus">
+                        <button class="badge badge-solid-red"><i class="fas fa-times-circle"></i>&nbsp;
+                          {{'No'}}</button>
+                      </div>
+                    </mat-cell>
+                      
+                    </ng-container>
+                    <ng-container matColumnDef="technicalApproved">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-15">
+                        Technical approved
+                      </mat-header-cell>
+                      <mat-cell mat-cell *matCellDef="let row"
+                      class="column-nowrap psl-3 tbl-col-width-per-15">
+                      <div *ngIf="row.roleTechnicalApprovalStatus == 'P'">
+                        <button class="badge badge-solid-red"><i class="fas fa-times-circle"></i>&nbsp;
+                          {{'No'}}</button>
+                      </div>
+                      <div *ngIf="row.roleTechnicalApprovalStatus == 'Y'">
+                        <button class="badge badge-solid-green"><i class="fas fa-check-square"></i>&nbsp;
+                          {{'Yes'}}</button>
+                      </div>
+                      <div *ngIf="!row.roleTechnicalApprovalStatus">
+                        <button class="badge badge-solid-red"><i class="fas fa-times-circle"></i>&nbsp;
+                          {{'No'}}</button>
+                      </div>
+                    </mat-cell>
+                      
+                    </ng-container>
+
+                    <ng-container matColumnDef="createdTime">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="column-nowrap psl-3 tbl-col-width-per-20">Date cretaed
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-20">
+                        {{ row.createdTime | date: 'short' }}
+                      </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                      <mat-header-cell class="column-nowrap psl-3 tbl-col-width-per-30 pr-0" *matHeaderCellDef>Actions
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let row; let i = index"
+                        class="column-nowrap psl-3 tbl-col-width-per-30 pr-0">
+                       
+                        <!-- <button mat-icon-button color="primary" (click)="$event.stopPropagation()"
+                          (click)="verify(row)" class="tbl-action-btn" matTooltip="VERIFY">
+                          <app-feather-icons [icon]="'check-square'" [class]="'tbl-fav-check-square'">
+                          </app-feather-icons>
+                        </button> -->
+                        <button mat-icon-button color="primary" (click)="$event.stopPropagation()"
+                          (click)="contractDetails(row)" class="tbl-action-btn" matTooltip="VIEW">
+                          <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-eye'"></app-feather-icons>
+                        </button>
+                        <button mat-icon-button color="accent" (click)="$event.stopPropagation()"
+                          (click)="editContract(row)" class="tbl-action-btn" matTooltip="EDIT">
+                          <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                        </button>
+                        <button mat-icon-button color="accent" (click)="$event.stopPropagation()"
+                          (click)="deleteAnnouncement(row)" class="tbl-action-btn" matTooltip="DELETE">
+                          <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                        </button>
+                      </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns" [style.cursor]="'pointer'" matRipple>
+                    </mat-row>
+                    <mat-cell *matNoDataRow colspan="4">
+                      No data matching the filter "{{ input.value }}"</mat-cell>
+                  </mat-table>
+                  <!-- Loading spinner -->
+                  <div *ngIf="isLoading" class="tbl-spinner">
+                    <mat-progress-spinner color="primary" [diameter]="40" mode="indeterminate">
+                    </mat-progress-spinner>
+                  </div>
+                  <mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 5, 10, 20, 30, 40, 50, 100]"
+                    aria-label="Select page of users"></mat-paginator>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

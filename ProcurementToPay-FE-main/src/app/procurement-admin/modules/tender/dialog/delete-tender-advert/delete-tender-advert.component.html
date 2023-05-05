@@ -1,0 +1,22 @@
+<div class="container">
+  <h3 mat-dialog-title>Are you sure?</h3>
+  <div mat-dialog-content>
+    <div class="row">
+      <div class="col text-center"> <i class="far fa-times-circle fa-6x col-red"></i> </div>
+      <div class="col-12">
+        <dl class="dl-horizontal">
+          <dt class="pull-left me-2">Tender Advert Name:</dt>
+          <dd>{{ tender.noticeTitle }}</dd>
+          <dt class="pull-left me-2">Tender Advert Code:</dt>
+          <dd> {{ tender.advertNo }}</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <mat-dialog-actions align="end" class="mb-1">
+    <button mat-flat-button color="warn" (click)="confirmDelete()">
+      Delete
+    </button>
+    <button mat-flat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+  </mat-dialog-actions>
+</div>

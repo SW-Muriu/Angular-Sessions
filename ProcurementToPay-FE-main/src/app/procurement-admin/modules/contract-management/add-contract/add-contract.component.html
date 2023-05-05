@@ -1,0 +1,239 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Contract Management'" [items]="['Home']" [active_item]="'Add'">
+      </app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Add Contract</h2>
+          </div>
+          <div class="body">
+            <form [formGroup]="Form" class="m-4">
+
+
+              <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <section class="example-section">
+                    <label class="example-margin">Open to Variations:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <mat-radio-group formControlName="isVariations">
+                      <mat-radio-button class="example-margin" value="true">Yes</mat-radio-button>
+                      <mat-radio-button class="example-margin" value="false">No </mat-radio-button>
+                    </mat-radio-group>
+                  </section>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Title</mat-label>
+                    <input formControlName="title" matInput required />
+                    <mat-error *ngIf="Form.get('title').hasError('required')">
+                      Title is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Supplier</mat-label>
+                    <input formControlName="supplierName" matInput readonly />
+                    <button (click)="suppliersLookup()" mat-icon-button matSuffix [attr.aria-label]="'Hide password'">
+                      <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-error *ngIf="Form.get('supplierName').hasError('required') && Form.get('supplierName').touched">
+                      Please enter supplier! </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Total Contract Worth</mat-label>
+                    <input formControlName="totalAmount" matInput required />
+                    <mat-error *ngIf="Form.get('totalAmount').hasError('required')">
+                      Contract Total Worth is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+
+              </div>
+
+              <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Select Tender</mat-label>
+                    <input formControlName="tender" matInput readonly />
+                    <button (click)="tendersLookup()" mat-icon-button matSuffix [attr.aria-label]="'Hide password'">
+                      <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-error *ngIf="Form.get('tender').hasError('required') && Form.get('tender').touched">
+                      Please select tender! </mat-error>
+                  </mat-form-field>
+                </div>
+               
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Contract Terms and Conditions</mat-label>
+                    <input formControlName="contractTermsConditionsListDetails" matInput readonly />
+                    <button (click)="termsLookup()" mat-icon-button matSuffix [attr.aria-label]="'Hide password'">
+                      <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-error *ngIf="Form.get('contractTermsConditionsListDetails').hasError('required') && Form.get('contractTermsConditionsListDetails').touched">
+                      Please enter contract terms conditions! </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Contract Type</mat-label>
+                    <mat-select formControlName="contractType">
+                      <mat-option *ngFor="let item of contractTypes" [value]="item.name">{{ item.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="Form.get('contractType').hasError('required') && Form.get('contractType').touched">
+                      Please enter contract type! </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Rate</mat-label>
+                    <input formControlName="rate" matInput />
+                    <mat-error *ngIf="Form.get('rate').hasError('required') && Form.get('rate').touched">
+                      Please enter rate! </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Start date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="startDate" required (dateChange)="getDiffDays()"/>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="Form.get('startDate').hasError('required')">
+                      Please select Start Date
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Closing date</mat-label>
+                    <input matInput [matDatepicker]="picker2" formControlName="closingDate" required (dateChange)="getDiffDays()"/>
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                    <mat-error *ngIf="Form.get('closingDate').hasError('required')">
+                      Please select Closing Date
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Contract Duration (Days)</mat-label>
+                    <input formControlName="duration" matInput readonly/>
+                    <mat-error *ngIf="Form.get('duration').hasError('required') && Form.get('duration').touched">
+                      Please enter duration! </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Notification Period (Days before closing date)</mat-label>
+                    <input formControlName="notificationPeriod" matInput />
+                    <mat-error
+                      *ngIf="Form.get('notificationPeriod').hasError('required') && Form.get('notificationPeriod').touched">
+                      Please enter notification period! </mat-error>
+                  </mat-form-field>
+                </div>
+                
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput formControlName="description" required></textarea>
+                    <mat-error *ngIf="Form.get('description').hasError('required')">
+                      Description is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button style="margin-bottom: 10px" type="button" (click)="supplierSelected()" mat-raised-button
+                    color="primary">
+                    + Add Contract Files
+                  </button>
+                  <div *ngFor="let dyForm of t.controls; let i = index" class="list-group list-group-flush">
+                    <div>
+                      <div [formGroup]="dyForm">
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-4">
+                              <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>{{ i + 1 }}.Filename name </mat-label>
+                                <input matInput formControlName="filename" required readonly/>
+                                <mat-error *ngIf="dyForm.get('filename').hasError('required')">
+                                  Category name is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-4">
+                              <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>{{ i + 1 }}.File Type </mat-label>
+                                <input matInput formControlName="fileType" required readonly/>
+                                <mat-error *ngIf="dyForm.get('fileType').hasError('required')">
+                                  File Type is required
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                              <!-- <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>{{ i + 1 }}.File </mat-label>
+                              <input matInput formControlName="file" required/>
+                              <mat-error *ngIf="dyForm.get('file').hasError('required')">
+                                File is required
+                              </mat-error>
+                            </mat-form-field> -->
+                             
+                                <mat-label>{{ i + 1 }}.Attach File</mat-label><br>
+                                <input #file type="file" [disabled]="isLoading | async"
+                                  (change)="onSelectFile(file.files,i)" [multiple]="'multiple'"/>
+                                  <!-- <label for="file">Choose a file</label> -->
+                           
+                            </div>
+
+                            <div class="col-1 d-flex align-items-center justify-content-center">
+                              <mat-icon color="primary" (click)="supplierSelected()">add_circle</mat-icon>
+                              <mat-icon color="warn" (click)="onRemoveField(i)">remove_circle</mat-icon>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="m-l-25 m-b-20" [align]="'end'">
+                  <button mat-flat-button color="warn" class="msr-2 mt-4" (click)="back()">
+                    Discard
+                  </button>
+                  <button mat-flat-button color="primary" class="msr-4 mt-4" (click)="onSubmit()"
+                    [class.auth-spinner]="announcementloading"[disabled]="!Form.valid" >
+                    Submit
+                  </button>
+                  <!-- [disabled]="announcementloading"
+                    [disabled]="!selectedFiles" [disabled]="Form.invalid" -->
+             
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

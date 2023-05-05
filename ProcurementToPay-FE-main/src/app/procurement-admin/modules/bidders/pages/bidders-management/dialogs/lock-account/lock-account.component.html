@@ -1,0 +1,30 @@
+<div class="container">
+  <h3 mat-dialog-title>Are you sure?</h3>
+  <div mat-dialog-content>
+    <div class="row">
+      <!--Gift Icon-->
+      <div class="col text-center"> <i class="far fa-times-circle fa-6x col-red"></i> </div>
+      <!--Modal Text-->
+      <div class="col-12">
+        <dl class="dl-horizontal">
+          <dt class="pull-left me-2">Username:</dt>
+          <dd>{{ bidder.firstname }}</dd>
+          <dt class="pull-left me-2">Company name:</dt>
+          <dd> {{ bidder.companyname }}</dd>
+          <dt class="pull-left me-2">Arrears of interest:</dt>
+          <dd> {{ bidder.areasofinterest }}</dd>
+          <dt class="pull-left me-2">Email:</dt>
+          <dd> {{ bidder.emailaddress }}</dd> 
+          <dt class="pull-left me-2">Phonenumber:</dt>
+          <dd> {{ bidder.phonenumber }}</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <mat-dialog-actions align="end" class="mb-1">
+    <button mat-flat-button color="warn" (click)="confirmLock()">
+      Lock Account
+    </button>
+    <button mat-flat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+  </mat-dialog-actions>
+</div>

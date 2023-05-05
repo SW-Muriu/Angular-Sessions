@@ -1,0 +1,241 @@
+<div style="margin: 15px;">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="boxs mail_listing">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="body">
+            <div class="table-responsive">
+              <div class="materialTableHeader">
+                <div class="row">
+                  <div class="col-8">
+                    <ul class="header-buttons-left ms-0">
+                      <li class="dropdown">
+                        <h2>Approved (Posted) Announcements</h2>
+                      </li>
+                      <li class="dropdown m-l-20">
+                        <label for="search-input"><i
+                            class="material-icons search-icon">search</i></label>
+                        <input placeholder="Filter..." type="text" (keyup)="applyFilter($event)" #filter
+                          class="browser-default search-field" aria-label="Search box">
+                      </li>
+                      <li>
+                        <div class="m-l-10" matTooltip="ADD">
+                          <button mat-mini-fab color="primary" (click)="add()">
+                            <mat-icon class="col-white">add</mat-icon>
+                          </button>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="m-l-10" matTooltip="REFRESH" (click)="refresh()">
+                          <button mat-mini-fab color="primary">
+                            <mat-icon class="col-white">refresh</mat-icon>
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-4">
+                    <ul class="header-buttons">
+                      <li>
+                        <div class="export-button m-l-10" matTooltip="XLSX">
+                          <img src="assets/images/icons/xlsx.png" alt="" (click)="
+                                        exporter.exportTable('xlsx', {
+                                          fileName: 'assets-list',
+                                          sheet: 'sheet1'
+                                        })
+                                      " />
+                        </div>
+                      </li>
+                      <li>
+                        <div class="export-button m-l-10" matTooltip="CSV">
+                          <img src="assets/images/icons/csv.png" alt=""
+                            (click)="exporter.exportTable('csv')" />
+                        </div>
+                      </li>
+                      <li>
+                        <div class="export-button m-l-10" matTooltip="JSON">
+                          <img src="assets/images/icons/json.png" alt=""
+                            (click)="exporter.exportTable('json')" />
+                        </div>
+                      </li>
+                      <li>
+                        <div class="export-button m-l-10" matTooltip="TXT">
+                          <img src="assets/images/icons/txt.png" alt=""
+                            (click)="exporter.exportTable('txt')" />
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <mat-table #table matTableExporter [dataSource]="dataSource" matSort class="mat-cell"
+                #exporter="matTableExporter">
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-4">Id
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-4">
+                    {{ row.id }}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="referenceid">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-8">ReferenceId
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-8">
+                    {{ row.referenceid }}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="category">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-10">Categoryname
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-10">
+                    {{ row.category }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="startdate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-10">Startdate
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-10">
+                    {{ row.startdate | date: 'short' }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="closingdate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-10">Closingdate
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-10">
+                    {{ row.closingdate | date: 'short' }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="postedby">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-12">PostedBy
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-12">
+                    {{ row.postedby }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="posteddate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-10">PostedDate
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-10">
+                    {{ row.posteddate | date: 'short' }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="deskevaluatorverifyflag">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-15">
+                    Desk approved?
+                  </mat-header-cell>
+                  <mat-cell mat-cell *matCellDef="let row"
+                    class="column-nowrap psl-3 tbl-col-width-per-15">
+                    <div *ngIf="row.deskevaluatorverifyflag == 'N'">
+                      <button class="badge badge-solid-red"><i class="fas fa-times-circle"></i>&nbsp;
+                        {{'No'}}</button>
+                    </div>
+                    <div *ngIf="row.deskevaluatorverifyflag == 'Approved'">
+                      <button class="badge badge-solid-green"><i class="fas fa-check-square"></i>&nbsp;
+                        {{'Yes'}}</button>
+                    </div>
+                    <div *ngIf="!row.deskevaluatorverifyflag">
+                      <button class="badge badge-solid-red"><i class="fas fa-times-circle"></i>&nbsp;
+                        {{'No'}}</button>
+                    </div>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="procadminverifyflag">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-15">
+                    Admin approved?
+                  </mat-header-cell>
+                  <mat-cell mat-cell *matCellDef="let row"
+                    class="column-nowrap psl-3 tbl-col-width-per-15">
+                    <div *ngIf="row.procadminverifyflag == 'N'">
+                      <button class="badge badge-solid-red"><i class="fas fa-times-circle"></i>&nbsp;
+                        {{'No'}}</button>
+                    </div>
+                    <div *ngIf="row.procadminverifyflag == 'Approved'">
+                      <button class="badge badge-solid-green"><i class="fas fa-check-square"></i>&nbsp;
+                        {{'Yes'}}</button>
+                    </div>
+                    <div *ngIf="!row.procadminverifyflag">
+                      <button class="badge badge-solid-red"><i class="fas fa-times-circle"></i>&nbsp;
+                        {{'No'}}</button>
+                    </div>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    class="column-nowrap psl-3 tbl-col-width-per-10">Status</mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="column-nowrap psl-3 tbl-col-width-per-10"
+                    (click)="$event.stopPropagation()" (click)="updateStatus(row)">
+
+                    <div *ngIf="row.status == 'Pending'">
+                      <button class="badge badge-solid-purple"><i class="far fa-pause-circle"></i>&nbsp;
+                        {{'Pending'}}</button>
+                    </div>
+                    <div *ngIf="row.status == 'Posted'">
+                      <button class="badge badge-solid-blue"><i class="far fa-check-circle"></i>&nbsp;
+                        {{'Posted'}}</button>
+                    </div>
+                    <div *ngIf="row.status == 'Rejected'">
+                      <button class="badge badge-solid-red"><i class="fas fa-times-circle"></i>&nbsp;
+                        {{'Rejected'}}</button>
+                    </div>
+                  </mat-cell>
+                </ng-container>
+
+
+                <!-- Actions -->
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef class="column-nowrap psl-3 tbl-col-width-per-15">
+                    Actions
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row; let i = index"
+                    class="column-nowrap psl-3 tbl-col-width-per-15">
+                    <!-- <button mat-icon-button color="primary" (click)="$event.stopPropagation()"
+                      (click)="updateStatus(row)" class="tbl-action-btn" matTooltip="VERIFY">
+                      <app-feather-icons [icon]="'check-square'" [class]="'tbl-fav-check-square'">
+                      </app-feather-icons>
+                    </button> -->
+                    <button mat-icon-button color="primary" (click)="$event.stopPropagation()"
+                      (click)="preqDetails(row)" class="tbl-action-btn" matTooltip="VIEW">
+                      <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-eye'"></app-feather-icons>
+                    </button>
+                    <button mat-icon-button color="accent" (click)="$event.stopPropagation()"
+                      (click)="updateAnnouncement(row)" class="tbl-action-btn" matTooltip="EDIT">
+                      <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                    </button>
+                    <button mat-icon-button color="accent" (click)="$event.stopPropagation()"
+                      (click)="deleteAnnouncement(row)" class="tbl-action-btn" matTooltip="DELETE">
+                      <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'">
+                      </app-feather-icons>
+                    </button>
+
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+                <mat-row *matRowDef="let row; columns: displayedColumns" (click)="preqDetails(row)"
+                  [style.cursor]="'pointer'" matRipple>
+                </mat-row>
+                <mat-cell *matNoDataRow colspan="4">
+                  No data matching the filter "{{ input.value }}"</mat-cell>
+              </mat-table>
+              <!-- Loading spinner -->
+              <div *ngIf="isLoading" class="tbl-spinner">
+                <mat-progress-spinner color="primary" [diameter]="40" mode="indeterminate">
+                </mat-progress-spinner>
+              </div>
+              <mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 5, 10, 20, 30, 40, 50, 100]"
+                aria-label="Select page of users"></mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

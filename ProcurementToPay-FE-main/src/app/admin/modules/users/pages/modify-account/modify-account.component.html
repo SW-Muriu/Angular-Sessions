@@ -1,0 +1,268 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb
+        [title]="'Edit User'"
+        [items]="['User']"
+        [active_item]="'Edit User'"
+      >
+      </app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card py-3">
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <div class="header">
+                <h2><strong>Update</strong> Role</h2>
+              </div>
+              <div class="body">
+                <form [formGroup]="updateRoleForm" (ngSubmit)="updateRole()">
+                  <div class="example-container">
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                          <mat-form-field
+                            class="example-full-width"
+                            appearance="fill"
+                          >
+                            <mat-label>User ID</mat-label>
+                            <input
+                              matInput
+                              formControlName="userid"
+                              required
+                              readonly
+                            />
+                            <mat-error
+                              *ngIf="
+                                updateRoleForm
+                                  .get('userid')
+                                  .hasError('required')
+                              "
+                            >
+                              User id is required
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                          <mat-form-field
+                            class="example-full-width"
+                            appearance="fill"
+                          >
+                            <mat-label>Role</mat-label>
+                            <mat-select formControlName="roleid" required>
+                              <mat-option
+                                *ngFor="let role of roles"
+                                [value]="role.id"
+                              >
+                                {{ role.name }}</mat-option
+                              >
+                            </mat-select>
+                            <mat-error
+                              *ngIf="
+                                updateRoleForm
+                                  .get('roleid')
+                                  .hasError('required')
+                              "
+                            >
+                              Role is required
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row"></div>
+                  </div>
+                  <button mat-raised-button type="submit" color="primary">
+                    Update Role
+                  </button>
+                </form>
+              </div>
+            </div>
+            <!-- <div class="col-md-6 col-lg-6">
+              <div class="header">
+                <h2><strong>Update</strong> Department</h2>
+              </div>
+              <div class="body">
+                <form [formGroup]="updateDepartmentForm" (ngSubmit)="updateDepartment()">
+                  <div class="example-container">
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                          <mat-form-field
+                            class="example-full-width"
+                            appearance="fill"
+                          >
+                            <mat-label>Username</mat-label>
+                            <input
+                              matInput
+                              formControlName="username"
+                              required
+                              readonly
+                            />
+                            <mat-error
+                              *ngIf="
+                                updateDepartmentForm
+                                  .get('username')
+                                  .hasError('required')
+                              "
+                            >
+                              Username is required
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                          <mat-label>Department</mat-label>
+                          <mat-select formControlName="department" required>
+                            <mat-option *ngFor="let department of departments" [value]="department.departmentName">
+                              {{ department.departmentName }}
+                            </mat-option>
+                          </mat-select>
+                          <mat-error
+                              *ngIf="
+                                updateDepartmentForm
+                                  .get('department')
+                                  .hasError('required')
+                              "
+                            >
+                              Department is required
+                            </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    
+                  </div>
+                  <button mat-raised-button type="submit" color="primary">
+                    Update Department
+                  </button>
+                </form>
+              </div>
+            </div> -->
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <div class="header">
+                <h2><strong>Update</strong> Password</h2>
+              </div>
+              <div class="body">
+                <form
+                  [formGroup]="updatePasswordForm"
+                  (ngSubmit)="updatePassword()"
+                >
+                  <div class="example-container">
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                          <mat-form-field
+                            class="example-full-width"
+                            appearance="fill"
+                          >
+                            <mat-label>Username</mat-label>
+                            <input
+                              matInput
+                              formControlName="username"
+                              required
+                              readonly
+                            />
+                            <mat-error
+                              *ngIf="
+                                updatePasswordForm
+                                  .get('username')
+                                  .hasError('required')
+                              "
+                            >
+                              Username is required
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6">
+                        <mat-form-field
+                          class="example-full-width"
+                          appearance="fill"
+                        >
+                          <mat-label>Password</mat-label>
+                          <input matInput formControlName="password" required />
+                          <mat-error
+                            *ngIf="
+                              updatePasswordForm
+                                .get('password')
+                                .hasError('required')
+                            "
+                          >
+                            Password is required
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <button mat-raised-button type="submit" color="primary">
+                    Update Password
+                  </button>
+                </form>
+              </div>
+            </div>
+            <!-- <div class="col-lg-6 col-md-6">
+              <div class="header">
+                <h2><strong>Account</strong> Logs</h2>
+              </div>
+              <div class="body">
+                <form
+                  [formGroup]="updatePasswordForm"
+                  (ngSubmit)="updatePassword()"
+                >
+                  <div class="example-container">
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                          <mat-form-field
+                            class="example-full-width"
+                            appearance="fill"
+                          >
+                            <mat-label>Username</mat-label>
+                            <input
+                              matInput
+                              formControlName="username"
+                              required
+                              readonly
+                            />
+                            <mat-error
+                              *ngIf="
+                                updatePasswordForm
+                                  .get('username')
+                                  .hasError('required')
+                              "
+                            >
+                              Username is required
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                          <mat-label>Choose a date</mat-label>
+                          <input matInput [matDatepicker]="picker">
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <button mat-raised-button type="submit" color="primary">
+                    View Logs
+                  </button>
+                </form>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

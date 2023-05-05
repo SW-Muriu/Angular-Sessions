@@ -1,0 +1,75 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!-- <img [src]='asset.img' alt="avatar"> -->
+        <img src="assets/images/emtec.png" alt="avatar" />
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 ms-2 me-2 font-17">
+            {{ dialogTitle }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="Form">
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" required>
+            <!-- <mat-select formControlName="taxName" required>
+              <mat-option *ngFor="let tax of taxes" [value]="tax.value">
+                {{ tax.name }}
+              </mat-option>
+            </mat-select> -->
+            <mat-error *ngIf="Form.get('name').hasError('required')">
+              Name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Type</mat-label>
+            <!-- <input matInput formControlName="name" required> -->
+            <mat-select formControlName="type" required>
+              <mat-option *ngFor="let type of types" [value]="type.name">
+                {{ type.name }} - ({{type.full}})
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="Form.get('type').hasError('required')">
+              Type is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row" align="end">
+            <button mat-raised-button color="primary" [disabled]="!Form.valid" (click)="submit()">
+              Save
+            </button>
+            <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- <br />
+Form value = {{ Form.value | json }}
+<br />
+Form Status = {{ Form }} -->
